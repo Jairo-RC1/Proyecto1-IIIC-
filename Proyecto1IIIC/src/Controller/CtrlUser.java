@@ -5,114 +5,106 @@
 package Controller;
 
 import Model.DBConnectionJava;
-import java.sql.Connection;
+import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class CtrlUser {
 
-    private Connection connection;
 
-    public CtrlUser(DBConnectionJava dbConnection) {
-        connection = dbConnection.getConnection();
+    public CtrlUser() {
+
     }
 
-    // Method to add a new user to the database
-    public String addUser(String name, String firstName, String lastName, String email, String password, String entityId, String roleId) {
-        String message = "User not added.";
+    public void createUser(User user) {
+        DBConnectionJava db = new DBConnectionJava();
         String sql = "INSERT INTO users (name, first_name, last_name, email, password, entity_id, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, lastName);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, password);
-            preparedStatement.setString(6, entityId);
-            preparedStatement.setString(7, roleId);
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                message = "User added successfully.";
-            }
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getEntityId());
+            preparedStatement.setString(7, user.getRoleId());
+            preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "Se insertó correctamente el usuario");
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No Se insertó correctamente el usuario, error: " + e.getMessage());
+        } finally {
+            db.disconnect(); // Desconectar la base de datos
         }
-        return message;
     }
 
-    // Method to edit an existing user in the database
-    public String editUser(int idToUpdate, String name, String firstName, String lastName, String password, String entityId, String roleId) {
-        String message = "User not updated.";
-        String sql = "UPDATE users SET name=?, first_name=?, last_name=?, password=?, entity_id=?, role_id=? WHERE id=?";
+    public List<User> readUsers() {
+        DBConnectionJava db = new DBConnectionJava();
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setString(3, lastName);
-            preparedStatement.setString(4, password);
-            preparedStatement.setString(5, entityId);
-            preparedStatement.setString(6, roleId);
-            preparedStatement.setInt(7, idToUpdate);
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                message = "User updated successfully.";
-            } else {
-                message = "The searched user does not exist.";
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String entityId = resultSet.getString("entity_id");
+                String roleId = resultSet.getString("role_id");
+                users.add(new User(id, name, firstName, lastName, email, password, entityId, roleId));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect(); // Desconectar la base de datos
         }
-        return message;
+        return users;
     }
 
-    // Method to delete a user from the database
-    public String deleteUser(int idToDelete) {
-        String message = "User not deleted.";
+    public void updateUser(User user) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "UPDATE users SET name=?, first_name=?, last_name=?, email=?, password=?, entity_id=?, role_id=? WHERE id=?";
+        try {
+
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getEntityId());
+            preparedStatement.setString(7, user.getRoleId());
+            preparedStatement.setInt(8, user.getId());
+            preparedStatement.execute();
+             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se modificó, error:" + e.getMessage());
+        } finally {
+            db.disconnect(); // Desconectar la base de datos
+        }
+    }
+
+    public void deleteUser(int id) {
+        DBConnectionJava db = new DBConnectionJava();
         String sql = "DELETE FROM users WHERE id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, idToDelete);
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                message = "The user has been deleted.";
-            } else {
-                message = "The searched user does not exist.";
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return message;
-    }
 
-    // Method to validate user access
-    public boolean validateAccess(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email=? AND password=?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            System.out.println("Se eliminó correctamente el usuario");
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    // Method to search for a user's role
-    public String searchUserRole(String firstName) {
-        String sql = "SELECT role_id FROM users WHERE first_name=?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, firstName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getString("role_id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar, error: " + e.getMessage());
+        } finally {
+            db.disconnect(); // Desconectar la base de datos
         }
-        return "Role not found.";
     }
 }
