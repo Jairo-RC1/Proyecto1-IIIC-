@@ -37,7 +37,7 @@ public class CtrlUser {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No Se insertó correctamente el usuario, error: " + e.getMessage());
         } finally {
-            db.disconnect(); // Desconectar la base de datos
+            db.disconnect(); // Disconnects data base
         }
     }
 
@@ -63,7 +63,7 @@ public class CtrlUser {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         } finally {
-            db.disconnect(); // Desconectar la base de datos
+            db.disconnect();// Disconnects data base
         }
         return users;
     }
@@ -87,7 +87,7 @@ public class CtrlUser {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se modificó, error:" + e.getMessage());
         } finally {
-            db.disconnect(); // Desconectar la base de datos
+            db.disconnect();// Disconnects data base
         }
     }
 
@@ -104,7 +104,7 @@ public class CtrlUser {
 
             JOptionPane.showMessageDialog(null, "No se pudo eliminar, error: " + e.getMessage());
         } finally {
-            db.disconnect(); // Desconectar la base de datos
+            db.disconnect(); // Disconnects data base
         }
     }
 }
