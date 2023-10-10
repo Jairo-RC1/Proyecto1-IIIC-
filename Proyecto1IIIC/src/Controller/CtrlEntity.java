@@ -6,7 +6,6 @@ package Controller;
 
 import Model.DBConnectionJava;
 import Model.Entity;
-import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,7 +68,7 @@ public class CtrlEntity {
         }
         return entities;
     }
-//legalId, name, email, phoneNumber, address, description
+
     public void updateEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "UPDATE entities SET legalId=?, name=?, email=?, phoneNumber=?, address=?, description=? WHERE id=?";
