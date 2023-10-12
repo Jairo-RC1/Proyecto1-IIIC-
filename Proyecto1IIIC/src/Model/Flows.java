@@ -4,10 +4,7 @@
  */
 package Model;
 
-/**
- *
- * @author Andrew
- */
+
 public class Flows {
     
 }
