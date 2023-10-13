@@ -65,6 +65,40 @@ public class Register extends javax.swing.JFrame {
         btnEntityDelete = new javax.swing.JButton();
         btnEntityAdd = new javax.swing.JButton();
         btnEntityEdit = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblFlow = new javax.swing.JTable();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        txtFlowDone = new javax.swing.JTextField();
+        txtFlowCapacity = new javax.swing.JTextField();
+        txtFlowMethod = new javax.swing.JTextField();
+        txtFlowObservation = new javax.swing.JTextField();
+        txtFlowDate = new javax.swing.JTextField();
+        txtFlowClimate = new javax.swing.JTextField();
+        btnFlowDelete = new javax.swing.JButton();
+        btnFlowAdd = new javax.swing.JButton();
+        btnFlowEdit = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblSampling = new javax.swing.JTable();
+        jLabel28 = new javax.swing.JLabel();
+        txtSamplingName = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        cbxSamplingProvince = new javax.swing.JComboBox<>();
+        cbxSamplingCounty = new javax.swing.JComboBox<>();
+        cbxSamplingDistrict = new javax.swing.JComboBox<>();
+        cbxSamplingEntity = new javax.swing.JComboBox<>();
+        btnSamplingDelete = new javax.swing.JButton();
+        btnSamplingAdd = new javax.swing.JButton();
+        btnSamplingEdit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblWater = new javax.swing.JTable();
@@ -89,30 +123,11 @@ public class Register extends javax.swing.JFrame {
         cbxWaterCounty = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         cbxWaterDistric = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblFlow = new javax.swing.JTable();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        txtFlowDone = new javax.swing.JTextField();
-        txtFlowCapacity = new javax.swing.JTextField();
-        txtFlowMethod = new javax.swing.JTextField();
-        txtFlowObservation = new javax.swing.JTextField();
-        txtFlowDate = new javax.swing.JTextField();
-        txtFlowClimate = new javax.swing.JTextField();
-        btnFlowDelete = new javax.swing.JButton();
-        btnFlowAdd = new javax.swing.JButton();
-        btnFlowEdit = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblWater1 = new javax.swing.JTable();
+        jPanel7 = new javax.swing.JPanel();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -126,7 +141,7 @@ public class Register extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblUser);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 990, 340));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel1.setText("Correo Electronico:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
@@ -177,7 +192,7 @@ public class Register extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblEntity);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 990, 300));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 970, 340));
 
         jLabel5.setText("Direccion:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
@@ -214,6 +229,104 @@ public class Register extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Entidades", jPanel2);
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblFlow.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(tblFlow);
+
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+
+        jLabel22.setText("Capacidad:");
+        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
+
+        jLabel23.setText("Metodo:");
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jLabel24.setText("Realizado:");
+        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+
+        jLabel25.setText("Observacion:");
+        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jLabel26.setText("Fecha:");
+        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        jLabel27.setText("Clima:");
+        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jPanel4.add(txtFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 160, -1));
+        jPanel4.add(txtFlowCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 160, -1));
+        jPanel4.add(txtFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
+        jPanel4.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
+        jPanel4.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
+        jPanel4.add(txtFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
+
+        btnFlowDelete.setText("Eliminar");
+        jPanel4.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
+
+        btnFlowAdd.setText("Agregar");
+        jPanel4.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
+
+        btnFlowEdit.setText("Editar");
+        jPanel4.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
+
+        jTabbedPane1.addTab("Medicion", jPanel4);
+
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblSampling.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tblSampling);
+
+        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+
+        jLabel28.setText("Entidad:");
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jPanel5.add(txtSamplingName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 130, -1));
+
+        jLabel29.setText("Nombre:");
+        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jLabel30.setText("Provincia:");
+        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        jLabel31.setText("Canton:");
+        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+
+        jLabel32.setText("Distrito");
+        jPanel5.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jPanel5.add(cbxSamplingProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+
+        jPanel5.add(cbxSamplingCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+
+        jPanel5.add(cbxSamplingDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+
+        jPanel5.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+
+        btnSamplingDelete.setText("Eliminar");
+        jPanel5.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
+
+        btnSamplingAdd.setText("Agregar");
+        jPanel5.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 120, -1));
+
+        btnSamplingEdit.setText("Editar");
+        jPanel5.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
+
+        jTabbedPane1.addTab("Muestreo", jPanel5);
+
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblWater.setModel(new javax.swing.table.DefaultTableModel(
@@ -226,10 +339,10 @@ public class Register extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblWater);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 990, 300));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel11.setText("Longitud");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 10));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
 
         jLabel12.setText("Nombre:");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
@@ -279,96 +392,21 @@ public class Register extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Nacientes", jPanel3);
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblFlow.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(tblFlow);
-
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 990, 300));
-
-        jLabel22.setText("Capacidad:");
-        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
-
-        jLabel23.setText("Metodo:");
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        jLabel24.setText("Realizado:");
-        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
-
-        jLabel25.setText("Observacion:");
-        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-
-        jLabel26.setText("Fecha:");
-        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-
-        jLabel27.setText("Clima:");
-        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
-        jPanel4.add(txtFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 160, -1));
-        jPanel4.add(txtFlowCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 160, -1));
-        jPanel4.add(txtFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
-        jPanel4.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
-        jPanel4.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
-        jPanel4.add(txtFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
-
-        btnFlowDelete.setText("Eliminar");
-        jPanel4.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
-
-        btnFlowAdd.setText("Agregar");
-        jPanel4.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
-
-        btnFlowEdit.setText("Editar");
-        jPanel4.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
-
-        jTabbedPane1.addTab("Muestreo", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1015, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 970, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Medición", jPanel5);
+        jTabbedPane1.addTab("Reportes", jPanel7);
 
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblWater1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(tblWater1);
-
-        jPanel6.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 990, 300));
-
-        jTabbedPane1.addTab("Reportes", jPanel6);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
-        );
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -378,12 +416,20 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btnEntityAdd;
     private javax.swing.JButton btnEntityDelete;
     private javax.swing.JButton btnEntityEdit;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnFlowAdd;
     private javax.swing.JButton btnFlowDelete;
     private javax.swing.JButton btnFlowEdit;
+    private javax.swing.JButton btnSamplingAdd;
+    private javax.swing.JButton btnSamplingDelete;
+    private javax.swing.JButton btnSamplingEdit;
     private javax.swing.JButton btnWaterAdd;
     private javax.swing.JButton btnWaterDelete;
     private javax.swing.JButton btnWaterEdit;
+    private javax.swing.JComboBox<String> cbxSamplingCounty;
+    private javax.swing.JComboBox<String> cbxSamplingDistrict;
+    private javax.swing.JComboBox<String> cbxSamplingEntity;
+    private javax.swing.JComboBox<String> cbxSamplingProvince;
     private javax.swing.JComboBox<String> cbxUserEntity;
     private javax.swing.JComboBox<String> cbxUserRol;
     private javax.swing.JComboBox<String> cbxWaterCounty;
@@ -413,7 +459,12 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -425,18 +476,18 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblEntity;
     private javax.swing.JTable tblFlow;
+    private javax.swing.JTable tblSampling;
     private javax.swing.JTable tblUser;
     private javax.swing.JTable tblWater;
-    private javax.swing.JTable tblWater1;
     private javax.swing.JTextField txtEntityAddress;
     private javax.swing.JTextField txtEntityDescription;
     private javax.swing.JTextField txtEntityEmail;
@@ -449,6 +500,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField txtFlowMethod;
     private javax.swing.JTextField txtFlowObservation;
     private javax.swing.JTextField txtLegalNumber;
+    private javax.swing.JTextField txtSamplingName;
     private javax.swing.JTextField txtUserEmail;
     private javax.swing.JTextField txtUserLastName;
     private javax.swing.JTextField txtUserName;

@@ -33,7 +33,7 @@ public class UserDAO {
             ps.execute();
             JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo insertar el usuario, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el usuario, error: " + e.getMessage());
         } finally {
             db.disconnect();
         }
@@ -82,7 +82,7 @@ public class UserDAO {
             ps.execute();
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario, error: " + e.getMessage());
         } finally {
             db.disconnect();
         }
@@ -99,7 +99,7 @@ public class UserDAO {
             preparedStatement.execute();
             JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo eliminar el usuario, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar el usuario, error: " + e.getMessage());
         } finally {
             db.disconnect();
         }

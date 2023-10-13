@@ -11,33 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class EntityDAO {
-       public EntityDAO() {
+
+    public EntityDAO() {
     }
 
-    public void entity(Entity entity) {
-
+    public void createEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
-        String consultaSQL = "INSERT INTO entities (legal_id, name, email, phone_number, address, description) VALUES (?, ?. ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO entities (legal_id, name, email, phone_number, address, description) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setString(1, Integer.toString(entity.getLegalId()));
+            ps.setInt(1, entity.getLegalId());
             ps.setString(2, entity.getName());
-            ps.setString(3, Integer.toString(entity.getPhoneNumber()));
-            ps.setString(4, entity.getAddress());
-            ps.setString(5, entity.getDescription());
+            ps.setString(3, entity.getEmail());
+            ps.setInt(4, entity.getPhoneNumber());
+            ps.setString(5, entity.getAddress());
+            ps.setString(6, entity.getDescription());
             ps.execute();
-            JOptionPane.showMessageDialog(null, "Se insertó correctamente la entidad");
+            JOptionPane.showMessageDialog(null, "Entidad insertada correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se insertó correctamente la entidad, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo insertar la entidad, error: " + e.getMessage());
         } finally {
             db.disconnect();
         }
     }
 
-    public List<Entity> read() {
-
+    public List<Entity> readEntities() {
         DBConnectionJava db = new DBConnectionJava();
         List<Entity> entities = new ArrayList<>();
         String sql = "SELECT * FROM entities";
@@ -47,13 +46,13 @@ public class EntityDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int legal_id = Integer.parseInt(resultSet.getString("legal_id"));
+                int legalId = resultSet.getInt("legal_id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
-                int phone_number = Integer.parseInt(resultSet.getString("phone_number"));
+                int phoneNumber = resultSet.getInt("phone_number");
                 String address = resultSet.getString("address");
                 String description = resultSet.getString("description");
-                entities.add(new Entity(id, legal_id, name, email, phone_number, address, description));
+                entities.add(new Entity(id, legalId, name, email, phoneNumber, address, description));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -63,32 +62,30 @@ public class EntityDAO {
         return entities;
     }
 
-    public void update(Entity entity) {
-
+    public void updateEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
 
         String consultaSQL = "UPDATE entities SET legal_id=?, name=?, email=?, phone_number=?, address=?, description=? WHERE id=?";
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setString(1, Integer.toString(entity.getLegalId()));
+            ps.setInt(1, entity.getLegalId());
             ps.setString(2, entity.getName());
-            ps.setString(3, Integer.toString(entity.getPhoneNumber()));
-            ps.setString(4, entity.getAddress());
-            ps.setString(5, entity.getDescription());
+            ps.setString(3, entity.getEmail());
+            ps.setInt(4, entity.getPhoneNumber());
+            ps.setString(5, entity.getAddress());
+            ps.setString(6, entity.getDescription());
+            ps.setInt(7, entity.getId());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se modificó, error:" + e.toString());
-        }finally {
+            JOptionPane.showMessageDialog(null, "No se pudo modificar la entidad, error: " + e.getMessage());
+        } finally {
             db.disconnect();
         }
-        
     }
 
-    public void delete(int id) {
-
+    public void deleteEntity(int id) {
         DBConnectionJava db = new DBConnectionJava();
 
         String consultaSQL = "DELETE FROM entities WHERE id=?";
@@ -97,14 +94,12 @@ public class EntityDAO {
             PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL);
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            JOptionPane.showMessageDialog(null, "Se eliminó correctamente la entidad");
-
+            JOptionPane.showMessageDialog(null, "Entidad eliminada correctamente");
         } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(null, "No se pudo eliminar, error: " + e.toString());
-        }finally {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar la entidad, error: " + e.getMessage());
+        } finally {
             db.disconnect();
         }
-        
     }
+
 }

@@ -13,28 +13,22 @@ public class User {
     private static int NextUserId = 1;
     private int id;
     private String name;
-    private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private String entityId;
-    private String roleId;
+    private int entityId;
+    private int roleId;
 
     private static int ContIdUser = 1;
 
-    public User(int id, String name, String firstName, String lastName, String email, String password, String entityId, String roleId) {
+    public User(int id, String name, String lastName, String email, String password, int entityId, int roleId) {
         this.id = id;
         this.name = name;
-        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.entityId = entityId;
         this.roleId = roleId;
-    }
-
-    public User() {
-
     }
 
     public static int getNextUserId() {
@@ -61,14 +55,6 @@ public class User {
         this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -93,29 +79,30 @@ public class User {
         this.password = password;
     }
 
-    public String getEntityId() {
+    public int getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(String entityId) {
+    public void setEntityId(int entityId) {
         this.entityId = entityId;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
-    public static int generateNextId() {
-        return ContIdUser++;
+    public static int getContIdUser() {
+        return ContIdUser;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + "entityId=" + entityId + ", roleId=" + roleId + '}';
+    public static void setContIdUser(int ContIdUser) {
+        User.ContIdUser = ContIdUser;
     }
+
+    
 
 }
