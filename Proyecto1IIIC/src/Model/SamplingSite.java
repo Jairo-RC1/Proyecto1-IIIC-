@@ -4,15 +4,22 @@
  */
 package Model;
 
-
 public class SamplingSite {
-    
+
     private int id;
     private String name;
     private int provinceId;
     private int countyId;
     private int districtId;
     private int entityId;
+
+    public SamplingSite(String name, int provinceId, int countyId, int districtId, int entityId) {
+        this.name = name;
+        this.provinceId = provinceId;
+        this.countyId = countyId;
+        this.districtId = districtId;
+        this.entityId = entityId;
+    }
 
     public SamplingSite(int id, String name, int provinceId, int countyId, int districtId, int entityId) {
         this.id = id;
@@ -70,6 +77,5 @@ public class SamplingSite {
     public void setEntityId(int entityId) {
         this.entityId = entityId;
     }
-    
-    
+
 }

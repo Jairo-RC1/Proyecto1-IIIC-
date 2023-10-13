@@ -18,6 +18,15 @@ public class Entity {
     private String address;
     private String description;
 
+    public Entity(int legalId, String name, String email, int phoneNumber, String address, String description) {
+        this.legalId = legalId;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.description = description;
+    }
+
     public Entity(int id, int legalId, String name, String email, int phoneNumber, String address, String description) {
         this.id = id;
         this.legalId = legalId;
@@ -28,7 +37,9 @@ public class Entity {
         this.description = description;
 
     }
-    public Entity(){}
+
+    public Entity() {
+    }
 
     /**
      * @return the id

@@ -19,6 +19,17 @@ public class Flow {
     private int waterSpringId;
     private int samplingId;
 
+    public Flow(int capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
+        this.capacity = capacity;
+        this.method = method;
+        this.observation = observation;
+        this.date = date;
+        this.climate = climate;
+        this.done = done;
+        this.waterSpringId = waterSpringId;
+        this.samplingId = samplingId;
+    }
+
     public Flow(int id, int capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
         this.id = id;
         this.capacity = capacity;

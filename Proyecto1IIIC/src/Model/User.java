@@ -21,6 +21,17 @@ public class User {
 
     private static int ContIdUser = 1;
 
+    public User(String name, String lastName, String email, String password, int entityId, int roleId) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.entityId = entityId;
+        this.roleId = roleId;
+    }
+    
+    
+    
     public User(int id, String name, String lastName, String email, String password, int entityId, int roleId) {
         this.id = id;
         this.name = name;

@@ -4,9 +4,8 @@
  */
 package Model;
 
-
 public class WaterSpring {
-    
+
     private int id;
     private String name;
     private String address;
@@ -17,6 +16,18 @@ public class WaterSpring {
     private int countyId;
     private int districtId;
     private int entityId;
+
+    public WaterSpring(String name, String address, String latitude, String longitude, String description, int provinceId, int countyId, int districtId, int entityId) {
+        this.name = name;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.description = description;
+        this.provinceId = provinceId;
+        this.countyId = countyId;
+        this.districtId = districtId;
+        this.entityId = entityId;
+    }
 
     public WaterSpring(int id, String name, String address, String latitude, String longitude, String description, int provinceId, int countyId, int districtId, int entityId) {
         this.id = id;
@@ -30,7 +41,9 @@ public class WaterSpring {
         this.districtId = districtId;
         this.entityId = entityId;
     }
-    public WaterSpring(){}
+
+    public WaterSpring() {
+    }
 
     public int getId() {
         return id;
@@ -111,6 +124,5 @@ public class WaterSpring {
     public void setEntityId(int entityId) {
         this.entityId = entityId;
     }
-    
-    
+
 }
