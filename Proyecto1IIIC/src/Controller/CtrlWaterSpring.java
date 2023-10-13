@@ -23,23 +23,22 @@ public class CtrlWaterSpring {
     WaterSpringDAO dao = new WaterSpringDAO();
     int id;
 
-  public void loadDataWaterSprings(JTable table) {
-    DefaultTableModel model = (DefaultTableModel) table.getModel();
-    model.setRowCount(0);
-
-    dao.readWaterSprings().forEach(waterSpring -> {
-        Object[] row = {
-            waterSpring.getId(), waterSpring.getName(), waterSpring.getAddress(),
-            waterSpring.getLatitude(), waterSpring.getLongitude(), waterSpring.getDescription(),
-            waterSpring.getProvinceId(), waterSpring.getCountyId(), waterSpring.getDistrictId(),
-            waterSpring.getEntityId()
-        };
-        model.addRow(row);
-    });
-
-    TableRowSorter<TableModel> order = new TableRowSorter<>(model);
-    table.setRowSorter(order);
-}
+    public void loadDataWaterSprings(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<TableModel> order = new TableRowSorter<>(model);
+        table.setRowSorter(order);
+        model.setRowCount(0);
+        List<WaterSpring> waterSprings = dao.readWaterSprings();
+        for (WaterSpring waterSpring : waterSprings) {
+            Object[] row = {
+                waterSpring.getId(), waterSpring.getName(), waterSpring.getAddress(),
+                waterSpring.getLatitude(), waterSpring.getLongitude(), waterSpring.getDescription(),
+                waterSpring.getProvinceId(), waterSpring.getCountyId(), waterSpring.getDistrictId(),
+                waterSpring.getEntityId()
+            };
+            model.addRow(row);
+        }
+    }
     public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
         try {
             this.dao.createWaterSpring(new WaterSpring(
