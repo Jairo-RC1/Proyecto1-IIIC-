@@ -4,7 +4,14 @@
  */
 package View;
 
+import Model.DBConnectionJava;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class Login extends javax.swing.JFrame {
+
+    DBConnectionJava db = new DBConnectionJava();
 
     /**
      * Creates new form Login
@@ -30,15 +37,42 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+public class AccessValidator {
+    private final DBConnectionJava db;
+
+    public AccessValidator(DBConnectionJava db) {
+        this.db = db;
+    }
+
+    public boolean validateAccess(String username, String password) {
+        try (Connection connection = db.getConnection()) {
+            String query = "SELECT role FROM users WHERE username = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String role = resultSet.getString("role");
+                return "Super_admin".equals(role) || "Admin".equals(role) || "Digitador".equals(role);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
