@@ -4,10 +4,6 @@
  */
 package Controller;
 
-/**
- *
- * @author JRS
- */
 import Model.SamplingSite;
 import Model.SamplingSiteDAO;
 import javax.swing.JOptionPane;
@@ -32,7 +28,8 @@ public class CtrlSamplingSite {
         List<SamplingSite> samplingSites = dao.readSamplingSites();
         for (SamplingSite samplingSite : samplingSites) {
             Object[] row = {samplingSite.getId(), samplingSite.getName(),
-                samplingSite.getProvinceId(), samplingSite.getCountyId(), samplingSite.getDistrictId(), samplingSite.getEntityId()};
+                samplingSite.getProvinceId(), samplingSite.getCountyId(),
+                samplingSite.getDistrictId(), samplingSite.getEntityId()};
             model.addRow(row);
         }
     }
@@ -58,16 +55,12 @@ public class CtrlSamplingSite {
         this.dao.deleteSamplingSite(this.id);
     }
 
-    public void selectSamplingSiteRow(JTable table, JTextField name, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void selectSamplingSiteRow(JTable table, JTextField name) {
         try {
             int row = table.getSelectedRow();
             if (row >= 0) {
                 this.id = Integer.parseInt(table.getValueAt(row, 0).toString());
                 name.setText(table.getValueAt(row, 1).toString());
-                provinceId.setText(table.getValueAt(row, 2).toString());
-                countyId.setText(table.getValueAt(row, 3).toString());
-                districtId.setText(table.getValueAt(row, 4).toString());
-                entityId.setText(table.getValueAt(row, 5).toString());
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }

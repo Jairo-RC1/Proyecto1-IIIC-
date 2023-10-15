@@ -4,10 +4,6 @@
  */
 package Controller;
 
-/**
- *
- * @author JRS
- */
 import Model.WaterSpring;
 import Model.WaterSpringDAO;
 import javax.swing.JOptionPane;
@@ -17,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.List;
+import javax.swing.JComboBox;
 
 public class CtrlWaterSpring {
 
@@ -39,12 +36,13 @@ public class CtrlWaterSpring {
             model.addRow(row);
         }
     }
+
     public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
         try {
             this.dao.createWaterSpring(new WaterSpring(
-                name.getText(), address.getText(), latitude.getText(), longitude.getText(),
-                description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
-                Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
+                    name.getText(), address.getText(), latitude.getText(), longitude.getText(),
+                    description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
+                    Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
             ));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
@@ -54,9 +52,9 @@ public class CtrlWaterSpring {
     public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
         try {
             this.dao.updateWaterSpring(new WaterSpring(
-                this.id, name.getText(), address.getText(), latitude.getText(), longitude.getText(),
-                description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
-                Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
+                    this.id, name.getText(), address.getText(), latitude.getText(), longitude.getText(),
+                    description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
+                    Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
             ));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
@@ -67,7 +65,7 @@ public class CtrlWaterSpring {
         this.dao.deleteWaterSpring(this.id);
     }
 
-    public void selectWaterSpringRow(JTable table, JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void selectWaterSpringRow(JTable table, JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description) {
         try {
             int row = table.getSelectedRow();
             if (row >= 0) {
@@ -77,10 +75,6 @@ public class CtrlWaterSpring {
                 latitude.setText(table.getValueAt(row, 3).toString());
                 longitude.setText(table.getValueAt(row, 4).toString());
                 description.setText(table.getValueAt(row, 5).toString());
-                provinceId.setText(table.getValueAt(row, 6).toString());
-                countyId.setText(table.getValueAt(row, 7).toString());
-                districtId.setText(table.getValueAt(row, 8).toString());
-                entityId.setText(table.getValueAt(row, 9).toString());
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }
@@ -89,16 +83,25 @@ public class CtrlWaterSpring {
         }
     }
 
-    public void clearFields(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void clearFields(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description) {
         name.setText("");
         address.setText("");
         latitude.setText("");
         longitude.setText("");
         description.setText("");
-        provinceId.setText("");
-        countyId.setText("");
-        districtId.setText("");
-        entityId.setText("");
+    }
+    public void loadProvincesToWaterProvinceComboBox(JComboBox<String> comboBox) {
+        CtrlProvince ctrlProvince = new CtrlProvince();
+        ctrlProvince.loadProvincesToComboBox(comboBox);
+    }
+
+    public void loadCountiesToWaterCountyComboBox(JComboBox<String> comboBox, String selectedProvince) {
+        CtrlCounty ctrlCounty = new CtrlCounty();
+        ctrlCounty.loadCountiesToSamplingCountyComboBox(comboBox, selectedProvince);
+    }
+
+    public void loadDistrictsToWaterDistrictComboBox(JComboBox<String> comboBox, String countyName) {
+        CtrlDistrict ctrlDistrict = new CtrlDistrict();
+        ctrlDistrict.loadDistrictsForCounty(comboBox, countyName);
     }
 }
-

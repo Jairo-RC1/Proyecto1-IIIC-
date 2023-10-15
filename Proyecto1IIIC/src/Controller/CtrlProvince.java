@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import Model.DBConnectionJava;
 import Model.Province;
 import Model.ProvinceDAO;
 import javax.swing.JComboBox;

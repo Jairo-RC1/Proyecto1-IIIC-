@@ -41,6 +41,29 @@ public class Register extends javax.swing.JFrame {
                 ctss.loadDistrictsToSamplingDistrictComboBox(cbxSamplingDistrict, selectedCounty);
             }
         });
+        cbxWaterProvince.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el nombre de la provincia seleccionada
+                String selectedProvince = cbxWaterProvince.getSelectedItem().toString();
+
+                // Llamar al método para cargar los cantones
+                ctss.loadCountiesToSamplingCountyComboBox(cbxWaterCounty, selectedProvince);
+            }
+        });
+        cbxWaterCounty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el nombre de la provincia seleccionada
+                String selectedCounty = (String) cbxWaterCounty.getSelectedItem();
+
+                // Llamar al método para cargar los cantones
+                ctss.loadDistrictsToSamplingDistrictComboBox(cbxWaterDistrict, selectedCounty);
+            }
+        });
+        
+       
+        
     }
 
     public void listTable() {
@@ -50,6 +73,7 @@ public class Register extends javax.swing.JFrame {
         this.ctu.loadUserData(tblUser);
         this.ctw.loadDataWaterSprings(tblWater);
         ctss.loadProvincesToSamplingProvinceComboBox(cbxSamplingProvince);
+        ctw.loadProvincesToWaterProvinceComboBox(cbxWaterProvince);
     }
 
     public void clear() {
@@ -156,7 +180,7 @@ public class Register extends javax.swing.JFrame {
         cbxWaterProvince = new javax.swing.JComboBox<>();
         cbxWaterCounty = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
-        cbxWaterDistric = new javax.swing.JComboBox<>();
+        cbxWaterDistrict = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
 
@@ -429,7 +453,7 @@ public class Register extends javax.swing.JFrame {
         jLabel19.setText("Distrito:");
         jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
-        jPanel3.add(cbxWaterDistric, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
+        jPanel3.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
 
         jTabbedPane1.addTab("Nacientes", jPanel3);
 
@@ -478,7 +502,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxUserEntity;
     private javax.swing.JComboBox<String> cbxUserRol;
     private javax.swing.JComboBox<String> cbxWaterCounty;
-    private javax.swing.JComboBox<String> cbxWaterDistric;
+    private javax.swing.JComboBox<String> cbxWaterDistrict;
     private javax.swing.JComboBox<String> cbxWaterEntity;
     private javax.swing.JComboBox<String> cbxWaterProvince;
     private javax.swing.JButton jButton1;
