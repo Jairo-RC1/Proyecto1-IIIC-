@@ -87,14 +87,12 @@ public class CtrlFlow {
         }
     }
 
-    public void clearFields(JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done, JTextField waterSpringId, JTextField samplingId) {
+    public void clearFields(JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done) {
         capacity.setText("");
         method.setText("");
         observation.setText("");
         date.setText("");
         climate.setText("");
         done.setText("");
-        waterSpringId.setText("");
-        samplingId.setText("");
     } 
 }

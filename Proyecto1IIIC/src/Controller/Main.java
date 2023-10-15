@@ -10,7 +10,7 @@ import Model.DBConnectionJava;
 public class Main {
 
     public static void main(String[] args) {
-        Login lo = new Login();
+        Register lo = new Register();
         lo.setVisible(true);
         
         /*DBConnectionJava db = new DBConnectionJava();

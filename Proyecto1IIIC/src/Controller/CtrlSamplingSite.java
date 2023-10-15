@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.List;
+import javax.swing.JComboBox;
 
 public class CtrlSamplingSite {
 
@@ -75,11 +76,23 @@ public class CtrlSamplingSite {
         }
     }
 
-    public void clearFields(JTextField name, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void clearFields(JTextField name) {
         name.setText("");
-        provinceId.setText("");
-        countyId.setText("");
-        districtId.setText("");
-        entityId.setText("");
     }
+
+    public void loadProvincesToSamplingProvinceComboBox(JComboBox<String> comboBox) {
+        CtrlProvince ctrlProvince = new CtrlProvince();
+        ctrlProvince.loadProvincesToComboBox(comboBox);
+    }
+
+    public void loadCountiesToSamplingCountyComboBox(JComboBox<String> comboBox, String selectedProvince) {
+        CtrlCounty ctrlCounty = new CtrlCounty();
+        ctrlCounty.loadCountiesToSamplingCountyComboBox(comboBox, selectedProvince);
+    }
+
+    public void loadDistrictsToSamplingDistrictComboBox(JComboBox<String> comboBox, String countyName) {
+        CtrlDistrict ctrlDistrict = new CtrlDistrict();
+        ctrlDistrict.loadDistrictsForCounty(comboBox, countyName);
+    }
+
 }
