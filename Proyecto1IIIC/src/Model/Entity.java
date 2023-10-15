@@ -4,10 +4,7 @@
  */
 package Model;
 
-/**
- *
- * @author JRS
- */
+
 public class Entity {
 
     private int id;
@@ -37,6 +34,12 @@ public class Entity {
         this.description = description;
 
     }
+
+    public Entity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
 
     public Entity() {
     }

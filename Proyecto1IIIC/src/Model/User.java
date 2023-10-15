@@ -30,8 +30,6 @@ public class User {
         this.roleId = roleId;
     }
     
-    
-    
     public User(int id, String name, String lastName, String email, String password, int entityId, int roleId) {
         this.id = id;
         this.name = name;
@@ -41,6 +39,16 @@ public class User {
         this.entityId = entityId;
         this.roleId = roleId;
     }
+
+    public User(int id, String name, String lastName, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+    
+    
 
     public static int getNextUserId() {
         return NextUserId;

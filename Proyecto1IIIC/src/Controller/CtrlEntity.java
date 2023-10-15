@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -11,10 +12,10 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.List;
 import Model.*;
-
+import javax.swing.JComboBox;
 
 public class CtrlEntity {
-    
+
     EntityDAO dao = new EntityDAO();
     int id;
 
@@ -66,7 +67,7 @@ public class CtrlEntity {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.getMessage());
         }
     }
 
@@ -78,4 +79,35 @@ public class CtrlEntity {
         address.setText("");
         description.setText("");
     }
+
+    public int getEntityIdByName(String entityName) {
+        EntityDAO entityDAO = new EntityDAO();
+        Entity entity = entityDAO.getEntityByName(entityName);
+
+        if (entity != null) {
+            return entity.getId();
+        } else {
+            // En caso de no encontrar la entidad, puedes manejarlo como desees, por ejemplo, lanzar una excepción o devolver un valor predeterminado.
+            return -1; // Valor predeterminado o manejo de error
+        }
+    }
+
+    public String getEntityNameById(int entityId) {
+        EntityDAO entityDAO = new EntityDAO();
+        return entityDAO.getEntityNameById(entityId);
+    }
+
+    public void loadEntitiesToComboBox(JComboBox<String> comboBox) {
+        EntityDAO entityDao = new EntityDAO();
+        List<Entity> entities = entityDao.readEntities();
+
+        comboBox.removeAllItems(); // Limpia el ComboBox
+
+        for (Entity entity : entities) {
+            // Combina el ID y el nombre en una cadena y agrégalo al ComboBox
+            String item = entity.getId() + " - " + entity.getName();
+            comboBox.addItem(item);
+        }
+    }
+
 }

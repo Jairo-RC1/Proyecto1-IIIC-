@@ -20,7 +20,8 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.listTable();
+        this.listUser();
+        this.listCombobox();
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,25 +62,33 @@ public class Register extends javax.swing.JFrame {
                 ctss.loadDistrictsToSamplingDistrictComboBox(cbxWaterDistrict, selectedCounty);
             }
         });
-        
-       
-        
+
     }
 
-    public void listTable() {
-        this.cte.loadDataEntities(tblEntity);
-        this.ctf.loadFlowData(tblFlow);
-        this.ctss.loadDataSamplingSites(tblSampling);
+    public void listUser() {
+        //this.ctf.loadFlowData(tblFlow);
+        //this.ctss.loadDataSamplingSites(tblSampling);
         this.ctu.loadUserData(tblUser);
-        this.ctw.loadDataWaterSprings(tblWater);
+        //this.ctw.loadDataWaterSprings(tblWater);
+    }
+
+    public void listEntity() {
+        this.cte.loadDataEntities(tblEntity);
+    }
+
+    public void listCombobox() {
         ctss.loadProvincesToSamplingProvinceComboBox(cbxSamplingProvince);
         ctw.loadProvincesToWaterProvinceComboBox(cbxWaterProvince);
+        ctu.loadRolesToUserComboBox(cbxUserRol);
+        cte.loadEntitiesToComboBox(cbxUserEntity);
     }
 
     public void clear() {
         this.cte.clearFields(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.ctf.clearFields(txtFlowCapacity, txtFlowMethod, txtFlowObservation, txtFlowDate, txtFlowClimate, txtFlowDone);
         this.ctss.clearFields(txtSamplingName);
+        this.ctu.clearFields(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword);
+        this.ctw.clearFields(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription);
     }
 
     @SuppressWarnings("unchecked")
@@ -98,9 +107,9 @@ public class Register extends javax.swing.JFrame {
         txtUserName = new javax.swing.JTextField();
         txtUserLastName = new javax.swing.JTextField();
         txtUserEmail = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAddUser = new javax.swing.JButton();
+        btnDeleteUser = new javax.swing.JButton();
+        btnEditUser = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         cbxUserRol = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
@@ -168,7 +177,7 @@ public class Register extends javax.swing.JFrame {
         txtWaterDescription = new javax.swing.JTextField();
         txtWaterName = new javax.swing.JTextField();
         txtWaterAddress = new javax.swing.JTextField();
-        txtWaterLatitud = new javax.swing.JTextField();
+        txtWaterLatitude = new javax.swing.JTextField();
         txtWaterLongitude = new javax.swing.JTextField();
         btnWaterDelete = new javax.swing.JButton();
         btnWaterAdd = new javax.swing.JButton();
@@ -194,9 +203,14 @@ public class Register extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Apellidos", "Correo Electronico", "Contraseña", "Entidad", "Rol"
             }
         ));
+        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUser);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
@@ -217,14 +231,29 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(txtUserLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, -1));
         jPanel1.add(txtUserEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 190, -1));
 
-        jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 130, -1));
+        btnAddUser.setText("Agregar");
+        btnAddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 130, -1));
 
-        jButton2.setText("Eliminar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 130, -1));
+        btnDeleteUser.setText("Eliminar");
+        btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 130, -1));
 
-        jButton3.setText("Editar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 130, -1));
+        btnEditUser.setText("Editar");
+        btnEditUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 130, -1));
 
         jLabel20.setText("Rol:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
@@ -245,9 +274,14 @@ public class Register extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Cedula Juridica", "Nombre", "Correo Electronico", "Telefono", "Direccion", "Descripcion"
             }
         ));
+        tblEntity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEntityMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEntity);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 970, 340));
@@ -277,12 +311,27 @@ public class Register extends javax.swing.JFrame {
         jPanel2.add(txtLegalNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 180, -1));
 
         btnEntityDelete.setText("Eliminar");
+        btnEntityDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntityDeleteActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnEntityDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 130, -1));
 
         btnEntityAdd.setText("Agregar");
+        btnEntityAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntityAddActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnEntityAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 130, -1));
 
         btnEntityEdit.setText("Editar");
+        btnEntityEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntityEditActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
 
         jTabbedPane1.addTab("Entidades", jPanel2);
@@ -402,6 +451,11 @@ public class Register extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblWater.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblWaterMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblWater);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
@@ -423,7 +477,7 @@ public class Register extends javax.swing.JFrame {
         jPanel3.add(txtWaterDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 180, -1));
         jPanel3.add(txtWaterName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 180, -1));
         jPanel3.add(txtWaterAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, -1));
-        jPanel3.add(txtWaterLatitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
+        jPanel3.add(txtWaterLatitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
         jPanel3.add(txtWaterLongitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         btnWaterDelete.setText("Eliminar");
@@ -448,11 +502,13 @@ public class Register extends javax.swing.JFrame {
 
         jPanel3.add(cbxWaterProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, -1));
 
+        cbxWaterCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jPanel3.add(cbxWaterCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         jLabel19.setText("Distrito:");
         jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
+        cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jPanel3.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
 
         jTabbedPane1.addTab("Nacientes", jPanel3);
@@ -480,8 +536,59 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxSamplingProvinceActionPerformed
 
+    private void tblWaterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWaterMouseClicked
+
+    }//GEN-LAST:event_tblWaterMouseClicked
+
+    private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
+        this.ctu.addUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
+        //this.clear();
+        this.listUser();
+    }//GEN-LAST:event_btnAddUserActionPerformed
+
+    private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
+        this.ctu.updateUser(txtUserName, txtUserName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
+        this.clear();
+        this.listUser();
+    }//GEN-LAST:event_btnEditUserActionPerformed
+
+    private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
+        this.ctu.deleteUser();
+        this.clear();
+        this.listUser();
+    }//GEN-LAST:event_btnDeleteUserActionPerformed
+
+    private void btnEntityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityAddActionPerformed
+        this.cte.addEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
+        this.clear();
+        this.listEntity();
+    }//GEN-LAST:event_btnEntityAddActionPerformed
+
+    private void tblEntityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntityMouseClicked
+        this.cte.selectEntityRow(tblEntity, txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
+    }//GEN-LAST:event_tblEntityMouseClicked
+
+    private void btnEntityEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityEditActionPerformed
+        this.cte.updateEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
+        this.clear();
+        this.listEntity();
+    }//GEN-LAST:event_btnEntityEditActionPerformed
+
+    private void btnEntityDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityDeleteActionPerformed
+        this.cte.deleteEntity();
+        this.clear();
+        this.listEntity();
+    }//GEN-LAST:event_btnEntityDeleteActionPerformed
+
+    private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
+        this.ctu.selectRow(tblUser, txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
+    }//GEN-LAST:event_tblUserMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddUser;
+    private javax.swing.JButton btnDeleteUser;
+    private javax.swing.JButton btnEditUser;
     private javax.swing.JButton btnEntityAdd;
     private javax.swing.JButton btnEntityDelete;
     private javax.swing.JButton btnEntityEdit;
@@ -505,9 +612,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxWaterDistrict;
     private javax.swing.JComboBox<String> cbxWaterEntity;
     private javax.swing.JComboBox<String> cbxWaterProvince;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -576,7 +680,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField txtUserPassword;
     private javax.swing.JTextField txtWaterAddress;
     private javax.swing.JTextField txtWaterDescription;
-    private javax.swing.JTextField txtWaterLatitud;
+    private javax.swing.JTextField txtWaterLatitude;
     private javax.swing.JTextField txtWaterLongitude;
     private javax.swing.JTextField txtWaterName;
     // End of variables declaration//GEN-END:variables

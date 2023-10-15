@@ -102,4 +102,70 @@ public class EntityDAO {
         }
     }
 
+    public Entity getEntityByName(String entityName) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT * FROM entities WHERE name = ?";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, entityName);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                // Agrega aquí más columnas si es necesario
+                return new Entity(id, name);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return null; // Devuelve null si no se encuentra la entidad
+    }
+
+    public String getEntityNameById(int entityId) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT name FROM entities WHERE id = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setInt(1, entityId);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("name");
+            } else {
+                throw new RuntimeException("No se encontró una entidad con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+            throw new RuntimeException("Error al consultar la entidad por ID.");
+        } finally {
+            db.disconnect();
+        }
+    }
+
+    public List<Entity> readEntitiesNames() {
+        DBConnectionJava db = new DBConnectionJava();
+        List<Entity> entities = new ArrayList<>();
+        String sql = "SELECT * FROM entities"; // Asumiendo que el nombre de la tabla de entidades es "entities"
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                entities.add(new Entity(id, name));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return entities;
+    }
+
 }
