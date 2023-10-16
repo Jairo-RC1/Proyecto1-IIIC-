@@ -168,4 +168,25 @@ public class EntityDAO {
         return entities;
     }
 
+    public int getEntityIdByName(String entityName) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT id FROM entities WHERE name = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, entityName);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return -1; // Puedes elegir un valor predeterminado si no se encuentra ningún ID correspondiente
+    }
+
 }

@@ -35,7 +35,7 @@ public class CtrlUser {
             String entityName = entityDAO.getEntityNameById(user.getEntityId());
             String roleName = rolDAO.getRoleNameById(user.getRoleId());
 
-            Object[] row = {user.getId(), user.getName(), user.getLastName(), user.getEmail(), entityName, roleName};
+            Object[] row = {user.getId(), user.getName(), user.getLastName(), user.getEmail(),user.getPassword(), entityName, roleName};
             model.addRow(row);
         }
     }
@@ -108,21 +108,23 @@ public class CtrlUser {
 
     public void addUser(JTextField txtName, JTextField txtLastName, JTextField txtEmail, JTextField txtPassword, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
-            // Obtener los valores de los campos de texto y los JComboBox
+            // Obtener los valores de los campos de texto
             String name = txtName.getText();
             String lastName = txtLastName.getText();
             String email = txtEmail.getText();
             String password = txtPassword.getText();
-            String entityName = (String) cbxEntity.getSelectedItem(); // Obtener el nombre de la entidad seleccionada
-            String roleName = (String) cbxRole.getSelectedItem(); // Obtener el nombre del rol seleccionado
 
-            // Obtener los IDs de entidad y rol utilizando CtrlEntity y CtrlRol
+            // Obtener los nombres de entidad y rol seleccionados desde ComboBoxes
+            String entityName = (String) cbxEntity.getSelectedItem();
+            String roleName = (String) cbxRole.getSelectedItem();
+
+            // Utilizar las clases CtrlEntity y CtrlRol para obtener los IDs correspondientes
             CtrlRol ctrlRol = new CtrlRol();
             CtrlEntity ctrlEntity = new CtrlEntity();
-            int entityId = ctrlEntity.getEntityIdByName(entityName);
-            int roleId = ctrlRol.getRoleIdByName(roleName);
+            int entityId = ctrlEntity.getEntityIdByName2(entityName);
+            int roleId = ctrlRol.getRoleIdByName2(roleName);
 
-            // Crear un nuevo usuario
+            // Crear un nuevo usuario con los IDs en lugar de nombres
             User user = new User(name, lastName, email, password, entityId, roleId);
 
             // Agregar el usuario a la base de datos

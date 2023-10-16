@@ -60,7 +60,7 @@ public class RolDAO {
 
     public String getRoleNameById(int roleId) {
         DBConnectionJava db = new DBConnectionJava();
-        String sql = "SELECT name FROM role WHERE id = ?";
+        String sql = "SELECT name FROM roles WHERE id = ?";
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
@@ -77,6 +77,27 @@ public class RolDAO {
         }
 
         return null; // En caso de no encontrar un nombre correspondiente al ID
+    }
+
+    public int getRoleIdByName(String roleName) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT id FROM roles WHERE name = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, roleName);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return -1; // Puedes elegir un valor predeterminado si no se encuentra ningún ID correspondiente
     }
 
 }

@@ -97,17 +97,20 @@ public class CtrlEntity {
         return entityDAO.getEntityNameById(entityId);
     }
 
-    public void loadEntitiesToComboBox(JComboBox<String> comboBox) {
+    public void loadEntityNamesToComboBox(JComboBox<String> comboBox) {
         EntityDAO entityDao = new EntityDAO();
         List<Entity> entities = entityDao.readEntities();
 
         comboBox.removeAllItems(); // Limpia el ComboBox
 
         for (Entity entity : entities) {
-            // Combina el ID y el nombre en una cadena y agrégalo al ComboBox
-            String item = entity.getId() + " - " + entity.getName();
-            comboBox.addItem(item);
+            comboBox.addItem(entity.getName());
         }
+    }
+
+    public int getEntityIdByName2(String entityName) {
+        EntityDAO entityDAO = new EntityDAO();
+        return entityDAO.getEntityIdByName(entityName);
     }
 
 }

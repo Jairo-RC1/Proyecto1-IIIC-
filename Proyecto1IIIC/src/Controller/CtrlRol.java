@@ -38,5 +38,11 @@ public class CtrlRol {
         RolDAO rolDAO = new RolDAO();
         return rolDAO.getRoleNameById(roleId);
     }
+    
+    public int getRoleIdByName2(String roleName) {
+    RolDAO rolDAO = new RolDAO();
+    return rolDAO.getRoleIdByName(roleName);
+}
+
 
 }

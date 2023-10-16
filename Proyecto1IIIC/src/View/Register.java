@@ -22,6 +22,7 @@ public class Register extends javax.swing.JFrame {
         this.setResizable(false);
         this.listUser();
         this.listCombobox();
+        this.listEntity();
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +81,9 @@ public class Register extends javax.swing.JFrame {
         ctss.loadProvincesToSamplingProvinceComboBox(cbxSamplingProvince);
         ctw.loadProvincesToWaterProvinceComboBox(cbxWaterProvince);
         ctu.loadRolesToUserComboBox(cbxUserRol);
-        cte.loadEntitiesToComboBox(cbxUserEntity);
+        cte.loadEntityNamesToComboBox(cbxUserEntity);
+        cte.loadEntityNamesToComboBox(cbxSamplingEntity);
+        cte.loadEntityNamesToComboBox(cbxWaterEntity);
     }
 
     public void clear() {
@@ -420,7 +423,7 @@ public class Register extends javax.swing.JFrame {
                 cbxSamplingProvinceActionPerformed(evt);
             }
         });
-        jPanel5.add(cbxSamplingProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        jPanel5.add(cbxSamplingProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 100, -1));
 
         cbxSamplingCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jPanel5.add(cbxSamplingCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
@@ -428,7 +431,7 @@ public class Register extends javax.swing.JFrame {
         cbxSamplingDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jPanel5.add(cbxSamplingDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
-        jPanel5.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        jPanel5.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
 
         btnSamplingDelete.setText("Eliminar");
         jPanel5.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
@@ -498,18 +501,18 @@ public class Register extends javax.swing.JFrame {
         jLabel18.setText("Canton:");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
 
-        jPanel3.add(cbxWaterEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, -1, -1));
+        jPanel3.add(cbxWaterEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 200, -1));
 
-        jPanel3.add(cbxWaterProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, -1));
+        jPanel3.add(cbxWaterProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, -1));
 
         cbxWaterCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel3.add(cbxWaterCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
+        jPanel3.add(cbxWaterCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 100, -1));
 
         jLabel19.setText("Distrito:");
         jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
         cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel3.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, -1));
+        jPanel3.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
 
         jTabbedPane1.addTab("Nacientes", jPanel3);
 
@@ -542,7 +545,7 @@ public class Register extends javax.swing.JFrame {
 
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
         this.ctu.addUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
-        //this.clear();
+        this.clear();
         this.listUser();
     }//GEN-LAST:event_btnAddUserActionPerformed
 
