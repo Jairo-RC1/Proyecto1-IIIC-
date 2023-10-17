@@ -21,7 +21,7 @@ public class EntityDAO {
         String consultaSQL = "INSERT INTO entities (legal_id, name, email, phone_number, address, description) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, entity.getLegalId());
+            ps.setLong(1, entity.getLegalId());
             ps.setString(2, entity.getName());
             ps.setString(3, entity.getEmail());
             ps.setInt(4, entity.getPhoneNumber());
@@ -46,7 +46,7 @@ public class EntityDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int legalId = resultSet.getInt("legal_id");
+                long legalId = resultSet.getLong("legal_id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
@@ -69,7 +69,7 @@ public class EntityDAO {
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, entity.getLegalId());
+            ps.setLong(1, entity.getLegalId());
             ps.setString(2, entity.getName());
             ps.setString(3, entity.getEmail());
             ps.setInt(4, entity.getPhoneNumber());
