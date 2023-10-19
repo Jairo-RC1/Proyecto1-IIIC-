@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.List;
 import javax.swing.JComboBox;
+import Model.*;
 
 public class CtrlSamplingSite {
 
@@ -26,19 +27,43 @@ public class CtrlSamplingSite {
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
+
+        ProvinceDAO provincedao = new ProvinceDAO();
+        CountyDAO countydao = new CountyDAO();
+        DistrictDAO districtdao = new DistrictDAO();
+        EntityDAO entitydao = new EntityDAO();
+
         List<SamplingSite> samplingSites = dao.readSamplingSites();
         for (SamplingSite samplingSite : samplingSites) {
-            Object[] row = {samplingSite.getId(), samplingSite.getName(),
-                samplingSite.getProvinceId(), samplingSite.getCountyId(),
-                samplingSite.getDistrictId(), samplingSite.getEntityId()};
+            String provinceName = provincedao.getProvinceNameById(samplingSite.getProvinceId());
+            String countyName = countydao.getCountyNameById(samplingSite.getCountyId());
+            String districtName = districtdao.getDistrictNameById(samplingSite.getDistrictId());
+            String entityName = entitydao.getEntityNameById(samplingSite.getEntityId());
+
+            Object[] row = {samplingSite.getId(), samplingSite.getName(), provinceName, countyName, districtName, entityName};
             model.addRow(row);
         }
     }
     // Add a new Sampling Site
 
-    public void addSamplingSite(JTextField name, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void addSamplingSite(JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
-            this.dao.createSamplingSite(new SamplingSite(this.id, name.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()), Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())));
+            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+            String selectedCounty = (String) cbxCountyId.getSelectedItem();
+            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
+
+            this.dao.createSamplingSite(new SamplingSite(this.id, name.getText(), provinceName, countyName, districtName, entityName));
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
@@ -46,9 +71,23 @@ public class CtrlSamplingSite {
     }
     // Update an existing Sampling Site
 
-    public void updateSamplingSite(JTextField name, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void updateSamplingSite(JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
-            this.dao.updateSamplingSite(new SamplingSite(this.id, name.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()), Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())));
+            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+            String selectedCounty = (String) cbxCountyId.getSelectedItem();
+            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
+
+            this.dao.updateSamplingSite(new SamplingSite(this.id, name.getText(), provinceName, countyName, districtName, entityName));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
@@ -60,12 +99,21 @@ public class CtrlSamplingSite {
     }
 
     // Select a Sampling Site from a JTable row
-    public void selectSamplingSiteRow(JTable table, JTextField name) {
+    public void selectSamplingSiteRow(JTable table, JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
             int row = table.getSelectedRow();
             if (row >= 0) {
                 this.id = Integer.parseInt(table.getValueAt(row, 0).toString());
                 name.setText(table.getValueAt(row, 1).toString());
+                String province = (table.getValueAt(row, 2).toString());
+                String county = (table.getValueAt(row, 3).toString());
+                String district = (table.getValueAt(row, 4).toString());
+                String entity = (table.getValueAt(row, 5).toString());
+                
+                cbxProvinceId.setSelectedItem(province);
+                cbxCountyId.setSelectedItem(county);
+                cbxDistrictId.setSelectedItem(district);
+                cbxEntityId.setSelectedItem(entity);
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }

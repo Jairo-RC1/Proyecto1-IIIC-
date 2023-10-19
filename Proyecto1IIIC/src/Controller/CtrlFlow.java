@@ -35,7 +35,8 @@ public class CtrlFlow {
             String waterName = waterdao.getWaterSpringNameById(flow.getWaterSpringId());
             String samplingName = samplingdao.getSamplingSiteNameById(flow.getSamplingId());
 
-            Object[] row = {flow.getId(), flow.getCapacity(), flow.getMethod(), flow.getObservation(), flow.getDate(), flow.getClimate(), flow.getDone(), waterName, samplingName};
+            Object[] row = {flow.getId(), flow.getCapacity(), flow.getMethod(), flow.getObservation(),
+                flow.getDate(), flow.getClimate(), flow.getDone(), waterName, samplingName};
             model.addRow(row);
         }
     }
@@ -45,7 +46,7 @@ public class CtrlFlow {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date flowDate = dateFormat.parse(date.getText());
-            
+
             String selectedMethod = (String) cbxMethod.getSelectedItem();
             String selectedClimate = (String) cbxClimate.getSelectedItem();
             String selectedDone = (String) cbxDone.getSelectedItem();

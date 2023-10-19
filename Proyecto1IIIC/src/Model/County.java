@@ -16,6 +16,13 @@ public class County {
         this.provinceId = provinceId;
     }
 
+    public County(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

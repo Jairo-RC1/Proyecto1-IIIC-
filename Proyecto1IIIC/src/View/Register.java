@@ -58,6 +58,7 @@ public class Register extends javax.swing.JFrame {
         this.listCombobox();
         this.listEntity();
         this.listFlow();
+        this.listSampling();
 
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
@@ -103,7 +104,6 @@ public class Register extends javax.swing.JFrame {
     }
 
     public void listUser() {
-        //this.ctss.loadDataSamplingSites(tblSampling);
         this.ctu.loadUserData(tblUser);
         //this.ctw.loadDataWaterSprings(tblWater);
     }
@@ -114,6 +114,10 @@ public class Register extends javax.swing.JFrame {
 
     public void listFlow() {
         this.ctf.loadFlowData(tblFlow);
+    }
+
+    public void listSampling() {
+        this.ctss.loadDataSamplingSites(tblSampling);
     }
 
     public void listCombobox() {
@@ -332,7 +336,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEntity);
 
-        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1040, 340));
+        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1080, 340));
 
         jLabel5.setText("Direccion:");
         jpEntity.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
@@ -401,7 +405,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblFlow);
 
-        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
+        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
 
         jLabel22.setText("Capacidad:");
         jpFlow.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
@@ -479,9 +483,14 @@ public class Register extends javax.swing.JFrame {
                 "ID", "Nombre", "Provincia", "Canton", "Distrito", "Entidad"
             }
         ));
+        tblSampling.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSamplingMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblSampling);
 
-        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
+        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
 
         jLabel28.setText("Entidad:");
         jpSampling.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
@@ -515,12 +524,27 @@ public class Register extends javax.swing.JFrame {
         jpSampling.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
 
         btnSamplingDelete.setText("Eliminar");
+        btnSamplingDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSamplingDeleteActionPerformed(evt);
+            }
+        });
         jpSampling.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
 
         btnSamplingAdd.setText("Agregar");
+        btnSamplingAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSamplingAddActionPerformed(evt);
+            }
+        });
         jpSampling.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 120, -1));
 
         btnSamplingEdit.setText("Editar");
+        btnSamplingEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSamplingEditActionPerformed(evt);
+            }
+        });
         jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
 
         TabRegister.addTab("Muestreo", jpSampling);
@@ -532,7 +556,7 @@ public class Register extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Direccion", "Latitud", "Longitud", "Descripcion", "Provincia", "Canton", "Distrito", "Entidad"
             }
         ));
         tblWater.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -542,7 +566,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblWater);
 
-        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
+        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
 
         jLabel11.setText("Longitud");
         jpWater.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
@@ -601,7 +625,7 @@ public class Register extends javax.swing.JFrame {
         jpReport.setLayout(jpReportLayout);
         jpReportLayout.setHorizontalGroup(
             jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 1090, Short.MAX_VALUE)
         );
         jpReportLayout.setVerticalGroup(
             jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,7 +634,7 @@ public class Register extends javax.swing.JFrame {
 
         TabRegister.addTab("Reportes", jpReport);
 
-        getContentPane().add(TabRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 1050, 671));
+        getContentPane().add(TabRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 1090, 671));
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
 
         pack();
@@ -689,6 +713,26 @@ public class Register extends javax.swing.JFrame {
     private void tblFlowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFlowMouseClicked
         this.ctf.selectFlowRow(tblFlow, txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
     }//GEN-LAST:event_tblFlowMouseClicked
+
+    private void btnSamplingAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingAddActionPerformed
+        this.ctss.addSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
+        this.clear();
+        this.listSampling();
+    }//GEN-LAST:event_btnSamplingAddActionPerformed
+
+    private void btnSamplingEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingEditActionPerformed
+        this.ctss.updateSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
+        this.clear();
+        this.listSampling();
+    }//GEN-LAST:event_btnSamplingEditActionPerformed
+
+    private void btnSamplingDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingDeleteActionPerformed
+        this.ctss.deleteSamplingSite();
+    }//GEN-LAST:event_btnSamplingDeleteActionPerformed
+
+    private void tblSamplingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSamplingMouseClicked
+        this.ctss.selectSamplingSiteRow(tblSampling, txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
+    }//GEN-LAST:event_tblSamplingMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

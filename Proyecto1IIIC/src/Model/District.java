@@ -16,6 +16,13 @@ public class District {
         this.countyId = countyId;
     }
 
+    public District(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
+
     // Method to get the ID of the district
     public int getId() {
         return id;
