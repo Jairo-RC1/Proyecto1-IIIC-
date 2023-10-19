@@ -18,7 +18,7 @@ public class CtrlUser {
 
     UserDAO dao = new UserDAO();
     int id;
-
+       // Load user data into a JTable
     public void loadUserData(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
@@ -29,9 +29,9 @@ public class CtrlUser {
         CtrlRol rolDAO = new CtrlRol(); // Instancia CtrlRol
 
         List<User> users = dao.readUser();
-
+        
         for (User user : users) {
-            // Obtiene el nombre de la entidad y el rol correspondiente
+            // Get the name of the entity and the corresponding role
             String entityName = entityDAO.getEntityNameById(user.getEntityId());
             String roleName = rolDAO.getRoleNameById(user.getRoleId());
 
@@ -39,20 +39,20 @@ public class CtrlUser {
             model.addRow(row);
         }
     }
-
+    // Update user data
     public void updateUser(JTextField name, JTextField lastName, JTextField email, JTextField password, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
             User user = new User(this.id, name.getText(), lastName.getText(), email.getText(), password.getText());
 
-            // Instancia de las clases CtrlEntity y CtrlRol
+           // Instance of the CtrlEntity and CtrlRol classes
             CtrlEntity ctrlEntity = new CtrlEntity();
             CtrlRol ctrlRol = new CtrlRol();
 
-            // Obtener los valores seleccionados en los JComboBox para entityId y roleId
+            // Get the selected values in the JComboBox for entityId and roleId
             String entityName = (String) cbxEntity.getSelectedItem();
             String roleName = (String) cbxRole.getSelectedItem();
 
-            // Convertir los nombres de entidad y rol en sus respectivos IDs
+            // Convert entity and role names into their respective IDs
             int entityId = ctrlEntity.getEntityIdByName(entityName);
             int roleId = ctrlRol.getRoleIdByName(roleName);
 
@@ -64,11 +64,11 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
     }
-
+    // Delete a user
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
-
+     // Select a row in the JTable
     public void selectRow(JTable table, JTextField name, JTextField lastName, JTextField email, JTextField password, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
             int row = table.getSelectedRow();
@@ -78,11 +78,11 @@ public class CtrlUser {
                 lastName.setText(table.getValueAt(row, 2).toString());
                 email.setText(table.getValueAt(row, 3).toString());
 
-                // Obtener los valores de los ComboBox (comboboxes)
+                 // Get the values of the ComboBoxes (comboboxes)
                 String entityName = table.getValueAt(row, 4).toString();
                 String roleName = table.getValueAt(row, 5).toString();
 
-                // Establecer los valores seleccionados en los ComboBox
+                // Set the selected values in the ComboBoxes
                 cbxEntity.setSelectedItem(entityName);
                 cbxRole.setSelectedItem(roleName);
             } else {
@@ -92,7 +92,7 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
+     // Clear text fields
     public void clearFields(JTextField name, JTextField lastName, JTextField email, JTextField password) {
         name.setText("");
         lastName.setText("");
@@ -100,34 +100,34 @@ public class CtrlUser {
         password.setText("");
 
     }
-
+        // Load roles to the JComboBox
     public void loadRolesToUserComboBox(JComboBox<String> comboBox) {
         CtrlRol ctrlRol = new CtrlRol();
         ctrlRol.loadRolesToComboBox(comboBox);
     }
-
+      // Add a new user
     public void addUser(JTextField txtName, JTextField txtLastName, JTextField txtEmail, JTextField txtPassword, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
-            // Obtener los valores de los campos de texto
+            // Get the values from the text fields
             String name = txtName.getText();
             String lastName = txtLastName.getText();
             String email = txtEmail.getText();
             String password = txtPassword.getText();
 
-            // Obtener los nombres de entidad y rol seleccionados desde ComboBoxes
+            // Get the entity and role names selected from ComboBoxes
             String entityName = (String) cbxEntity.getSelectedItem();
             String roleName = (String) cbxRole.getSelectedItem();
 
-            // Utilizar las clases CtrlEntity y CtrlRol para obtener los IDs correspondientes
+            // Use the CtrlEntity and CtrlRol classes to get the corresponding IDs
             CtrlRol ctrlRol = new CtrlRol();
             CtrlEntity ctrlEntity = new CtrlEntity();
             int entityId = ctrlEntity.getEntityIdByName2(entityName);
             int roleId = ctrlRol.getRoleIdByName2(roleName);
 
-            // Crear un nuevo usuario con los IDs en lugar de nombres
+             // Create a new user with IDs instead of names
             User user = new User(name, lastName, email, password, entityId, roleId);
 
-            // Agregar el usuario a la base de datos
+            // Add the user to the database
             UserDAO userDAO = new UserDAO();
             userDAO.createUser(user);
         } catch (NumberFormatException ex) {

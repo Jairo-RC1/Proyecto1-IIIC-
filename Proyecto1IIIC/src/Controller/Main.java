@@ -10,6 +10,7 @@ import Model.DBConnectionJava;
 public class Main {
 
     public static void main(String[] args) {
+         // Create an instance of the Register class (assuming it's a UI component)
         Register lo = new Register();
         lo.setVisible(true);
         

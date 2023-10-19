@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import Model.*;
 import javax.swing.table.TableRowSorter;
 
-
+// Store the ID of the selected flow
 public class CtrlFlow {
    FlowDAO dao = new FlowDAO();
     int id;
-
+       // Load flow data into the JTable
     public void loadFlowData(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
@@ -31,7 +31,8 @@ public class CtrlFlow {
             model.addRow(row);
         }
     }
-
+    
+    // Add a new flow
     public void addFlow(JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done, JTextField waterSpringId, JTextField samplingId) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,7 +47,7 @@ public class CtrlFlow {
             JOptionPane.showMessageDialog(null, "Error de formato en la fecha (debe ser yyyy-MM-dd).");
         }
     }
-
+     // Update an existing flow
     public void updateFlow(JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done, JTextField waterSpringId, JTextField samplingId) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,11 +62,11 @@ public class CtrlFlow {
             JOptionPane.showMessageDialog(null, "Error de formato en la fecha (debe ser yyyy-MM-dd).");
         }
     }
-
+    // Delete the selected flow
     public void deleteFlow() {
         this.dao.deleteFlow(this.id);
     }
-
+    // Select a row in the table to work with
     public void selectFlowRow(JTable table, JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done, JTextField waterSpringId, JTextField samplingId) {
         try {
             int row = table.getSelectedRow();
@@ -86,7 +87,7 @@ public class CtrlFlow {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
+    // Clear input fields
     public void clearFields(JTextField capacity, JTextField method, JTextField observation, JTextField date, JTextField climate, JTextField done) {
         capacity.setText("");
         method.setText("");

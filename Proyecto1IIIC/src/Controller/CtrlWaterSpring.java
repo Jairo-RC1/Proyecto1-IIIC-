@@ -19,7 +19,7 @@ public class CtrlWaterSpring {
 
     WaterSpringDAO dao = new WaterSpringDAO();
     int id;
-
+     // Load water spring data into a JTable
     public void loadDataWaterSprings(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
@@ -36,7 +36,7 @@ public class CtrlWaterSpring {
             model.addRow(row);
         }
     }
-
+    // Add a new water spring
     public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
         try {
             this.dao.createWaterSpring(new WaterSpring(
@@ -48,7 +48,7 @@ public class CtrlWaterSpring {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
     }
-
+    // Update a water spring's data
     public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
         try {
             this.dao.updateWaterSpring(new WaterSpring(
@@ -60,11 +60,11 @@ public class CtrlWaterSpring {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
     }
-
+     // Delete a water spring
     public void deleteWaterSpring() {
         this.dao.deleteWaterSpring(this.id);
     }
-
+    // Select a water spring's row in the JTable
     public void selectWaterSpringRow(JTable table, JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description) {
         try {
             int row = table.getSelectedRow();
@@ -82,7 +82,7 @@ public class CtrlWaterSpring {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
+    // Clear text fields
     public void clearFields(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description) {
         name.setText("");
         address.setText("");
@@ -90,16 +90,18 @@ public class CtrlWaterSpring {
         longitude.setText("");
         description.setText("");
     }
+    
+    // Load provinces to a JComboBox
     public void loadProvincesToWaterProvinceComboBox(JComboBox<String> comboBox) {
         CtrlProvince ctrlProvince = new CtrlProvince();
         ctrlProvince.loadProvincesToComboBox(comboBox);
     }
-
+       // Load counties to a JComboBox based on the selected province
     public void loadCountiesToWaterCountyComboBox(JComboBox<String> comboBox, String selectedProvince) {
         CtrlCounty ctrlCounty = new CtrlCounty();
         ctrlCounty.loadCountiesToSamplingCountyComboBox(comboBox, selectedProvince);
     }
-
+     // Load districts to a JComboBox based on the selected county
     public void loadDistrictsToWaterDistrictComboBox(JComboBox<String> comboBox, String countyName) {
         CtrlDistrict ctrlDistrict = new CtrlDistrict();
         ctrlDistrict.loadDistrictsForCounty(comboBox, countyName);
