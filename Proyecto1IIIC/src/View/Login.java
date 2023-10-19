@@ -104,7 +104,7 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     // Get the entered username and password
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         /*// Get the entered username and password from text fields
         String usuario = txtUsuario.getText();
@@ -137,7 +137,8 @@ public class Login extends javax.swing.JFrame {
         public AccessValidator(DBConnectionJava db) {
             this.db = db;
         }
-
+        
+    // Method to validate access
         public boolean validateAccess(String username, String password) {
             try (Connection connection = db.getConnection()) {
                 String query = "SELECT role FROM users WHERE username = ? AND password = ?";
