@@ -9,35 +9,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author JRS
- */
 public class LoginDAO {
-      private final DBConnectionJava db;
 
-        public LoginDAO(DBConnectionJava db) {
-            this.db = db;}
-     // Method to validate access
-        public boolean validateAccess(String username, String password) {
-            try (Connection connection = db.getConnection()) {
-                String query = "SELECT role FROM users WHERE username = ? AND password = ?";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, username);
-                statement.setString(2, password);
+    public String loginUser(String username, String password) {
+        String role = "";
+        String query = "SELECT r.name FROM users u "
+                + "INNER JOIN roles r ON u.role_id = r.id "
+                + "WHERE u.name = ? AND u.password = ?";
 
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    String role = resultSet.getString("role");
-                    return "Super_admin".equals(role) || "Admin".equals(role) || "Digitador".equals(role);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                db.disconnect();
+        // Utiliza tu clase de conexión para establecer la conexión
+        DBConnectionJava dbConnection = new DBConnectionJava();
+        try (Connection connection = dbConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                role = resultSet.getString("name");
             }
-
-            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.disconnect();
         }
-    }
 
+        return role;
+    }
+}

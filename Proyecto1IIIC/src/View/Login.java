@@ -5,19 +5,10 @@
 package View;
 
 import Controller.CtrlLogin;
-import Model.DBConnectionJava;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    DBConnectionJava db = new DBConnectionJava();
-    Register register = new Register();
-    CtrlLogin CtrlLogin = new CtrlLogin();
-    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,7 +23,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
+        txtUserName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -45,22 +36,25 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Hack Nerd Font", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("BIENVENIDO");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Hack Nerd Font", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Contraseña:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Hack Nerd Font", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuario:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, 30));
 
-        txtUsername.setBackground(new java.awt.Color(204, 255, 255));
-        txtUsername.setFont(new java.awt.Font("Lucida Sans", 3, 14)); // NOI18N
-        txtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsername.setBorder(null);
-        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 160, 150, 20));
+        txtUserName.setBackground(new java.awt.Color(204, 255, 255));
+        txtUserName.setFont(new java.awt.Font("Lucida Sans", 3, 14)); // NOI18N
+        txtUserName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUserName.setBorder(null);
+        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 160, 150, 20));
 
         txtPassword.setBackground(new java.awt.Color(204, 255, 255));
         txtPassword.setFont(new java.awt.Font("Lucida Sans", 3, 14)); // NOI18N
@@ -86,6 +80,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 70, 70));
 
         jLabel6.setFont(new java.awt.Font("Hack Nerd Font", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Sistema de control de nacientes");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
@@ -104,31 +99,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
      // Get the entered username and password
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    String username = txtUsername.getText();
-    String password = new String(txtPassword.getPassword());
+        String username = txtUserName.getText();
+        String password = new String(txtPassword.getPassword());
 
-    // Checks autentification y get role name
-    String roleName = CtrlLogin.loginUser(username, password);
-    
-    if (roleName != null) {
-        // Closes LoginForm
-        dispose();
+        CtrlLogin loginController = new CtrlLogin();
+        String roleName = loginController.loginUser(username, password);
 
-        // Opens RegisterForm and switches roleName
-        Register registerForm = new Register(roleName);
-        registerForm.setVisible(true);
-    } else {
-        // Triggers exception
-        JOptionPane.showMessageDialog(null, "Credenciales inválidas");
-    }
+        if (!roleName.isEmpty()) {
+            Register register = new Register(roleName);
+            register.setVisible(true);
+            // Código para ocultar la ventana de inicio de sesión de Login si es necesario
+        } else {
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectos. Por favor, inténtelo de nuevo.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    public class AccessValidator {
-
-      
-        }
-        
-   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -141,6 +126,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

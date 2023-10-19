@@ -7,10 +7,10 @@ package View;
 import Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
 
 public class Register extends javax.swing.JFrame {
 
+    private String roleName;
     CtrlEntity cte = new CtrlEntity();
     CtrlFlow ctf = new CtrlFlow();
     CtrlSamplingSite ctss = new CtrlSamplingSite();
@@ -18,47 +18,46 @@ public class Register extends javax.swing.JFrame {
     CtrlWaterSpring ctw = new CtrlWaterSpring();
 
     public Register(String roleName) {
-        // Configs tabs and ctrls
-        switch (roleName) {
-            case "Super Administrador":
-                jpUser = new JPanel();
-                jpUser.setVisible(true);
-                jpEntity.setVisible(true);
-                jpFlow.setVisible(true);
-                jpSampling.setVisible(true);
-                jpWater.setVisible(true);
-                jpReport.setVisible(true);
-                break;
-            case "Administrador":
-                Tab.setVisible(true);
-                Tab.setVisible(true);
-                jpFlow.setVisible(false);
-                jpSampling.setVisible(false);
-                jpWater.setVisible(false);
-                jpReport.setVisible(false);
-                break;
-            case "Digitador":
-                Tab.setVisible(false);
-                Tab.setVisible(false);
-                jpFlow.setVisible(true);
-                jpSampling.setVisible(true);
-                jpWater.setVisible(true);
-                jpReport.setVisible(false);
-                break;
-        // Trata el caso de un rol no válido o desconocido
-            default:
-                break;
-        }
-    }
-
-    public Register() {
         initComponents();
+        this.roleName = roleName;
+        if (roleName.equals("Super Administrador")) {
+            // Habilita todas las pestañas
+            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
+            jTabbedPane.setEnabledAt(1, true); // Índice 1: Entity
+            jTabbedPane.setEnabledAt(2, true); // Índice 2: Flow
+            jTabbedPane.setEnabledAt(3, true); // Índice 3: Sampling
+            jTabbedPane.setEnabledAt(4, true); // Índice 4: Water
+            jTabbedPane.setEnabledAt(5, true); // Índice 5: Report
+        } else if (roleName.equals("Administrador")) {
+            // Habilita solo algunas pestañas
+            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
+            jTabbedPane.setEnabledAt(1, true); // Índice 1: Entity
+            jTabbedPane.setEnabledAt(2, false); // Índice 2: Flow
+            jTabbedPane.setEnabledAt(3, false); // Índice 3: Sampling
+            jTabbedPane.setEnabledAt(4, false); // Índice 4: Water
+            jTabbedPane.setEnabledAt(5, false); // Índice 5: Report
+        } else if (roleName.equals("Digitador")) {
+            // Habilita otras pestañas
+            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
+            jTabbedPane.setEnabledAt(1, false); // Índice 1: Entity
+            jTabbedPane.setEnabledAt(2, true); // Índice 2: Flow
+            jTabbedPane.setEnabledAt(3, false); // Índice 3: Sampling
+            jTabbedPane.setEnabledAt(4, false); // Índice 4: Water
+            jTabbedPane.setEnabledAt(5, false); // Índice 5: Report
+            btnEditUser.setEnabled(false);
+            btnDeleteUser.setEnabled(false);
+            btnFlowEdit.setEnabled(false);
+            btnFlowDelete.setEnabled(false);
+        } else {
+
+        }
+
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.listUser();
         this.listCombobox();
         this.listEntity();
-       
+
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,7 +133,7 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Tab = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
         jpUser = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
@@ -304,7 +303,7 @@ public class Register extends javax.swing.JFrame {
 
         jpUser.add(cbxUserEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
-        Tab.addTab("Usuarios", jpUser);
+        jTabbedPane.addTab("Usuarios", jpUser);
 
         jpEntity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -373,7 +372,7 @@ public class Register extends javax.swing.JFrame {
         });
         jpEntity.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
 
-        Tab.addTab("Entidades", jpEntity);
+        jTabbedPane.addTab("Entidades", jpEntity);
 
         jpFlow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -422,7 +421,7 @@ public class Register extends javax.swing.JFrame {
         btnFlowEdit.setText("Editar");
         jpFlow.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
 
-        Tab.addTab("Medicion", jpFlow);
+        jTabbedPane.addTab("Medicion", jpFlow);
 
         jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -478,7 +477,7 @@ public class Register extends javax.swing.JFrame {
         btnSamplingEdit.setText("Editar");
         jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
 
-        Tab.addTab("Muestreo", jpSampling);
+        jTabbedPane.addTab("Muestreo", jpSampling);
 
         jpWater.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -550,7 +549,7 @@ public class Register extends javax.swing.JFrame {
         cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jpWater.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
 
-        Tab.addTab("Nacientes", jpWater);
+        jTabbedPane.addTab("Nacientes", jpWater);
 
         javax.swing.GroupLayout jpReportLayout = new javax.swing.GroupLayout(jpReport);
         jpReport.setLayout(jpReportLayout);
@@ -563,9 +562,9 @@ public class Register extends javax.swing.JFrame {
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        Tab.addTab("Reportes", jpReport);
+        jTabbedPane.addTab("Reportes", jpReport);
 
-        getContentPane().add(Tab, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
+        getContentPane().add(jTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
 
         pack();
@@ -625,7 +624,6 @@ public class Register extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane Tab;
     private javax.swing.JButton btnAddUser;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnEditUser;
@@ -689,6 +687,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JPanel jpEntity;
     private javax.swing.JPanel jpFlow;
     private javax.swing.JPanel jpReport;

@@ -8,13 +8,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class DBConnectionJava {
      // Constructor to establish a connection to the database
     static String bd = "project1";
     static String port = "3306";
     static String login = "root";
-    static String password = "Rosalja224+";
+    static String password = "Jairo8553";
     static String url = "jdbc:mariadb://localhost:" + port + "/" + bd;
 
     Connection connection = null;
