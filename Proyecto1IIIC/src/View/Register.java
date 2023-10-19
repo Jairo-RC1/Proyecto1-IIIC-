@@ -7,6 +7,7 @@ package View;
 import Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 public class Register extends javax.swing.JFrame {
 
@@ -16,6 +17,35 @@ public class Register extends javax.swing.JFrame {
     CtrlUser ctu = new CtrlUser();
     CtrlWaterSpring ctw = new CtrlWaterSpring();
 
+    public Register(String roleName) {
+ // Configura las pestañas y controles según el rol
+        if (roleName.equals("Super Administrador")) {
+            jpUser = new JPanel();
+            jpUser.setVisible(true);
+            jpEntity.setVisible(true);
+            jpFlow.setVisible(true);
+            jpSampling.setVisible(true);
+            jpWater.setVisible(true);
+            jpReport.setVisible(true);
+        } else if (roleName.equals("Administrador")) {
+            Tab.setVisible(true);
+            Tab.setVisible(true);
+            jpFlow.setVisible(false);
+            jpSampling.setVisible(false);
+            jpWater.setVisible(false);
+            jpReport.setVisible(false);
+        } else if (roleName.equals("Digitador")) {
+            Tab.setVisible(false);
+            Tab.setVisible(false);
+            jpFlow.setVisible(true);
+            jpSampling.setVisible(true);
+            jpWater.setVisible(true);
+            jpReport.setVisible(false);
+        } else {
+            // Trata el caso de un rol no válido o desconocido
+        }
+    }
+
     public Register() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -23,6 +53,7 @@ public class Register extends javax.swing.JFrame {
         this.listUser();
         this.listCombobox();
         this.listEntity();
+       
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,8 +129,8 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        Tab = new javax.swing.JTabbedPane();
+        jpUser = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -117,7 +148,7 @@ public class Register extends javax.swing.JFrame {
         cbxUserRol = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         cbxUserEntity = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
+        jpEntity = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEntity = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -135,7 +166,7 @@ public class Register extends javax.swing.JFrame {
         btnEntityDelete = new javax.swing.JButton();
         btnEntityAdd = new javax.swing.JButton();
         btnEntityEdit = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        jpFlow = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblFlow = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
@@ -153,7 +184,7 @@ public class Register extends javax.swing.JFrame {
         btnFlowDelete = new javax.swing.JButton();
         btnFlowAdd = new javax.swing.JButton();
         btnFlowEdit = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jpSampling = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblSampling = new javax.swing.JTable();
         jLabel28 = new javax.swing.JLabel();
@@ -169,7 +200,7 @@ public class Register extends javax.swing.JFrame {
         btnSamplingDelete = new javax.swing.JButton();
         btnSamplingAdd = new javax.swing.JButton();
         btnSamplingEdit = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jpWater = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblWater = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
@@ -193,13 +224,13 @@ public class Register extends javax.swing.JFrame {
         cbxWaterCounty = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         cbxWaterDistrict = new javax.swing.JComboBox<>();
-        jPanel7 = new javax.swing.JPanel();
+        jpReport = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -216,23 +247,23 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUser);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel1.setText("Correo Electronico:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jpUser.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabel2.setText("Nombre: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        jpUser.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jLabel3.setText("Apellidos: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jpUser.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel4.setText("Contraseña:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        jPanel1.add(txtUserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 190, -1));
-        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 190, -1));
-        jPanel1.add(txtUserLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, -1));
-        jPanel1.add(txtUserEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 190, -1));
+        jpUser.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jpUser.add(txtUserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 190, -1));
+        jpUser.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 190, -1));
+        jpUser.add(txtUserLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, -1));
+        jpUser.add(txtUserEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 190, -1));
 
         btnAddUser.setText("Agregar");
         btnAddUser.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +271,7 @@ public class Register extends javax.swing.JFrame {
                 btnAddUserActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 130, -1));
+        jpUser.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 130, -1));
 
         btnDeleteUser.setText("Eliminar");
         btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +279,7 @@ public class Register extends javax.swing.JFrame {
                 btnDeleteUserActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 130, -1));
+        jpUser.add(btnDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 130, -1));
 
         btnEditUser.setText("Editar");
         btnEditUser.addActionListener(new java.awt.event.ActionListener() {
@@ -256,21 +287,21 @@ public class Register extends javax.swing.JFrame {
                 btnEditUserActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 130, -1));
+        jpUser.add(btnEditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 130, -1));
 
         jLabel20.setText("Rol:");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        jpUser.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
-        jPanel1.add(cbxUserRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
+        jpUser.add(cbxUserRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
 
         jLabel21.setText("Entidad:");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
+        jpUser.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
 
-        jPanel1.add(cbxUserEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
+        jpUser.add(cbxUserEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
-        jTabbedPane1.addTab("Usuarios", jPanel1);
+        Tab.addTab("Usuarios", jpUser);
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpEntity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblEntity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,31 +318,31 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEntity);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 970, 340));
+        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 970, 340));
 
         jLabel5.setText("Direccion:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jpEntity.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel6.setText("Cedula Juridica:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jpEntity.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel7.setText("Nombre:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jpEntity.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jLabel8.setText("Correo Electronico:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jpEntity.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jLabel9.setText("Telefono:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-        jPanel2.add(txtEntityAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 180, -1));
-        jPanel2.add(txtEntityDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 180, -1));
-        jPanel2.add(txtEntityName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 180, -1));
-        jPanel2.add(txtEntityEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 180, -1));
-        jPanel2.add(txtEntityPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 180, -1));
+        jpEntity.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        jpEntity.add(txtEntityAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 180, -1));
+        jpEntity.add(txtEntityDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 180, -1));
+        jpEntity.add(txtEntityName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 180, -1));
+        jpEntity.add(txtEntityEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 180, -1));
+        jpEntity.add(txtEntityPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 180, -1));
 
         jLabel10.setText("Descripcion:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
-        jPanel2.add(txtLegalNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 180, -1));
+        jpEntity.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+        jpEntity.add(txtLegalNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 180, -1));
 
         btnEntityDelete.setText("Eliminar");
         btnEntityDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +350,7 @@ public class Register extends javax.swing.JFrame {
                 btnEntityDeleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEntityDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 130, -1));
+        jpEntity.add(btnEntityDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 130, -1));
 
         btnEntityAdd.setText("Agregar");
         btnEntityAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +358,7 @@ public class Register extends javax.swing.JFrame {
                 btnEntityAddActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEntityAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 130, -1));
+        jpEntity.add(btnEntityAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 130, -1));
 
         btnEntityEdit.setText("Editar");
         btnEntityEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -335,11 +366,11 @@ public class Register extends javax.swing.JFrame {
                 btnEntityEditActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
+        jpEntity.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
 
-        jTabbedPane1.addTab("Entidades", jPanel2);
+        Tab.addTab("Entidades", jpEntity);
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpFlow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblFlow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -351,44 +382,44 @@ public class Register extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tblFlow);
 
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel22.setText("Capacidad:");
-        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
+        jpFlow.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
 
         jLabel23.setText("Metodo:");
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jpFlow.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel24.setText("Realizado:");
-        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        jpFlow.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
         jLabel25.setText("Observacion:");
-        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jpFlow.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLabel26.setText("Fecha:");
-        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jpFlow.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel27.setText("Clima:");
-        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
-        jPanel4.add(txtFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 160, -1));
-        jPanel4.add(txtFlowCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 160, -1));
-        jPanel4.add(txtFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
-        jPanel4.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
-        jPanel4.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
-        jPanel4.add(txtFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
+        jpFlow.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jpFlow.add(txtFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 160, -1));
+        jpFlow.add(txtFlowCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 160, -1));
+        jpFlow.add(txtFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
+        jpFlow.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
+        jpFlow.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
+        jpFlow.add(txtFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
 
         btnFlowDelete.setText("Eliminar");
-        jPanel4.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
+        jpFlow.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
 
         btnFlowAdd.setText("Agregar");
-        jPanel4.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
+        jpFlow.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
 
         btnFlowEdit.setText("Editar");
-        jPanel4.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
+        jpFlow.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
 
-        jTabbedPane1.addTab("Medicion", jPanel4);
+        Tab.addTab("Medicion", jpFlow);
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblSampling.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -400,51 +431,51 @@ public class Register extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tblSampling);
 
-        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel28.setText("Entidad:");
-        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        jPanel5.add(txtSamplingName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 130, -1));
+        jpSampling.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jpSampling.add(txtSamplingName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 130, -1));
 
         jLabel29.setText("Nombre:");
-        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jpSampling.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel30.setText("Provincia:");
-        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jpSampling.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel31.setText("Canton:");
-        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jpSampling.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel32.setText("Distrito");
-        jPanel5.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jpSampling.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         cbxSamplingProvince.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxSamplingProvinceActionPerformed(evt);
             }
         });
-        jPanel5.add(cbxSamplingProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 100, -1));
+        jpSampling.add(cbxSamplingProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 100, -1));
 
         cbxSamplingCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel5.add(cbxSamplingCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+        jpSampling.add(cbxSamplingCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
         cbxSamplingDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel5.add(cbxSamplingDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+        jpSampling.add(cbxSamplingDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
-        jPanel5.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
+        jpSampling.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
 
         btnSamplingDelete.setText("Eliminar");
-        jPanel5.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
+        jpSampling.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
 
         btnSamplingAdd.setText("Agregar");
-        jPanel5.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 120, -1));
+        jpSampling.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 120, -1));
 
         btnSamplingEdit.setText("Editar");
-        jPanel5.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
+        jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
 
-        jTabbedPane1.addTab("Muestreo", jPanel5);
+        Tab.addTab("Muestreo", jpSampling);
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpWater.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblWater.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -461,75 +492,75 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblWater);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
 
         jLabel11.setText("Longitud");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
+        jpWater.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
 
         jLabel12.setText("Nombre:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jpWater.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel13.setText("Direccion:");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jpWater.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel14.setText("Latitud:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 10));
+        jpWater.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 10));
 
         jLabel15.setText("Descripcion:");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
-        jPanel3.add(txtWaterDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 180, -1));
-        jPanel3.add(txtWaterName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 180, -1));
-        jPanel3.add(txtWaterAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, -1));
-        jPanel3.add(txtWaterLatitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
-        jPanel3.add(txtWaterLongitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
+        jpWater.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jpWater.add(txtWaterDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 180, -1));
+        jpWater.add(txtWaterName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 180, -1));
+        jpWater.add(txtWaterAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, -1));
+        jpWater.add(txtWaterLatitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
+        jpWater.add(txtWaterLongitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         btnWaterDelete.setText("Eliminar");
-        jPanel3.add(btnWaterDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 120, -1));
+        jpWater.add(btnWaterDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 120, -1));
 
         btnWaterAdd.setText("Agregar");
-        jPanel3.add(btnWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 120, -1));
+        jpWater.add(btnWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 120, -1));
 
         btnWaterEdit.setText("Editar");
-        jPanel3.add(btnWaterEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 120, -1));
+        jpWater.add(btnWaterEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 120, -1));
 
         jLabel16.setText("Entidad:");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+        jpWater.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
         jLabel17.setText("Provincia:");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
+        jpWater.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
 
         jLabel18.setText("Canton:");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+        jpWater.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
 
-        jPanel3.add(cbxWaterEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 200, -1));
+        jpWater.add(cbxWaterEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 200, -1));
 
-        jPanel3.add(cbxWaterProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, -1));
+        jpWater.add(cbxWaterProvince, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 100, -1));
 
         cbxWaterCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel3.add(cbxWaterCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 100, -1));
+        jpWater.add(cbxWaterCounty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 100, -1));
 
         jLabel19.setText("Distrito:");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+        jpWater.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
         cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
-        jPanel3.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
+        jpWater.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
 
-        jTabbedPane1.addTab("Nacientes", jPanel3);
+        Tab.addTab("Nacientes", jpWater);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpReportLayout = new javax.swing.GroupLayout(jpReport);
+        jpReport.setLayout(jpReportLayout);
+        jpReportLayout.setHorizontalGroup(
+            jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 970, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpReportLayout.setVerticalGroup(
+            jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Reportes", jPanel7);
+        Tab.addTab("Reportes", jpReport);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
+        getContentPane().add(Tab, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
 
         pack();
@@ -589,6 +620,7 @@ public class Register extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Tab;
     private javax.swing.JButton btnAddUser;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnEditUser;
@@ -647,18 +679,17 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jpEntity;
+    private javax.swing.JPanel jpFlow;
+    private javax.swing.JPanel jpReport;
+    private javax.swing.JPanel jpSampling;
+    private javax.swing.JPanel jpUser;
+    private javax.swing.JPanel jpWater;
     private javax.swing.JTable tblEntity;
     private javax.swing.JTable tblFlow;
     private javax.swing.JTable tblSampling;

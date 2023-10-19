@@ -15,12 +15,14 @@ import java.sql.SQLException;
  */
 public class CtrlLogin {
 
-    public String loginUser(String username, String password) {
+   public String loginUser(String username, String password) {
         String role = "";
-        String query = "SELECT role FROM users WHERE name = ? AND password = ?";
+        String query = "SELECT r.name FROM users u " +
+                       "JOIN roles r ON u.role_id = r.id " +
+                       "WHERE u.name = ? AND u.password = ?";
         
-        // DB connection
         DBConnectionJava dbConnection = new DBConnectionJava();
+
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
@@ -28,7 +30,7 @@ public class CtrlLogin {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                role = resultSet.getString("role");
+                role = resultSet.getString("name");
             }
         } catch (SQLException e) {
             e.printStackTrace();
