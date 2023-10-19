@@ -20,7 +20,7 @@ public class CountyDAO {
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
-            ps.setString(1, selectedProvince); // Establece el nombre de la provincia como parámetro
+            ps.setString(1, selectedProvince); // Sets a province name
 
             ResultSet resultSet = ps.executeQuery();
 

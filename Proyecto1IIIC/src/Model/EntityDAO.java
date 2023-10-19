@@ -114,7 +114,7 @@ public class EntityDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                // Agrega aquí más columnas si es necesario
+                
                 return new Entity(id, name);
             }
         } catch (SQLException e) {
@@ -187,7 +187,7 @@ public class EntityDAO {
             db.disconnect();
         }
 
-        return -1; // You can choose a default value if no corresponding ID is found
+        return -1; 
     }
 
 }

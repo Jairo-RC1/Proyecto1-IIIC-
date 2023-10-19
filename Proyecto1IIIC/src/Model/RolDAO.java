@@ -46,7 +46,7 @@ public class RolDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                // Agrega aquí más columnas si es necesario
+                
                 return new Rol(id, name);
             }
         } catch (SQLException e) {

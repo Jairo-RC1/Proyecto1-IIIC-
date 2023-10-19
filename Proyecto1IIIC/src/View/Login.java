@@ -132,34 +132,10 @@ public class Login extends javax.swing.JFrame {
 
     public class AccessValidator {
 
-        private final DBConnectionJava db;
-
-        public AccessValidator(DBConnectionJava db) {
-            this.db = db;
+      
         }
         
-    // Method to validate access
-        public boolean validateAccess(String username, String password) {
-            try (Connection connection = db.getConnection()) {
-                String query = "SELECT role FROM users WHERE username = ? AND password = ?";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, username);
-                statement.setString(2, password);
-
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    String role = resultSet.getString("role");
-                    return "Super_admin".equals(role) || "Admin".equals(role) || "Digitador".equals(role);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                db.disconnect();
-            }
-
-            return false;
-        }
-    }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -15,7 +15,7 @@ public class CtrlProvince {
         ProvinceDAO provinceDao = new ProvinceDAO();
         List<Province> provinces = provinceDao.readProvinces();
 
-        comboBox.removeAllItems(); // Limpia el ComboBox
+        comboBox.removeAllItems(); // Cleans ComboBox
         // Add the names of provinces to the JComboBox
         for (Province province : provinces) {
             comboBox.addItem(province.getName());

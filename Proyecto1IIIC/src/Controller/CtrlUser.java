@@ -25,8 +25,8 @@ public class CtrlUser {
         table.setRowSorter(order);
         model.setRowCount(0);
 
-        CtrlEntity entityDAO = new CtrlEntity(); // Instancia CtrlEntity
-        CtrlRol rolDAO = new CtrlRol(); // Instancia CtrlRol
+        CtrlEntity entityDAO = new CtrlEntity(); // Instance CtrlEntity
+        CtrlRol rolDAO = new CtrlRol(); // Instance CtrlRol
 
         List<User> users = dao.readUser();
         

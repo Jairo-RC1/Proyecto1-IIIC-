@@ -15,7 +15,7 @@ public class CtrlCounty {
         CountyDAO CountyDAO = new CountyDAO();
         List<County> counties = CountyDAO.getCountiesForProvince(selectedProvince);
 
-        comboBox.removeAllItems(); // Limpia el ComboBox
+        comboBox.removeAllItems(); // Cleans ComboBox
          // Populate the JComboBox with county names
         for (County county : counties) {
             comboBox.addItem(county.getName());

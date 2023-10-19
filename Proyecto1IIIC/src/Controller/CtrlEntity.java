@@ -87,8 +87,8 @@ public class CtrlEntity {
         if (entity != null) {
             return entity.getId();
         } else {
-            // En caso de no encontrar la entidad, puedes manejarlo como desees, por ejemplo, lanzar una excepción o devolver un valor predeterminado.
-            return -1; // Valor predeterminado o manejo de error
+            // In cse entity is empty, takes one out.
+            return -1; 
         }
     }
      // Get the name of an entity by its ID
@@ -101,7 +101,7 @@ public class CtrlEntity {
         EntityDAO entityDao = new EntityDAO();
         List<Entity> entities = entityDao.readEntities();
 
-        comboBox.removeAllItems(); // Limpia el ComboBox
+        comboBox.removeAllItems(); // Cleans ComboBox
 
         for (Entity entity : entities) {
             comboBox.addItem(entity.getName());
