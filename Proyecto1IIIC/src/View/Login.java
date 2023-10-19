@@ -107,18 +107,18 @@ public class Login extends javax.swing.JFrame {
     String username = txtUsername.getText();
     String password = new String(txtPassword.getPassword());
 
-    // Verifica la autenticación y obtiene el nombre del rol
+    // Checks autentification y get role name
     String roleName = CtrlLogin.loginUser(username, password);
     
     if (roleName != null) {
-        // Cierra LoginForm
+        // Closes LoginForm
         dispose();
 
-        // Abre RegisterForm y pasa el nombre del rol
+        // Opens RegisterForm and switches roleName
         Register registerForm = new Register(roleName);
         registerForm.setVisible(true);
     } else {
-        // Muestra un mensaje de error
+        // Triggers exception
         JOptionPane.showMessageDialog(null, "Credenciales inválidas");
     }
     }//GEN-LAST:event_btnLoginActionPerformed

@@ -18,31 +18,36 @@ public class Register extends javax.swing.JFrame {
     CtrlWaterSpring ctw = new CtrlWaterSpring();
 
     public Register(String roleName) {
- // Configura las pestañas y controles según el rol
-        if (roleName.equals("Super Administrador")) {
-            jpUser = new JPanel();
-            jpUser.setVisible(true);
-            jpEntity.setVisible(true);
-            jpFlow.setVisible(true);
-            jpSampling.setVisible(true);
-            jpWater.setVisible(true);
-            jpReport.setVisible(true);
-        } else if (roleName.equals("Administrador")) {
-            Tab.setVisible(true);
-            Tab.setVisible(true);
-            jpFlow.setVisible(false);
-            jpSampling.setVisible(false);
-            jpWater.setVisible(false);
-            jpReport.setVisible(false);
-        } else if (roleName.equals("Digitador")) {
-            Tab.setVisible(false);
-            Tab.setVisible(false);
-            jpFlow.setVisible(true);
-            jpSampling.setVisible(true);
-            jpWater.setVisible(true);
-            jpReport.setVisible(false);
-        } else {
-            // Trata el caso de un rol no válido o desconocido
+        // Configs tabs and ctrls
+        switch (roleName) {
+            case "Super Administrador":
+                jpUser = new JPanel();
+                jpUser.setVisible(true);
+                jpEntity.setVisible(true);
+                jpFlow.setVisible(true);
+                jpSampling.setVisible(true);
+                jpWater.setVisible(true);
+                jpReport.setVisible(true);
+                break;
+            case "Administrador":
+                Tab.setVisible(true);
+                Tab.setVisible(true);
+                jpFlow.setVisible(false);
+                jpSampling.setVisible(false);
+                jpWater.setVisible(false);
+                jpReport.setVisible(false);
+                break;
+            case "Digitador":
+                Tab.setVisible(false);
+                Tab.setVisible(false);
+                jpFlow.setVisible(true);
+                jpSampling.setVisible(true);
+                jpWater.setVisible(true);
+                jpReport.setVisible(false);
+                break;
+        // Trata el caso de un rol no válido o desconocido
+            default:
+                break;
         }
     }
 
