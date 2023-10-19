@@ -4,7 +4,7 @@
  */
 package View;
 
-import Controller.CtrlLogin;
+import Model.LoginDAO;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -102,8 +102,8 @@ public class Login extends javax.swing.JFrame {
         String username = txtUserName.getText();
         String password = new String(txtPassword.getPassword());
 
-        CtrlLogin loginController = new CtrlLogin();
-        String roleName = loginController.loginUser(username, password);
+        LoginDAO login = new LoginDAO();
+        String roleName = login.loginUser(username, password);
 
         if (!roleName.isEmpty()) {
             Register register = new Register(roleName);

@@ -12,7 +12,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class SamplingSiteDAO {
-      // Method to create a sampling site in the database
+    // Method to create a sampling site in the database
+
     public void createSamplingSite(SamplingSite samplingSite) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO samplings_sities (name, province_id, county_id, district_id, entity_id) VALUES (?, ?, ?, ?, ?)";
@@ -31,6 +32,7 @@ public class SamplingSiteDAO {
             db.disconnect();
         }
     }
+
     // Method to read all sampling sites from the database
     public List<SamplingSite> readSamplingSites() {
         DBConnectionJava db = new DBConnectionJava();
@@ -56,7 +58,8 @@ public class SamplingSiteDAO {
         }
         return samplingSites;
     }
-     // Method to update the information of a sampling site
+    // Method to update the information of a sampling site
+
     public void updateSamplingSite(SamplingSite samplingSite) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -78,7 +81,8 @@ public class SamplingSiteDAO {
             db.disconnect();
         }
     }
-     // Method to delete a sampling site from the database by its ID
+    // Method to delete a sampling site from the database by its ID
+
     public void deleteSamplingSite(int id) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -94,5 +98,71 @@ public class SamplingSiteDAO {
         } finally {
             db.disconnect();
         }
+    }
+
+    public SamplingSite getSamplingSiteByName(String samplingName) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT * FROM samplings_sities WHERE name = ?";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, samplingName);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+
+                return new SamplingSite(id, name);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return null; // Return null if the sampling is not found
+    }
+
+    public String getSamplingSiteNameById(int samplingSiteId) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT name FROM samplings_sities WHERE id = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setInt(1, samplingSiteId);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("name");
+            } else {
+                throw new RuntimeException("No se encontró un sitio de muestreo con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+            throw new RuntimeException("Error al consultar el sitio de muestreo por ID.");
+        } finally {
+            db.disconnect();
+        }
+    }
+
+    public int getSamplingSiteIdByName(String samplingSiteName) {
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT id FROM samplings_sities WHERE name = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, samplingSiteName);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return -1;
     }
 }

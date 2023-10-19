@@ -22,28 +22,28 @@ public class Register extends javax.swing.JFrame {
         this.roleName = roleName;
         if (roleName.equals("Super Administrador")) {
             // Habilita todas las pestañas
-            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
-            jTabbedPane.setEnabledAt(1, true); // Índice 1: Entity
-            jTabbedPane.setEnabledAt(2, true); // Índice 2: Flow
-            jTabbedPane.setEnabledAt(3, true); // Índice 3: Sampling
-            jTabbedPane.setEnabledAt(4, true); // Índice 4: Water
-            jTabbedPane.setEnabledAt(5, true); // Índice 5: Report
+            TabRegister.setEnabledAt(0, true); // Índice 0: User
+            TabRegister.setEnabledAt(1, true); // Índice 1: Entity
+            TabRegister.setEnabledAt(2, true); // Índice 2: Flow
+            TabRegister.setEnabledAt(3, true); // Índice 3: Sampling
+            TabRegister.setEnabledAt(4, true); // Índice 4: Water
+            TabRegister.setEnabledAt(5, true); // Índice 5: Report
         } else if (roleName.equals("Administrador")) {
             // Habilita solo algunas pestañas
-            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
-            jTabbedPane.setEnabledAt(1, true); // Índice 1: Entity
-            jTabbedPane.setEnabledAt(2, false); // Índice 2: Flow
-            jTabbedPane.setEnabledAt(3, false); // Índice 3: Sampling
-            jTabbedPane.setEnabledAt(4, false); // Índice 4: Water
-            jTabbedPane.setEnabledAt(5, false); // Índice 5: Report
+            TabRegister.setEnabledAt(0, true); // Índice 0: User
+            TabRegister.setEnabledAt(1, true); // Índice 1: Entity
+            TabRegister.setEnabledAt(2, false); // Índice 2: Flow
+            TabRegister.setEnabledAt(3, false); // Índice 3: Sampling
+            TabRegister.setEnabledAt(4, false); // Índice 4: Water
+            TabRegister.setEnabledAt(5, false); // Índice 5: Report
         } else if (roleName.equals("Digitador")) {
             // Habilita otras pestañas
-            jTabbedPane.setEnabledAt(0, true); // Índice 0: User
-            jTabbedPane.setEnabledAt(1, false); // Índice 1: Entity
-            jTabbedPane.setEnabledAt(2, true); // Índice 2: Flow
-            jTabbedPane.setEnabledAt(3, false); // Índice 3: Sampling
-            jTabbedPane.setEnabledAt(4, false); // Índice 4: Water
-            jTabbedPane.setEnabledAt(5, false); // Índice 5: Report
+            TabRegister.setEnabledAt(0, true); // Índice 0: User
+            TabRegister.setEnabledAt(1, false); // Índice 1: Entity
+            TabRegister.setEnabledAt(2, true); // Índice 2: Flow
+            TabRegister.setEnabledAt(3, false); // Índice 3: Sampling
+            TabRegister.setEnabledAt(4, false); // Índice 4: Water
+            TabRegister.setEnabledAt(5, false); // Índice 5: Report
             btnEditUser.setEnabled(false);
             btnDeleteUser.setEnabled(false);
             btnFlowEdit.setEnabled(false);
@@ -57,6 +57,7 @@ public class Register extends javax.swing.JFrame {
         this.listUser();
         this.listCombobox();
         this.listEntity();
+        this.listFlow();
 
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
@@ -102,7 +103,6 @@ public class Register extends javax.swing.JFrame {
     }
 
     public void listUser() {
-        //this.ctf.loadFlowData(tblFlow);
         //this.ctss.loadDataSamplingSites(tblSampling);
         this.ctu.loadUserData(tblUser);
         //this.ctw.loadDataWaterSprings(tblWater);
@@ -112,6 +112,10 @@ public class Register extends javax.swing.JFrame {
         this.cte.loadDataEntities(tblEntity);
     }
 
+    public void listFlow() {
+        this.ctf.loadFlowData(tblFlow);
+    }
+
     public void listCombobox() {
         ctss.loadProvincesToSamplingProvinceComboBox(cbxSamplingProvince);
         ctw.loadProvincesToWaterProvinceComboBox(cbxWaterProvince);
@@ -119,11 +123,13 @@ public class Register extends javax.swing.JFrame {
         cte.loadEntityNamesToComboBox(cbxUserEntity);
         cte.loadEntityNamesToComboBox(cbxSamplingEntity);
         cte.loadEntityNamesToComboBox(cbxWaterEntity);
+        ctw.loadWaterSpringNamesToComboBox(cbxFlowWater);
+        ctss.loadSamplingSiteNamesToComboBox(cbxFlowSampling);
     }
 
     public void clear() {
         this.cte.clearFields(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
-        this.ctf.clearFields(txtFlowCapacity, txtFlowMethod, txtFlowObservation, txtFlowDate, txtFlowClimate, txtFlowDone);
+        this.ctf.clearFields(txtFlowCapacity, txtFlowObservation, txtFlowDate);
         this.ctss.clearFields(txtSamplingName);
         this.ctu.clearFields(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword);
         this.ctw.clearFields(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription);
@@ -133,7 +139,7 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane = new javax.swing.JTabbedPane();
+        TabRegister = new javax.swing.JTabbedPane();
         jpUser = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
@@ -179,15 +185,19 @@ public class Register extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtFlowDone = new javax.swing.JTextField();
         txtFlowCapacity = new javax.swing.JTextField();
-        txtFlowMethod = new javax.swing.JTextField();
         txtFlowObservation = new javax.swing.JTextField();
         txtFlowDate = new javax.swing.JTextField();
-        txtFlowClimate = new javax.swing.JTextField();
         btnFlowDelete = new javax.swing.JButton();
         btnFlowAdd = new javax.swing.JButton();
         btnFlowEdit = new javax.swing.JButton();
+        cbxFlowClimate = new javax.swing.JComboBox<>();
+        cbxFlowDone = new javax.swing.JComboBox<>();
+        cbxFlowSampling = new javax.swing.JComboBox<>();
+        cbxFlowWater = new javax.swing.JComboBox<>();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        cbxFlowMethod = new javax.swing.JComboBox<>();
         jpSampling = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblSampling = new javax.swing.JTable();
@@ -251,7 +261,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUser);
 
-        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
 
         jLabel1.setText("Correo Electronico:");
         jpUser.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
@@ -303,7 +313,7 @@ public class Register extends javax.swing.JFrame {
 
         jpUser.add(cbxUserEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
-        jTabbedPane.addTab("Usuarios", jpUser);
+        TabRegister.addTab("Usuarios", jpUser);
 
         jpEntity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -322,7 +332,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEntity);
 
-        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 970, 340));
+        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1040, 340));
 
         jLabel5.setText("Direccion:");
         jpEntity.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
@@ -372,7 +382,7 @@ public class Register extends javax.swing.JFrame {
         });
         jpEntity.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
 
-        jTabbedPane.addTab("Entidades", jpEntity);
+        TabRegister.addTab("Entidades", jpEntity);
 
         jpFlow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -381,12 +391,17 @@ public class Register extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Capacidad", "Metodo", "Observacion", "Fecha", "Clima", "Realizado", "Naciente", "Sitio"
             }
         ));
+        tblFlow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFlowMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblFlow);
 
-        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
 
         jLabel22.setText("Capacidad:");
         jpFlow.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
@@ -394,8 +409,8 @@ public class Register extends javax.swing.JFrame {
         jLabel23.setText("Metodo:");
         jpFlow.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel24.setText("Realizado:");
-        jpFlow.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        jLabel24.setText("Sitio de Muestreo:");
+        jpFlow.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
         jLabel25.setText("Observacion:");
         jpFlow.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
@@ -405,23 +420,54 @@ public class Register extends javax.swing.JFrame {
 
         jLabel27.setText("Clima:");
         jpFlow.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
-        jpFlow.add(txtFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 160, -1));
         jpFlow.add(txtFlowCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 160, -1));
-        jpFlow.add(txtFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
         jpFlow.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
         jpFlow.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
-        jpFlow.add(txtFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
 
         btnFlowDelete.setText("Eliminar");
+        btnFlowDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFlowDeleteActionPerformed(evt);
+            }
+        });
         jpFlow.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
 
         btnFlowAdd.setText("Agregar");
+        btnFlowAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFlowAddActionPerformed(evt);
+            }
+        });
         jpFlow.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
 
         btnFlowEdit.setText("Editar");
+        btnFlowEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFlowEditActionPerformed(evt);
+            }
+        });
         jpFlow.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
 
-        jTabbedPane.addTab("Medicion", jpFlow);
+        cbxFlowClimate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soleado", "Lluvioso", "Nublado" }));
+        jpFlow.add(cbxFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
+
+        cbxFlowDone.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sí", "No" }));
+        jpFlow.add(cbxFlowDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 100, -1));
+
+        jpFlow.add(cbxFlowSampling, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 190, -1));
+
+        jpFlow.add(cbxFlowWater, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 190, -1));
+
+        jLabel33.setText("Realizado:");
+        jpFlow.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
+
+        jLabel34.setText("Naciente:");
+        jpFlow.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
+
+        cbxFlowMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Directo", "Indirecto" }));
+        jpFlow.add(cbxFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
+
+        TabRegister.addTab("Medicion", jpFlow);
 
         jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -430,12 +476,12 @@ public class Register extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Provincia", "Canton", "Distrito", "Entidad"
             }
         ));
         jScrollPane6.setViewportView(tblSampling);
 
-        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
 
         jLabel28.setText("Entidad:");
         jpSampling.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
@@ -477,7 +523,7 @@ public class Register extends javax.swing.JFrame {
         btnSamplingEdit.setText("Editar");
         jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
 
-        jTabbedPane.addTab("Muestreo", jpSampling);
+        TabRegister.addTab("Muestreo", jpSampling);
 
         jpWater.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -496,7 +542,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblWater);
 
-        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 970, 340));
+        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
 
         jLabel11.setText("Longitud");
         jpWater.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
@@ -549,22 +595,22 @@ public class Register extends javax.swing.JFrame {
         cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jpWater.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
 
-        jTabbedPane.addTab("Nacientes", jpWater);
+        TabRegister.addTab("Nacientes", jpWater);
 
         javax.swing.GroupLayout jpReportLayout = new javax.swing.GroupLayout(jpReport);
         jpReport.setLayout(jpReportLayout);
         jpReportLayout.setHorizontalGroup(
             jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 970, Short.MAX_VALUE)
+            .addGap(0, 1050, Short.MAX_VALUE)
         );
         jpReportLayout.setVerticalGroup(
             jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        jTabbedPane.addTab("Reportes", jpReport);
+        TabRegister.addTab("Reportes", jpReport);
 
-        getContentPane().add(jTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 970, 671));
+        getContentPane().add(TabRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 1050, 671));
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
 
         pack();
@@ -585,7 +631,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddUserActionPerformed
 
     private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
-        this.ctu.updateUser(txtUserName, txtUserName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
+        this.ctu.updateUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
         this.clear();
         this.listUser();
     }//GEN-LAST:event_btnEditUserActionPerformed
@@ -622,8 +668,31 @@ public class Register extends javax.swing.JFrame {
         this.ctu.selectRow(tblUser, txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
     }//GEN-LAST:event_tblUserMouseClicked
 
+    private void btnFlowAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowAddActionPerformed
+        this.ctf.addFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
+        this.clear();
+        this.listFlow();
+    }//GEN-LAST:event_btnFlowAddActionPerformed
+
+    private void btnFlowEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowEditActionPerformed
+        this.ctf.updateFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
+        this.clear();
+        this.listFlow();
+    }//GEN-LAST:event_btnFlowEditActionPerformed
+
+    private void btnFlowDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowDeleteActionPerformed
+        this.ctf.deleteFlow();
+        this.clear();
+        this.listFlow();
+    }//GEN-LAST:event_btnFlowDeleteActionPerformed
+
+    private void tblFlowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFlowMouseClicked
+        this.ctf.selectFlowRow(tblFlow, txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
+    }//GEN-LAST:event_tblFlowMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane TabRegister;
     private javax.swing.JButton btnAddUser;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnEditUser;
@@ -640,6 +709,11 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btnWaterAdd;
     private javax.swing.JButton btnWaterDelete;
     private javax.swing.JButton btnWaterEdit;
+    private javax.swing.JComboBox<String> cbxFlowClimate;
+    private javax.swing.JComboBox<String> cbxFlowDone;
+    private javax.swing.JComboBox<String> cbxFlowMethod;
+    private javax.swing.JComboBox<String> cbxFlowSampling;
+    private javax.swing.JComboBox<String> cbxFlowWater;
     private javax.swing.JComboBox<String> cbxSamplingCounty;
     private javax.swing.JComboBox<String> cbxSamplingDistrict;
     private javax.swing.JComboBox<String> cbxSamplingEntity;
@@ -676,6 +750,8 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -687,7 +763,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JPanel jpEntity;
     private javax.swing.JPanel jpFlow;
     private javax.swing.JPanel jpReport;
@@ -705,10 +780,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField txtEntityName;
     private javax.swing.JTextField txtEntityPhone;
     private javax.swing.JTextField txtFlowCapacity;
-    private javax.swing.JTextField txtFlowClimate;
     private javax.swing.JTextField txtFlowDate;
-    private javax.swing.JTextField txtFlowDone;
-    private javax.swing.JTextField txtFlowMethod;
     private javax.swing.JTextField txtFlowObservation;
     private javax.swing.JTextField txtLegalNumber;
     private javax.swing.JTextField txtSamplingName;

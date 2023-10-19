@@ -18,7 +18,8 @@ public class CtrlUser {
 
     UserDAO dao = new UserDAO();
     int id;
-       // Load user data into a JTable
+    // Load user data into a JTable
+
     public void loadUserData(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
@@ -29,22 +30,53 @@ public class CtrlUser {
         CtrlRol rolDAO = new CtrlRol(); // Instance CtrlRol
 
         List<User> users = dao.readUser();
-        
+
         for (User user : users) {
             // Get the name of the entity and the corresponding role
             String entityName = entityDAO.getEntityNameById(user.getEntityId());
             String roleName = rolDAO.getRoleNameById(user.getRoleId());
 
-            Object[] row = {user.getId(), user.getName(), user.getLastName(), user.getEmail(),user.getPassword(), entityName, roleName};
+            Object[] row = {user.getId(), user.getName(), user.getLastName(), user.getEmail(), user.getPassword(), entityName, roleName};
             model.addRow(row);
         }
     }
+
+    // Add a new user
+    public void addUser(JTextField txtName, JTextField txtLastName, JTextField txtEmail, JTextField txtPassword, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
+        try {
+            // Get the values from the text fields
+            String name = txtName.getText();
+            String lastName = txtLastName.getText();
+            String email = txtEmail.getText();
+            String password = txtPassword.getText();
+
+            // Get the entity and role names selected from ComboBoxes
+            String entityName = (String) cbxEntity.getSelectedItem();
+            String roleName = (String) cbxRole.getSelectedItem();
+
+            // Use the CtrlEntity and CtrlRol classes to get the corresponding IDs
+            CtrlRol ctrlRol = new CtrlRol();
+            CtrlEntity ctrlEntity = new CtrlEntity();
+            int entityId = ctrlEntity.getEntityIdByName2(entityName);
+            int roleId = ctrlRol.getRoleIdByName2(roleName);
+
+            // Create a new user with IDs instead of names
+            User user = new User(name, lastName, email, password, entityId, roleId);
+
+            // Add the user to the database
+            UserDAO userDAO = new UserDAO();
+            userDAO.createUser(user);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
+        }
+    }
+
     // Update user data
     public void updateUser(JTextField name, JTextField lastName, JTextField email, JTextField password, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
             User user = new User(this.id, name.getText(), lastName.getText(), email.getText(), password.getText());
 
-           // Instance of the CtrlEntity and CtrlRol classes
+            // Instance of the CtrlEntity and CtrlRol classes
             CtrlEntity ctrlEntity = new CtrlEntity();
             CtrlRol ctrlRol = new CtrlRol();
 
@@ -64,11 +96,13 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
     }
+
     // Delete a user
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
-     // Select a row in the JTable
+    // Select a row in the JTable
+
     public void selectRow(JTable table, JTextField name, JTextField lastName, JTextField email, JTextField password, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
         try {
             int row = table.getSelectedRow();
@@ -78,7 +112,7 @@ public class CtrlUser {
                 lastName.setText(table.getValueAt(row, 2).toString());
                 email.setText(table.getValueAt(row, 3).toString());
 
-                 // Get the values of the ComboBoxes (comboboxes)
+                // Get the values of the ComboBoxes (comboboxes)
                 String entityName = table.getValueAt(row, 4).toString();
                 String roleName = table.getValueAt(row, 5).toString();
 
@@ -92,7 +126,8 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-     // Clear text fields
+    // Clear text fields
+
     public void clearFields(JTextField name, JTextField lastName, JTextField email, JTextField password) {
         name.setText("");
         lastName.setText("");
@@ -100,39 +135,11 @@ public class CtrlUser {
         password.setText("");
 
     }
-        // Load roles to the JComboBox
+    // Load roles to the JComboBox
+
     public void loadRolesToUserComboBox(JComboBox<String> comboBox) {
         CtrlRol ctrlRol = new CtrlRol();
         ctrlRol.loadRolesToComboBox(comboBox);
-    }
-      // Add a new user
-    public void addUser(JTextField txtName, JTextField txtLastName, JTextField txtEmail, JTextField txtPassword, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
-        try {
-            // Get the values from the text fields
-            String name = txtName.getText();
-            String lastName = txtLastName.getText();
-            String email = txtEmail.getText();
-            String password = txtPassword.getText();
-
-            // Get the entity and role names selected from ComboBoxes
-            String entityName = (String) cbxEntity.getSelectedItem();
-            String roleName = (String) cbxRole.getSelectedItem();
-
-            // Use the CtrlEntity and CtrlRol classes to get the corresponding IDs
-            CtrlRol ctrlRol = new CtrlRol();
-            CtrlEntity ctrlEntity = new CtrlEntity();
-            int entityId = ctrlEntity.getEntityIdByName2(entityName);
-            int roleId = ctrlRol.getRoleIdByName2(roleName);
-
-             // Create a new user with IDs instead of names
-            User user = new User(name, lastName, email, password, entityId, roleId);
-
-            // Add the user to the database
-            UserDAO userDAO = new UserDAO();
-            userDAO.createUser(user);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
-        }
     }
 
 }

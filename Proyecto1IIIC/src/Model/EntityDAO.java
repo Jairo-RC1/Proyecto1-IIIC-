@@ -147,27 +147,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-    // Method to retrieve a list of entity names
-    public List<Entity> readEntitiesNames() {
-        DBConnectionJava db = new DBConnectionJava();
-        List<Entity> entities = new ArrayList<>();
-        String sql = "SELECT * FROM entities"; // Assuming the entity table name is "entities"
-
-        try {
-            PreparedStatement ps = db.getConnection().prepareStatement(sql);
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                entities.add(new Entity(id, name));
-            }
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        } finally {
-            db.disconnect();
-        }
-        return entities;
-    }
+    
     // Method to retrieve the ID of an entity by its name
     public int getEntityIdByName(String entityName) {
         DBConnectionJava db = new DBConnectionJava();

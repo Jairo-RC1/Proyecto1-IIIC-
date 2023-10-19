@@ -42,6 +42,13 @@ public class WaterSpring {
         this.entityId = entityId;
     }
 
+    public WaterSpring(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
+
     public WaterSpring() {
     }
     // Getter method to retrieve the ID of the WaterSpring

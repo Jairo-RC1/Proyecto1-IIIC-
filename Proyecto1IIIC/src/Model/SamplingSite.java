@@ -29,6 +29,13 @@ public class SamplingSite {
         this.districtId = districtId;
         this.entityId = entityId;
     }
+
+    public SamplingSite(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
      // Getter method to retrieve the ID of the SamplingSite
     public int getId() {
         return id;

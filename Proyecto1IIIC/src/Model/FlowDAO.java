@@ -16,7 +16,7 @@ public class FlowDAO {
      // Method to create a new Flow record
     public void createFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
-        String consultaSQL = "INSERT INTO flows (capacity, method, observation, date, climate, done, waterSpringId, samplingId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO flows (capacity, method, observation, date, climate, done, water_spring_id, sampling_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, flow.getCapacity());
@@ -28,7 +28,7 @@ public class FlowDAO {
             ps.setInt(7, flow.getWaterSpringId());
             ps.setInt(8, flow.getSamplingId());
             ps.execute();
-            JOptionPane.showMessageDialog(null, "Flujo creado correctamente");
+            JOptionPane.showMessageDialog(null, "Naciente creada correctamente");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo crear el flujo, error: " + e.getMessage());
         } finally {
@@ -52,8 +52,8 @@ public class FlowDAO {
                 Date date = resultSet.getDate("date");
                 String climate = resultSet.getString("climate");
                 String done = resultSet.getString("done");
-                int waterSpringId = resultSet.getInt("waterSpringId");
-                int samplingId = resultSet.getInt("samplingId");
+                int waterSpringId = resultSet.getInt("water_spring_id");
+                int samplingId = resultSet.getInt("sampling_id");
                 flows.add(new Flow(id, capacity, method, observation, date, climate, done, waterSpringId, samplingId));
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class FlowDAO {
     public void updateFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
 
-        String consultaSQL = "UPDATE flows SET capacity=?, method=?, observation=?, date=?, climate=?, done=?, waterSpringId=?, samplingId=? WHERE id=?";
+        String consultaSQL = "UPDATE flows SET capacity=?, method=?, observation=?, date=?, climate=?, done=?, water_spring_id=?, sampling_id=? WHERE id=?";
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
