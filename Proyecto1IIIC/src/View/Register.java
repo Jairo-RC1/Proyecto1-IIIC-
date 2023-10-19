@@ -26,40 +26,40 @@ public class Register extends javax.swing.JFrame {
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el nombre de la provincia seleccionada
+                // Get the name of the selected province
                 String selectedProvince = cbxSamplingProvince.getSelectedItem().toString();
 
-                // Llamar al método para cargar los cantones
+                // LCall the method to load the blocks
                 ctss.loadCountiesToSamplingCountyComboBox(cbxSamplingCounty, selectedProvince);
             }
         });
         cbxSamplingCounty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el nombre de la provincia seleccionada
+                // Get the name of the selected province
                 String selectedCounty = (String) cbxSamplingCounty.getSelectedItem();
 
-                // Llamar al método para cargar los cantones
+                // Call the method to load the blocks
                 ctss.loadDistrictsToSamplingDistrictComboBox(cbxSamplingDistrict, selectedCounty);
             }
         });
         cbxWaterProvince.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el nombre de la provincia seleccionada
+                // Get the name of the selected province
                 String selectedProvince = cbxWaterProvince.getSelectedItem().toString();
 
-                // Llamar al método para cargar los cantones
+                // Call the method to load the blocks
                 ctss.loadCountiesToSamplingCountyComboBox(cbxWaterCounty, selectedProvince);
             }
         });
         cbxWaterCounty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el nombre de la provincia seleccionada
+                // Get the name of the selected province
                 String selectedCounty = (String) cbxWaterCounty.getSelectedItem();
 
-                // Llamar al método para cargar los cantones
+                // Call the method to load the blocks
                 ctss.loadDistrictsToSamplingDistrictComboBox(cbxWaterDistrict, selectedCounty);
             }
         });

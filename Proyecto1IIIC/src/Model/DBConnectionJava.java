@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 public class DBConnectionJava {
-
+     // Constructor to establish a connection to the database
     static String bd = "project1";
     static String port = "3306";
     static String login = "root";

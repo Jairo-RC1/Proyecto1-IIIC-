@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class SamplingSiteDAO {
-
+      // Method to create a sampling site in the database
     public void createSamplingSite(SamplingSite samplingSite) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO samplings_sities (name, province_id, county_id, district_id, entity_id) VALUES (?, ?, ?, ?, ?)";
@@ -31,7 +31,7 @@ public class SamplingSiteDAO {
             db.disconnect();
         }
     }
-
+    // Method to read all sampling sites from the database
     public List<SamplingSite> readSamplingSites() {
         DBConnectionJava db = new DBConnectionJava();
         List<SamplingSite> samplingSites = new ArrayList<>();
@@ -56,7 +56,7 @@ public class SamplingSiteDAO {
         }
         return samplingSites;
     }
-
+     // Method to update the information of a sampling site
     public void updateSamplingSite(SamplingSite samplingSite) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -78,7 +78,7 @@ public class SamplingSiteDAO {
             db.disconnect();
         }
     }
-
+     // Method to delete a sampling site from the database by its ID
     public void deleteSamplingSite(int id) {
         DBConnectionJava db = new DBConnectionJava();
 

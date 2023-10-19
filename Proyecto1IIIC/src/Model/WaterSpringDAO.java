@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+ // Method to create a new water spring record
 public class WaterSpringDAO {
     public void createWaterSpring(WaterSpring waterSpring) {
     DBConnectionJava db = new DBConnectionJava();
@@ -34,7 +35,7 @@ public class WaterSpringDAO {
         db.disconnect();
     }
 }
-
+// Method to retrieve a list of all water springs
 public List<WaterSpring> readWaterSprings() {
     DBConnectionJava db = new DBConnectionJava();
     List<WaterSpring> waterSprings = new ArrayList<>();
@@ -63,7 +64,7 @@ public List<WaterSpring> readWaterSprings() {
     }
     return waterSprings;
 }
-
+ // Method to update a water spring record
 public void updateWaterSpring(WaterSpring waterSpring) {
     DBConnectionJava db = new DBConnectionJava();
 
@@ -89,7 +90,7 @@ public void updateWaterSpring(WaterSpring waterSpring) {
         db.disconnect();
     }
 }
-
+// Method to delete a water spring record by ID
 public void deleteWaterSpring(int id) {
     DBConnectionJava db = new DBConnectionJava();
 

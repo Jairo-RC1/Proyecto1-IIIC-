@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountyDAO {
-
+    
+    // Method to get the list of counties for a specific province
     public List<County> getCountiesForProvince(String selectedProvince) {
         DBConnectionJava db = new DBConnectionJava();
         List<County> counties = new ArrayList<>();

@@ -4,10 +4,7 @@
  */
 package Model;
 
-/**
- *
- * @author jairo
- */
+
 public class User {
 
     private static int NextUserId = 1;
@@ -49,7 +46,7 @@ public class User {
     }
     
     
-
+    // Getter and setter methods for class attributes
     public static int getNextUserId() {
         return NextUserId;
     }

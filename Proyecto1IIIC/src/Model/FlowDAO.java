@@ -13,7 +13,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class FlowDAO {
-
+     // Method to create a new Flow record
     public void createFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO flows (capacity, method, observation, date, climate, done, waterSpringId, samplingId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +35,7 @@ public class FlowDAO {
             db.disconnect();
         }
     }
-
+      // Method to retrieve a list of Flow records
     public List<Flow> readFlows() {
         DBConnectionJava db = new DBConnectionJava();
         List<Flow> flows = new ArrayList<>();
@@ -63,7 +63,7 @@ public class FlowDAO {
         }
         return flows;
     }
-
+    // Method to update an existing Flow record
     public void updateFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -88,7 +88,7 @@ public class FlowDAO {
             db.disconnect();
         }
     }
-
+    // Method to delete a Flow record by ID
     public void deleteFlow(int id) {
         DBConnectionJava db = new DBConnectionJava();
 

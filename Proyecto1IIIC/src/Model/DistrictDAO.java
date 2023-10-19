@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistrictDAO {
-
+     // Method to retrieve a list of districts for a given county name    
     public List<District> getDistrictsForCounty(String countyName) {
         DBConnectionJava db = new DBConnectionJava();
         List<District> districts = new ArrayList<>();

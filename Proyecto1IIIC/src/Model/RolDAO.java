@@ -55,7 +55,7 @@ public class RolDAO {
             db.disconnect();
         }
 
-        return null; // Devuelve null si no se encuentra el rol
+        return null; // Returns null if role not found
     }
 
     public String getRoleNameById(int roleId) {
@@ -76,7 +76,7 @@ public class RolDAO {
             db.disconnect();
         }
 
-        return null; // En caso de no encontrar un nombre correspondiente al ID
+        return null; // If you do not find a name corresponding to the ID
     }
 
     public int getRoleIdByName(String roleName) {
@@ -97,7 +97,7 @@ public class RolDAO {
             db.disconnect();
         }
 
-        return -1; // Puedes elegir un valor predeterminado si no se encuentra ningún ID correspondiente
+        return -1; // You can choose a default value if no corresponding ID is found
     }
 
 }

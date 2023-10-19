@@ -16,26 +16,28 @@ public class District {
         this.countyId = countyId;
     }
 
+    // Method to get the ID of the district
     public int getId() {
         return id;
     }
-
+    // Method to set the ID of the district
     public void setId(int id) {
         this.id = id;
     }
-
+    // Method to get the name of the district 
     public String getName() {
         return name;
     }
-
+    
+    // Method to set the name of the district
     public void setName(String name) {
         this.name = name;
     }
-
+   // Method to get the ID of the county to which the district belongs
     public int getCountyId() {
         return countyId;
     }
-
+    // Method to set the ID of the county to which the district belongs  
     public void setCountyId(int countyId) {
         this.countyId = countyId;
     }

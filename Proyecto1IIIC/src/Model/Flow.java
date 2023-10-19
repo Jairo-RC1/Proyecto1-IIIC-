@@ -43,7 +43,7 @@ public class Flow {
     }
     
     public Flow(){}
-
+    // Getter and setter methods for class attributes
     public int getId() {
         return id;
     }

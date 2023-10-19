@@ -12,10 +12,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class EntityDAO {
-
+    
+     // Constructor
     public EntityDAO() {
     }
-
+    // Method to create a new entity record in the database
     public void createEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO entities (legal_id, name, email, phone_number, address, description) VALUES (?, ?, ?, ?, ?, ?)";
@@ -35,7 +36,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-
+       // Method to retrieve a list of all entities from the database
     public List<Entity> readEntities() {
         DBConnectionJava db = new DBConnectionJava();
         List<Entity> entities = new ArrayList<>();
@@ -61,7 +62,7 @@ public class EntityDAO {
         }
         return entities;
     }
-
+    // Method to update an existing entity record in the database
     public void updateEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -84,7 +85,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-
+    // Method to delete an entity record from the database by ID
     public void deleteEntity(int id) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -101,7 +102,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-
+    // Method to get an entity by its name
     public Entity getEntityByName(String entityName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM entities WHERE name = ?";
@@ -122,9 +123,9 @@ public class EntityDAO {
             db.disconnect();
         }
 
-        return null; // Devuelve null si no se encuentra la entidad
+        return null; // Return null if the entity is not found
     }
-
+    // Method to get the name of an entity by its ID
     public String getEntityNameById(int entityId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM entities WHERE id = ?";
@@ -146,11 +147,11 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-
+    // Method to retrieve a list of entity names
     public List<Entity> readEntitiesNames() {
         DBConnectionJava db = new DBConnectionJava();
         List<Entity> entities = new ArrayList<>();
-        String sql = "SELECT * FROM entities"; // Asumiendo que el nombre de la tabla de entidades es "entities"
+        String sql = "SELECT * FROM entities"; // Assuming the entity table name is "entities"
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
@@ -167,7 +168,7 @@ public class EntityDAO {
         }
         return entities;
     }
-
+    // Method to retrieve the ID of an entity by its name
     public int getEntityIdByName(String entityName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM entities WHERE name = ?";
@@ -186,7 +187,7 @@ public class EntityDAO {
             db.disconnect();
         }
 
-        return -1; // Puedes elegir un valor predeterminado si no se encuentra ningún ID correspondiente
+        return -1; // You can choose a default value if no corresponding ID is found
     }
 
 }

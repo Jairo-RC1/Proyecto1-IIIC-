@@ -14,7 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UserDAO {
-
+    // Constructor for the UserDAO class
     public UserDAO() {
 
     }
