@@ -40,7 +40,8 @@ public class CtrlSamplingSite {
             String districtName = districtdao.getDistrictNameById(samplingSite.getDistrictId());
             String entityName = entitydao.getEntityNameById(samplingSite.getEntityId());
 
-            Object[] row = {samplingSite.getId(), samplingSite.getName(), provinceName, countyName, districtName, entityName};
+            Object[] row = {samplingSite.getId(), samplingSite.getName(), provinceName, countyName,
+                districtName, entityName};
             model.addRow(row);
         }
     }
@@ -109,7 +110,7 @@ public class CtrlSamplingSite {
                 String county = (table.getValueAt(row, 3).toString());
                 String district = (table.getValueAt(row, 4).toString());
                 String entity = (table.getValueAt(row, 5).toString());
-                
+
                 cbxProvinceId.setSelectedItem(province);
                 cbxCountyId.setSelectedItem(county);
                 cbxDistrictId.setSelectedItem(district);

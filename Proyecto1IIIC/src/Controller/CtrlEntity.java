@@ -18,6 +18,7 @@ public class CtrlEntity {
 
     EntityDAO dao = new EntityDAO();
     int id;
+
     // Load data of entities into the JTable
     public void loadDataEntities(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -31,26 +32,34 @@ public class CtrlEntity {
             model.addRow(row);
         }
     }
-     // Add a new entity
+    // Add a new entity
+
     public void addEntity(JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
         try {
-            this.dao.createEntity(new Entity(Integer.parseInt(legalId.getText()), name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
+            long legalIdValue = Long.parseLong(legalId.getText());
+
+            this.dao.createEntity(new Entity(legalIdValue, name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }
     }
+
     // Update an existing entity
     public void updateEntity(JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
         try {
-            this.dao.updateEntity(new Entity(this.id, Integer.parseInt(legalId.getText()), name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
+            long legalIdValue = Long.parseLong(legalId.getText());
+
+            this.dao.updateEntity(new Entity(this.id, legalIdValue, name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }
     }
+
     // Delete the selected entity
     public void deleteEntity() {
         this.dao.deleteEntity(this.id);
     }
+
     // Select a row in the table to work with  
     public void selectEntityRow(JTable table, JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
         try {
@@ -70,7 +79,8 @@ public class CtrlEntity {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.getMessage());
         }
     }
-     // Clear input fields
+    // Clear input fields
+
     public void clearFields(JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
         legalId.setText("");
         name.setText("");
@@ -79,6 +89,7 @@ public class CtrlEntity {
         address.setText("");
         description.setText("");
     }
+
     // Get the ID of an entity by its name
     public int getEntityIdByName(String entityName) {
         EntityDAO entityDAO = new EntityDAO();
@@ -88,15 +99,17 @@ public class CtrlEntity {
             return entity.getId();
         } else {
             // In cse entity is empty, takes one out.
-            return -1; 
+            return -1;
         }
     }
-     // Get the name of an entity by its ID
+    // Get the name of an entity by its ID
+
     public String getEntityNameById(int entityId) {
         EntityDAO entityDAO = new EntityDAO();
         return entityDAO.getEntityNameById(entityId);
     }
-     // Load entity names into a JComboBox
+    // Load entity names into a JComboBox
+
     public void loadEntityNamesToComboBox(JComboBox<String> comboBox) {
         EntityDAO entityDao = new EntityDAO();
         List<Entity> entities = entityDao.readEntities();
@@ -107,7 +120,7 @@ public class CtrlEntity {
             comboBox.addItem(entity.getName());
         }
     }
-    
+
     // Get the ID of an entity by its name
     public int getEntityIdByName2(String entityName) {
         EntityDAO entityDAO = new EntityDAO();

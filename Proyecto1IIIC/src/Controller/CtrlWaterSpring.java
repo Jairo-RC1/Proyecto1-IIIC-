@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.WaterSpring;
+import Model.*;
 import Model.WaterSpringDAO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,32 +19,58 @@ public class CtrlWaterSpring {
 
     WaterSpringDAO dao = new WaterSpringDAO();
     int id;
-    // Load water spring data into a JTable
 
+    // Load water spring data into a JTable
     public void loadDataWaterSprings(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
+
+        ProvinceDAO provincedao = new ProvinceDAO();
+        CountyDAO countydao = new CountyDAO();
+        DistrictDAO districtdao = new DistrictDAO();
+        EntityDAO entitydao = new EntityDAO();
+
         List<WaterSpring> waterSprings = dao.readWaterSprings();
         for (WaterSpring waterSpring : waterSprings) {
+            String provinceName = provincedao.getProvinceNameById(waterSpring.getProvinceId());
+            String countyName = countydao.getCountyNameById(waterSpring.getCountyId());
+            String districtName = districtdao.getDistrictNameById(waterSpring.getDistrictId());
+            String entityName = entitydao.getEntityNameById(waterSpring.getEntityId());
+
             Object[] row = {
                 waterSpring.getId(), waterSpring.getName(), waterSpring.getAddress(),
-                waterSpring.getLatitude(), waterSpring.getLongitude(), waterSpring.getDescription(),
-                waterSpring.getProvinceId(), waterSpring.getCountyId(), waterSpring.getDistrictId(),
-                waterSpring.getEntityId()
+                waterSpring.getLatitude(), waterSpring.getLongitude(), waterSpring.getDescription(), provinceName,
+                countyName, districtName, entityName
             };
             model.addRow(row);
         }
     }
 
     // Add a new water spring
-    public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description,
+            JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
+
+            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+            String selectedCounty = (String) cbxCountyId.getSelectedItem();
+            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
+
             this.dao.createWaterSpring(new WaterSpring(
                     name.getText(), address.getText(), latitude.getText(), longitude.getText(),
-                    description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
-                    Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
+                    description.getText(), provinceName, countyName, districtName, entityName
             ));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
@@ -52,25 +78,39 @@ public class CtrlWaterSpring {
     }
 
     // Update a water spring's data
-    public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
+    public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description,
+            JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
+            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+            String selectedCounty = (String) cbxCountyId.getSelectedItem();
+            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
             this.dao.updateWaterSpring(new WaterSpring(
                     this.id, name.getText(), address.getText(), latitude.getText(), longitude.getText(),
-                    description.getText(), Integer.parseInt(provinceId.getText()), Integer.parseInt(countyId.getText()),
-                    Integer.parseInt(districtId.getText()), Integer.parseInt(entityId.getText())
+                    description.getText(), provinceName, countyName, districtName, entityName
             ));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
         }
     }
-    // Delete a water spring
 
+    // Delete a water spring
     public void deleteWaterSpring() {
         this.dao.deleteWaterSpring(this.id);
     }
 
     // Select a water spring's row in the JTable
-    public void selectWaterSpringRow(JTable table, JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description) {
+    public void selectWaterSpringRow(JTable table, JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description,
+            JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
         try {
             int row = table.getSelectedRow();
             if (row >= 0) {
@@ -80,6 +120,15 @@ public class CtrlWaterSpring {
                 latitude.setText(table.getValueAt(row, 3).toString());
                 longitude.setText(table.getValueAt(row, 4).toString());
                 description.setText(table.getValueAt(row, 5).toString());
+                String province = (table.getValueAt(row, 6).toString());
+                String county = (table.getValueAt(row, 7).toString());
+                String district = (table.getValueAt(row, 8).toString());
+                String entity = (table.getValueAt(row, 9).toString());
+                
+                cbxProvinceId.setSelectedItem(province);
+                cbxCountyId.setSelectedItem(county);
+                cbxDistrictId.setSelectedItem(district);
+                cbxEntityId.setSelectedItem(entity);
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }

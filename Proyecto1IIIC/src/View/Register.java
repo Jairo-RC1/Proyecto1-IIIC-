@@ -59,6 +59,7 @@ public class Register extends javax.swing.JFrame {
         this.listEntity();
         this.listFlow();
         this.listSampling();
+        this.listWater();
 
         cbxSamplingProvince.addActionListener(new ActionListener() {
             @Override
@@ -105,7 +106,6 @@ public class Register extends javax.swing.JFrame {
 
     public void listUser() {
         this.ctu.loadUserData(tblUser);
-        //this.ctw.loadDataWaterSprings(tblWater);
     }
 
     public void listEntity() {
@@ -118,6 +118,10 @@ public class Register extends javax.swing.JFrame {
 
     public void listSampling() {
         this.ctss.loadDataSamplingSites(tblSampling);
+    }
+
+    public void listWater() {
+        this.ctw.loadDataWaterSprings(tblWater);
     }
 
     public void listCombobox() {
@@ -589,12 +593,27 @@ public class Register extends javax.swing.JFrame {
         jpWater.add(txtWaterLongitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         btnWaterDelete.setText("Eliminar");
+        btnWaterDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWaterDeleteActionPerformed(evt);
+            }
+        });
         jpWater.add(btnWaterDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 120, -1));
 
         btnWaterAdd.setText("Agregar");
+        btnWaterAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWaterAddActionPerformed(evt);
+            }
+        });
         jpWater.add(btnWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 120, -1));
 
         btnWaterEdit.setText("Editar");
+        btnWaterEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWaterEditActionPerformed(evt);
+            }
+        });
         jpWater.add(btnWaterEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 120, -1));
 
         jLabel16.setText("Entidad:");
@@ -645,7 +664,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxSamplingProvinceActionPerformed
 
     private void tblWaterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWaterMouseClicked
-
+        this.ctw.selectWaterSpringRow(tblWater, txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
     }//GEN-LAST:event_tblWaterMouseClicked
 
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
@@ -733,6 +752,24 @@ public class Register extends javax.swing.JFrame {
     private void tblSamplingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSamplingMouseClicked
         this.ctss.selectSamplingSiteRow(tblSampling, txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
     }//GEN-LAST:event_tblSamplingMouseClicked
+
+    private void btnWaterAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterAddActionPerformed
+        this.ctw.addWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
+        this.clear();
+        this.listWater();
+    }//GEN-LAST:event_btnWaterAddActionPerformed
+
+    private void btnWaterEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterEditActionPerformed
+        this.ctw.updateWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
+        this.clear();
+        this.listWater();
+    }//GEN-LAST:event_btnWaterEditActionPerformed
+
+    private void btnWaterDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterDeleteActionPerformed
+        this.ctw.deleteWaterSpring();
+        this.clear();
+        this.listWater();
+    }//GEN-LAST:event_btnWaterDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
