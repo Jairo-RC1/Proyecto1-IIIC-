@@ -18,7 +18,7 @@ public class UserDAO {
     public UserDAO() {
 
     }
-      // Method to create a new user in the database
+
     public void createUser(User user) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO users (name, last_name, email, password, entity_id, role_id) VALUES (?, ?, ?, ?, ?, ?)";
@@ -38,7 +38,7 @@ public class UserDAO {
             db.disconnect();
         }
     }
-    // Method to retrieve a list of all users from the database
+
     public List<User> readUser() {
         DBConnectionJava db = new DBConnectionJava();
         List<User> users = new ArrayList<>();
@@ -64,7 +64,7 @@ public class UserDAO {
         }
         return users;
     }
-     // Method to update an existing user in the database
+
     public void updateUser(User user) {
         DBConnectionJava db = new DBConnectionJava();
 
@@ -87,7 +87,7 @@ public class UserDAO {
             db.disconnect();
         }
     }
-    // Method to delete a user by their ID
+
     public void deleteUser(int id) {
         DBConnectionJava db = new DBConnectionJava();
 

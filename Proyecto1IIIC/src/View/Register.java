@@ -101,6 +101,19 @@ public class Register extends javax.swing.JFrame {
                 ctss.loadDistrictsToSamplingDistrictComboBox(cbxWaterDistrict, selectedCounty);
             }
         });
+        btnAddCapacity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llama al método para generar el valor aleatorio
+                ctf.generateRandomCapacity(txtFlowCapacity);
+            }
+        });
+        btnAddDate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ctf.generateRandomDate(txtFlowDate);
+            }
+        });
 
     }
 
@@ -206,6 +219,8 @@ public class Register extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         cbxFlowMethod = new javax.swing.JComboBox<>();
+        btnAddCapacity = new javax.swing.JButton();
+        btnAddDate = new javax.swing.JButton();
         jpSampling = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblSampling = new javax.swing.JTable();
@@ -247,7 +262,10 @@ public class Register extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         cbxWaterDistrict = new javax.swing.JComboBox<>();
         jpReport = new javax.swing.JPanel();
+        chartPanel = new javax.swing.JPanel();
+        btnGraphic = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -269,7 +287,7 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUser);
 
-        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 340));
+        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
 
         jLabel1.setText("Correo Electronico:");
         jpUser.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
@@ -475,6 +493,24 @@ public class Register extends javax.swing.JFrame {
         cbxFlowMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Directo", "Indirecto" }));
         jpFlow.add(cbxFlowMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 160, -1));
 
+        btnAddCapacity.setBackground(new java.awt.Color(255, 255, 255));
+        btnAddCapacity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/mas.png"))); // NOI18N
+        btnAddCapacity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCapacityActionPerformed(evt);
+            }
+        });
+        jpFlow.add(btnAddCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 30, 30));
+
+        btnAddDate.setBackground(new java.awt.Color(255, 255, 255));
+        btnAddDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/mas.png"))); // NOI18N
+        btnAddDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddDateActionPerformed(evt);
+            }
+        });
+        jpFlow.add(btnAddDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 155, 30, 30));
+
         TabRegister.addTab("Medicion", jpFlow);
 
         jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -640,21 +676,50 @@ public class Register extends javax.swing.JFrame {
 
         TabRegister.addTab("Nacientes", jpWater);
 
-        javax.swing.GroupLayout jpReportLayout = new javax.swing.GroupLayout(jpReport);
-        jpReport.setLayout(jpReportLayout);
-        jpReportLayout.setHorizontalGroup(
-            jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+        jpReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
+        chartPanel.setLayout(chartPanelLayout);
+        chartPanelLayout.setHorizontalGroup(
+            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
-        jpReportLayout.setVerticalGroup(
-            jpReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        chartPanelLayout.setVerticalGroup(
+            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
         );
+
+        jpReport.add(chartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 710, 490));
+
+        btnGraphic.setText("Graficar Reporte");
+        jpReport.add(btnGraphic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         TabRegister.addTab("Reportes", jpReport);
 
         getContentPane().add(TabRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 0, 1090, 671));
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cerrar-sesion.png"))); // NOI18N
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 40, 50));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1170, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 1170, 680));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -771,9 +836,25 @@ public class Register extends javax.swing.JFrame {
         this.listWater();
     }//GEN-LAST:event_btnWaterDeleteActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        Login lo = new Login();
+        lo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnAddCapacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCapacityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddCapacityActionPerformed
+
+    private void btnAddDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddDateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabRegister;
+    private javax.swing.JButton btnAddCapacity;
+    private javax.swing.JButton btnAddDate;
     private javax.swing.JButton btnAddUser;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnEditUser;
@@ -784,6 +865,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btnFlowAdd;
     private javax.swing.JButton btnFlowDelete;
     private javax.swing.JButton btnFlowEdit;
+    private javax.swing.JButton btnGraphic;
     private javax.swing.JButton btnSamplingAdd;
     private javax.swing.JButton btnSamplingDelete;
     private javax.swing.JButton btnSamplingEdit;
@@ -805,6 +887,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxWaterDistrict;
     private javax.swing.JComboBox<String> cbxWaterEntity;
     private javax.swing.JComboBox<String> cbxWaterProvince;
+    private javax.swing.JPanel chartPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -839,6 +922,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

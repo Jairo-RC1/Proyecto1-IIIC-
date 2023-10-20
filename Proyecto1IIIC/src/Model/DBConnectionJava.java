@@ -30,15 +30,15 @@ public class DBConnectionJava {
             System.err.println("Error al establecer la conexion" + e.getMessage());
         }
     }
-    // Getter method to retrieve the database connection
+
     public Connection getConnection() {
         return connection;
     }
-    // Setter method to set the database connection
+
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-     // Method to disconnect from the database
+
     public void disconnect() {
         if (connection != null) {
             try {

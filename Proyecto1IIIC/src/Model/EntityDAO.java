@@ -12,10 +12,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class EntityDAO {
-    
-     // Constructor
+
+    // Constructor
     public EntityDAO() {
     }
+
     // Method to create a new entity record in the database
     public void createEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
@@ -36,7 +37,8 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-       // Method to retrieve a list of all entities from the database
+    // Method to retrieve a list of all entities from the database
+
     public List<Entity> readEntities() {
         DBConnectionJava db = new DBConnectionJava();
         List<Entity> entities = new ArrayList<>();
@@ -62,6 +64,7 @@ public class EntityDAO {
         }
         return entities;
     }
+
     // Method to update an existing entity record in the database
     public void updateEntity(Entity entity) {
         DBConnectionJava db = new DBConnectionJava();
@@ -85,6 +88,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
+
     // Method to delete an entity record from the database by ID
     public void deleteEntity(int id) {
         DBConnectionJava db = new DBConnectionJava();
@@ -102,6 +106,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
+
     // Method to get an entity by its name
     public Entity getEntityByName(String entityName) {
         DBConnectionJava db = new DBConnectionJava();
@@ -114,7 +119,7 @@ public class EntityDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                
+
                 return new Entity(id, name);
             }
         } catch (SQLException e) {
@@ -125,6 +130,7 @@ public class EntityDAO {
 
         return null; // Return null if the entity is not found
     }
+
     // Method to get the name of an entity by its ID
     public String getEntityNameById(int entityId) {
         DBConnectionJava db = new DBConnectionJava();
@@ -147,7 +153,7 @@ public class EntityDAO {
             db.disconnect();
         }
     }
-    
+
     // Method to retrieve the ID of an entity by its name
     public int getEntityIdByName(String entityName) {
         DBConnectionJava db = new DBConnectionJava();
@@ -167,7 +173,43 @@ public class EntityDAO {
             db.disconnect();
         }
 
-        return -1; 
+        return -1;
+    }
+
+    public List<WaterSpring> getWaterSpringsByEntity(String entityName) {
+        DBConnectionJava db = new DBConnectionJava();
+        List<WaterSpring> waterSprings = new ArrayList<>();
+
+        String sql = "SELECT ws.* FROM water_springs ws "
+                + "INNER JOIN entities e ON ws.entity_id = e.id "
+                + "WHERE e.name = ?";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, entityName);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String address = resultSet.getString("address");
+                String latitude = resultSet.getString("latitude");
+                String longitude = resultSet.getString("longitude");
+                String description = resultSet.getString("description");
+                int provinceId = resultSet.getInt("province_id");
+                int countyId = resultSet.getInt("county_id");
+                int districtId = resultSet.getInt("district_id");
+                int entityId = resultSet.getInt("entity_id");
+
+                WaterSpring waterSpring = new WaterSpring(id, name, address, latitude, longitude, description, provinceId, countyId, districtId, entityId);
+                waterSprings.add(waterSpring);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return waterSprings;
     }
 
 }

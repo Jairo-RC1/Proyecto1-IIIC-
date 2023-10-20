@@ -19,7 +19,7 @@ public class FlowDAO {
         String consultaSQL = "INSERT INTO flows (capacity, method, observation, date, climate, done, water_spring_id, sampling_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, flow.getCapacity());
+            ps.setString(1, flow.getCapacity());
             ps.setString(2, flow.getMethod());
             ps.setString(3, flow.getObservation());
             ps.setDate(4, new java.sql.Date(flow.getDate().getTime()));
@@ -46,7 +46,7 @@ public class FlowDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int capacity = resultSet.getInt("capacity");
+                String capacity = resultSet.getString("capacity");
                 String method = resultSet.getString("method");
                 String observation = resultSet.getString("observation");
                 Date date = resultSet.getDate("date");
@@ -71,7 +71,7 @@ public class FlowDAO {
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, flow.getCapacity());
+            ps.setString(1, flow.getCapacity());
             ps.setString(2, flow.getMethod());
             ps.setString(3, flow.getObservation());
             ps.setDate(4, new java.sql.Date(flow.getDate().getTime()));

@@ -10,7 +10,7 @@ import java.util.Date;
 public class Flow {
     
     private int id;
-    private int capacity;
+    private String capacity;
     private String method;
     private String observation;
     private Date date;
@@ -19,7 +19,7 @@ public class Flow {
     private int waterSpringId;
     private int samplingId;
 
-    public Flow(int capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
+    public Flow(String capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
         this.capacity = capacity;
         this.method = method;
         this.observation = observation;
@@ -30,7 +30,7 @@ public class Flow {
         this.samplingId = samplingId;
     }
 
-    public Flow(int id, int capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
+    public Flow(int id, String capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
         this.id = id;
         this.capacity = capacity;
         this.method = method;
@@ -44,6 +44,7 @@ public class Flow {
     
     public Flow(){}
     // Getter and setter methods for class attributes
+
     public int getId() {
         return id;
     }
@@ -52,11 +53,11 @@ public class Flow {
         this.id = id;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -115,4 +116,9 @@ public class Flow {
     public void setSamplingId(int samplingId) {
         this.samplingId = samplingId;
     }
+
+    
+   
+    
+    
 }

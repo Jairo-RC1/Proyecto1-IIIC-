@@ -14,6 +14,10 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+    public void clear(){
+        this.txtUserName.setText("");
+        this.txtPassword.setText("");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -108,9 +112,12 @@ public class Login extends javax.swing.JFrame {
         if (!roleName.isEmpty()) {
             Register register = new Register(roleName);
             register.setVisible(true);
+            this.clear();
+            this.dispose();
             // Código para ocultar la ventana de inicio de sesión de Login si es necesario
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectos. Por favor, inténtelo de nuevo.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            this.clear();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

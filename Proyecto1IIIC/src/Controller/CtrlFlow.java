@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
 import Model.*;
+import java.util.Locale;
+import java.util.Random;
 import javax.swing.table.TableRowSorter;
 
 // Store the ID of the selected flow
@@ -47,6 +49,8 @@ public class CtrlFlow {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date flowDate = dateFormat.parse(date.getText());
 
+            
+
             String selectedMethod = (String) cbxMethod.getSelectedItem();
             String selectedClimate = (String) cbxClimate.getSelectedItem();
             String selectedDone = (String) cbxDone.getSelectedItem();
@@ -58,7 +62,7 @@ public class CtrlFlow {
             int waterName = waterdao.getWaterSpringIdByName(selectedWater);
             int samplingName = samplingdao.getSamplingSiteIdByName(selectedSampling);
 
-            this.dao.createFlow(new Flow(Integer.parseInt(capacity.getText()), selectedMethod, observation.getText(), flowDate, selectedClimate, selectedDone, waterName, samplingName));
+            this.dao.createFlow(new Flow(capacity.getText(), selectedMethod, observation.getText(), flowDate, selectedClimate, selectedDone, waterName, samplingName));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en capacidad.");
         } catch (ParseException ex) {
@@ -70,7 +74,7 @@ public class CtrlFlow {
     public void updateFlow(JTextField capacity, JComboBox<String> cbxMethod, JTextField observation, JTextField date, JComboBox<String> cbxClimate, JComboBox<String> cbxDone, JComboBox<String> cbxFlowWater, JComboBox<String> cbxFlowSampling) {
         try {
             // Parse the capacity
-            int flowCapacity = Integer.parseInt(capacity.getText());
+            double flowCapacity = Double.parseDouble(capacity.getText());
 
             // Get the selected values in the JComboBox for climate, done, flowWater, and flowSampling
             String selectedMethod = (String) cbxMethod.getSelectedItem();
@@ -91,7 +95,8 @@ public class CtrlFlow {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date flowDate = dateFormat.parse(date.getText());
 
-            Flow flow = new Flow(this.id, flowCapacity, selectedMethod, observation.getText(), flowDate, climate, done, flowWaterId, flowSamplingId);
+            Flow flow = new Flow(this.id, capacity.getText(), selectedMethod, observation.getText(),
+                    flowDate, climate, done, flowWaterId, flowSamplingId);
 
             dao.updateFlow(flow);
         } catch (NumberFormatException ex) {
@@ -142,5 +147,41 @@ public class CtrlFlow {
         capacity.setText("");
         observation.setText("");
         date.setText("");
+    }
+
+    public void generateRandomCapacity(JTextField txtFlowCapacity) {
+        // Rango de valores para la capacidad (entre 0.1 y 100)
+        double minValue = 0.1;
+        double maxValue = 100.0;
+
+        // Genera un número decimal aleatorio entre el valor mínimo y máximo
+        double randomCapacity = minValue + Math.random() * (maxValue - minValue);
+
+        // Formatea el número con dos decimales y lo establece en el campo txtFlowCapacity
+        txtFlowCapacity.setText(String.format(Locale.ENGLISH, "%.2f", randomCapacity));
+    }
+
+    public void generateRandomDate(JTextField txtFlowDate) {
+        try {
+            Random rand = new Random();
+
+            // Genera un número aleatorio para el día (1-31)
+            int day = rand.nextInt(31) + 1;
+
+            // Genera un número aleatorio para el mes (1-12)
+            int month = rand.nextInt(12) + 1;
+
+            // Establece el año como 2022
+            int year = 2022;
+
+            // Combina los valores en una fecha
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date randomDate = dateFormat.parse(String.format("%04d-%02d-%02d", year, month, day));
+
+            // Establece la fecha en el campo txtFlowDate
+            txtFlowDate.setText(dateFormat.format(randomDate));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al generar la fecha aleatoria.");
+        }
     }
 }

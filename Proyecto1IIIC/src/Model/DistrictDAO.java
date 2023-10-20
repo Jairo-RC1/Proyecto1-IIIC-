@@ -40,8 +40,7 @@ public class DistrictDAO {
 
         return districts;
     }
-    
-    // Method to retrieve a district by its name
+
     public District getDistrictByName(String districtName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM districts WHERE name = ?";
@@ -64,7 +63,7 @@ public class DistrictDAO {
 
         return null; // Return null if the district is not found
     }
-    // Method to retrieve a district's name by its ID
+
     public String getDistrictNameById(int districtId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM districts WHERE id = ?";
@@ -86,8 +85,7 @@ public class DistrictDAO {
             db.disconnect();
         }
     }
-    
-    // Method to retrieve a district's ID by its name
+
     public int getDistrictIdByName(String districtName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM districts WHERE name = ?";
