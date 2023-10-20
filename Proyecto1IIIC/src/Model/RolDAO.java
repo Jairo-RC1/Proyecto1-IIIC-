@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RolDAO {
-
+    
+    // Method to retrieve a list of all roles from the database
     public List<Rol> readRoles() {
         DBConnectionJava db = new DBConnectionJava();
         List<Rol> roles = new ArrayList<>();
@@ -34,7 +35,7 @@ public class RolDAO {
         }
         return roles;
     }
-
+    // Method to retrieve a role by its name
     public Rol getRolByName(String roleName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM roles WHERE name = ?";
@@ -57,7 +58,7 @@ public class RolDAO {
 
         return null; // Returns null if role not found
     }
-
+    // Method to retrieve a role's name by its ID
     public String getRoleNameById(int roleId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM roles WHERE id = ?";
@@ -78,7 +79,7 @@ public class RolDAO {
 
         return null; // If you do not find a name corresponding to the ID
     }
-
+    // Method to retrieve a role's ID by its name
     public int getRoleIdByName(String roleName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM roles WHERE name = ?";

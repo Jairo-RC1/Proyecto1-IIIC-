@@ -15,38 +15,36 @@ public class County {
         this.name = name;
         this.provinceId = provinceId;
     }
-
+    
     public County(int id, String name) {
         this.id = id;
         this.name = name;
     }
     
     
-
+    
+    // Getter method to retrieve the unique ID of the county
     public int getId() {
         return id;
     }
-
+    // Setter method to set the unique ID of the county
     public void setId(int id) {
         this.id = id;
     }
-
+     // Getter method to retrieve the name of the county
     public String getName() {
         return name;
     }
-
+    // Setter method to set the name of the county
     public void setName(String name) {
         this.name = name;
     }
-
+     // Getter method to retrieve the province ID to which this county belongs
     public int getProvinceId() {
         return provinceId;
     }
-
+      // Setter method to set the province ID to which this county belongs
     public void setProvinceId(int provinceId) {
         this.provinceId = provinceId;
     }
-
-    
-    
 }

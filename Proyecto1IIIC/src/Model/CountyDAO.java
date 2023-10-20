@@ -40,7 +40,8 @@ public class CountyDAO {
 
         return counties;
     }
-
+    
+    // Method to retrieve a county by its name
     public County getCountyByName(String cantonName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM counties WHERE name = ?";
@@ -63,7 +64,7 @@ public class CountyDAO {
 
         return null; // Return null if the canton is not found
     }
-
+     // Method to retrieve a county's name by its ID
     public String getCountyNameById(int cantonId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM counties WHERE id = ?";
@@ -85,7 +86,7 @@ public class CountyDAO {
             db.disconnect();
         }
     }
-
+     // Method to retrieve a county's ID by its name
     public int getCountyIdByName(String cantonName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM counties WHERE name = ?";

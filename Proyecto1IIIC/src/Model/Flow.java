@@ -115,6 +115,4 @@ public class Flow {
     public void setSamplingId(int samplingId) {
         this.samplingId = samplingId;
     }
-    
-    
 }
