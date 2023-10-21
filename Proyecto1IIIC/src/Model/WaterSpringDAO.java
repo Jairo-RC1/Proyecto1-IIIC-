@@ -234,6 +234,39 @@ public class WaterSpringDAO {
 
         return report.toString();
     }
-    
+
+    public List<WaterSpring> getWaterSpringsByDistrict(String districtName) {
+        DBConnectionJava db = new DBConnectionJava();
+        List<WaterSpring> waterSprings = new ArrayList<>();
+
+        String sql = "SELECT * FROM water_springs WHERE district_id = (SELECT id FROM districts WHERE name = ?)";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, districtName);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String address = resultSet.getString("address");
+                String latitude = resultSet.getString("latitude");
+                String longitude = resultSet.getString("longitude");
+                String description = resultSet.getString("description");
+                int provinceId = resultSet.getInt("province_id");
+                int countyId = resultSet.getInt("county_id");
+                int districtId = resultSet.getInt("district_id");
+                int entityId = resultSet.getInt("entity_id");
+
+                WaterSpring waterSpring = new WaterSpring(id, name, address, latitude, longitude, description, provinceId, countyId, districtId, entityId);
+                waterSprings.add(waterSpring);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return waterSprings;
+    }
 
 }

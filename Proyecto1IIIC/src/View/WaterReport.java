@@ -22,6 +22,8 @@ public class WaterReport extends javax.swing.JFrame {
 
     public WaterReport() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         btnWaterPDF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,22 +42,18 @@ public class WaterReport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaWater = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         btnReportWater = new javax.swing.JButton();
         cbxWaterEntity = new javax.swing.JComboBox<>();
-        btnExit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaWater = new javax.swing.JTextArea();
         btnWaterPDF = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtAreaWater.setColumns(20);
-        txtAreaWater.setRows(5);
-        jScrollPane1.setViewportView(txtAreaWater);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 820, 400));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Reporte de Nacientes por Entidad");
@@ -71,16 +69,31 @@ public class WaterReport extends javax.swing.JFrame {
 
         getContentPane().add(cbxWaterEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, -1));
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtAreaWater.setColumns(20);
+        txtAreaWater.setRows(5);
+        jScrollPane1.setViewportView(txtAreaWater);
+
+        jScrollPane2.setViewportView(jScrollPane1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 820, 440));
+
+        btnWaterPDF.setBackground(new java.awt.Color(30, 30, 30));
+        btnWaterPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pdf.png"))); // NOI18N
+        btnWaterPDF.setBorderPainted(false);
+        btnWaterPDF.setContentAreaFilled(false);
+        jPanel1.add(btnWaterPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 200, 50, 70));
+
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cerrar-sesion.png"))); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 60, 50));
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 40, 50));
 
-        btnWaterPDF.setText("PDF");
-        getContentPane().add(btnWaterPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 220, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -113,7 +126,9 @@ public class WaterReport extends javax.swing.JFrame {
     private javax.swing.JButton btnWaterPDF;
     private javax.swing.JComboBox<String> cbxWaterEntity;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtAreaWater;
     // End of variables declaration//GEN-END:variables
 }

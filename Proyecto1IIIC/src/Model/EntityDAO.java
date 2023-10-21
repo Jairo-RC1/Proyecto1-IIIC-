@@ -184,11 +184,9 @@ public class EntityDAO {
         Document document = new Document();
         WaterSpringDAO water = new WaterSpringDAO();
         try {
-            // Nombre del archivo PDF de salida
-            String fileName = "report.pdf";
 
             // Crear un archivo PDF en la ubicación deseada
-            String filePath = "C:\\Users\\jairo\\Music\\Reportes/report.pdf";
+            String filePath = "C:\\Users\\jairo\\Music\\Reportes/Informe de Nacientes por Entidad.pdf";
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
             // Abrir el documento para comenzar a escribir

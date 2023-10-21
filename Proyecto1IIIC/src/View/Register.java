@@ -7,6 +7,12 @@ package View;
 import Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import Model.*;
+import java.awt.Dimension;
+import javax.swing.JDialog;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 public class Register extends javax.swing.JFrame {
 
@@ -162,8 +168,6 @@ public class Register extends javax.swing.JFrame {
 
         TabRegister = new javax.swing.JTabbedPane();
         jpUser = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblUser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -179,9 +183,13 @@ public class Register extends javax.swing.JFrame {
         cbxUserRol = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         cbxUserEntity = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUser = new javax.swing.JTable();
         jpEntity = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblEntity = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -197,9 +205,13 @@ public class Register extends javax.swing.JFrame {
         btnEntityDelete = new javax.swing.JButton();
         btnEntityAdd = new javax.swing.JButton();
         btnEntityEdit = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEntity = new javax.swing.JTable();
         jpFlow = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblFlow = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -221,9 +233,13 @@ public class Register extends javax.swing.JFrame {
         cbxFlowMethod = new javax.swing.JComboBox<>();
         btnAddCapacity = new javax.swing.JButton();
         btnAddDate = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblFlow = new javax.swing.JTable();
         jpSampling = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tblSampling = new javax.swing.JTable();
         jLabel28 = new javax.swing.JLabel();
         txtSamplingName = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
@@ -237,9 +253,13 @@ public class Register extends javax.swing.JFrame {
         btnSamplingDelete = new javax.swing.JButton();
         btnSamplingAdd = new javax.swing.JButton();
         btnSamplingEdit = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblSampling = new javax.swing.JTable();
         jpWater = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblWater = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -261,10 +281,16 @@ public class Register extends javax.swing.JFrame {
         cbxWaterCounty = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         cbxWaterDistrict = new javax.swing.JComboBox<>();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblWater = new javax.swing.JTable();
         jpReport = new javax.swing.JPanel();
-        chartPanel = new javax.swing.JPanel();
         btnGraphic = new javax.swing.JButton();
         btnWaterReport = new javax.swing.JButton();
+        btnDistrictReport = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
@@ -272,23 +298,6 @@ public class Register extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblUser.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nombre", "Apellidos", "Correo Electronico", "Contraseña", "Entidad", "Rol"
-            }
-        ));
-        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblUserMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblUser);
-
-        jpUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
 
         jLabel1.setText("Correo Electronico:");
         jpUser.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
@@ -306,29 +315,35 @@ public class Register extends javax.swing.JFrame {
         jpUser.add(txtUserLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, -1));
         jpUser.add(txtUserEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 190, -1));
 
-        btnAddUser.setText("Agregar");
+        btnAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add (1).png"))); // NOI18N
+        btnAddUser.setBorderPainted(false);
+        btnAddUser.setContentAreaFilled(false);
         btnAddUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddUserActionPerformed(evt);
             }
         });
-        jpUser.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 130, -1));
+        jpUser.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 50, 40, 40));
 
-        btnDeleteUser.setText("Eliminar");
+        btnDeleteUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete (1).png"))); // NOI18N
+        btnDeleteUser.setBorderPainted(false);
+        btnDeleteUser.setContentAreaFilled(false);
         btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteUserActionPerformed(evt);
             }
         });
-        jpUser.add(btnDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 130, -1));
+        jpUser.add(btnDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 210, 40, 40));
 
-        btnEditUser.setText("Editar");
+        btnEditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btnEditUser.setBorderPainted(false);
+        btnEditUser.setContentAreaFilled(false);
         btnEditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditUserActionPerformed(evt);
             }
         });
-        jpUser.add(btnEditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 130, -1));
+        jpUser.add(btnEditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 130, 40, 40));
 
         jLabel20.setText("Rol:");
         jpUser.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
@@ -340,26 +355,37 @@ public class Register extends javax.swing.JFrame {
 
         jpUser.add(cbxUserEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
-        TabRegister.addTab("Usuarios", jpUser);
+        jLabel47.setText("Eliminar");
+        jpUser.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, -1, -1));
 
-        jpEntity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel48.setText("Agregar:");
+        jpUser.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 60, -1, -1));
 
-        tblEntity.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel49.setText("Editar:");
+        jpUser.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, -1));
+
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Cedula Juridica", "Nombre", "Correo Electronico", "Telefono", "Direccion", "Descripcion"
+                "ID", "Nombre", "Apellidos", "Correo Electronico", "Contraseña", "Entidad", "Rol"
             }
         ));
-        tblEntity.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblEntityMouseClicked(evt);
+                tblUserMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblEntity);
+        jScrollPane1.setViewportView(tblUser);
 
-        jpEntity.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1080, 340));
+        jScrollPane10.setViewportView(jScrollPane1);
+
+        jpUser.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 1070, 360));
+
+        TabRegister.addTab("Usuarios", jpUser);
+
+        jpEntity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Direccion:");
         jpEntity.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
@@ -385,50 +411,67 @@ public class Register extends javax.swing.JFrame {
         jpEntity.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
         jpEntity.add(txtLegalNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 180, -1));
 
-        btnEntityDelete.setText("Eliminar");
+        btnEntityDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete (1).png"))); // NOI18N
+        btnEntityDelete.setBorderPainted(false);
+        btnEntityDelete.setContentAreaFilled(false);
         btnEntityDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntityDeleteActionPerformed(evt);
             }
         });
-        jpEntity.add(btnEntityDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 130, -1));
+        jpEntity.add(btnEntityDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, 30, 40));
 
-        btnEntityAdd.setText("Agregar");
+        btnEntityAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add (1).png"))); // NOI18N
+        btnEntityAdd.setBorderPainted(false);
+        btnEntityAdd.setContentAreaFilled(false);
         btnEntityAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntityAddActionPerformed(evt);
             }
         });
-        jpEntity.add(btnEntityAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 130, -1));
+        jpEntity.add(btnEntityAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 40, 40));
 
-        btnEntityEdit.setText("Editar");
+        btnEntityEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btnEntityEdit.setBorderPainted(false);
+        btnEntityEdit.setContentAreaFilled(false);
         btnEntityEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntityEditActionPerformed(evt);
             }
         });
-        jpEntity.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 140, 130, -1));
+        jpEntity.add(btnEntityEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 130, 40, 40));
 
-        TabRegister.addTab("Entidades", jpEntity);
+        jLabel44.setText("Eliminar:");
+        jpEntity.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 220, -1, -1));
 
-        jpFlow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel45.setText("Agregar:");
+        jpEntity.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, -1, -1));
 
-        tblFlow.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel46.setText("Editar:");
+        jpEntity.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, -1, -1));
+
+        tblEntity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Capacidad", "Metodo", "Observacion", "Fecha", "Clima", "Realizado", "Naciente", "Sitio"
+                "ID", "Cedula Juridica", "Nombre", "Correo Electronico", "Telefono", "Direccion", "Descripcion"
             }
         ));
-        tblFlow.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblEntity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblFlowMouseClicked(evt);
+                tblEntityMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(tblFlow);
+        jScrollPane2.setViewportView(tblEntity);
 
-        jpFlow.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
+        jScrollPane9.setViewportView(jScrollPane2);
+
+        jpEntity.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 1070, 330));
+
+        TabRegister.addTab("Entidades", jpEntity);
+
+        jpFlow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setText("Capacidad:");
         jpFlow.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 16, -1, 20));
@@ -451,29 +494,35 @@ public class Register extends javax.swing.JFrame {
         jpFlow.add(txtFlowObservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, -1));
         jpFlow.add(txtFlowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 160, -1));
 
-        btnFlowDelete.setText("Eliminar");
+        btnFlowDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete (1).png"))); // NOI18N
+        btnFlowDelete.setBorderPainted(false);
+        btnFlowDelete.setContentAreaFilled(false);
         btnFlowDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlowDeleteActionPerformed(evt);
             }
         });
-        jpFlow.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 130, -1));
+        jpFlow.add(btnFlowDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 200, 30, 40));
 
-        btnFlowAdd.setText("Agregar");
+        btnFlowAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add (1).png"))); // NOI18N
+        btnFlowAdd.setBorderPainted(false);
+        btnFlowAdd.setContentAreaFilled(false);
         btnFlowAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlowAddActionPerformed(evt);
             }
         });
-        jpFlow.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 130, -1));
+        jpFlow.add(btnFlowAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 40, 40));
 
-        btnFlowEdit.setText("Editar");
+        btnFlowEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btnFlowEdit.setBorderPainted(false);
+        btnFlowEdit.setContentAreaFilled(false);
         btnFlowEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlowEditActionPerformed(evt);
             }
         });
-        jpFlow.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 130, -1));
+        jpFlow.add(btnFlowEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 120, 40, 40));
 
         cbxFlowClimate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soleado", "Lluvioso", "Nublado" }));
         jpFlow.add(cbxFlowClimate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
@@ -512,26 +561,37 @@ public class Register extends javax.swing.JFrame {
         });
         jpFlow.add(btnAddDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 155, 30, 30));
 
-        TabRegister.addTab("Medicion", jpFlow);
+        jLabel41.setText("Eliminar:");
+        jpFlow.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, -1, -1));
 
-        jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel42.setText("Agregar:");
+        jpFlow.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 50, -1, -1));
 
-        tblSampling.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel43.setText("Editar:");
+        jpFlow.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, -1, -1));
+
+        tblFlow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Provincia", "Canton", "Distrito", "Entidad"
+                "ID", "Capacidad", "Metodo", "Observacion", "Fecha", "Clima", "Realizado", "Naciente", "Sitio"
             }
         ));
-        tblSampling.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblFlow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSamplingMouseClicked(evt);
+                tblFlowMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(tblSampling);
+        jScrollPane5.setViewportView(tblFlow);
 
-        jpSampling.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
+        jScrollPane4.setViewportView(jScrollPane5);
+
+        jpFlow.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 1070, 370));
+
+        TabRegister.addTab("Medicion", jpFlow);
+
+        jpSampling.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel28.setText("Entidad:");
         jpSampling.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
@@ -564,50 +624,67 @@ public class Register extends javax.swing.JFrame {
 
         jpSampling.add(cbxSamplingEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
 
-        btnSamplingDelete.setText("Eliminar");
+        btnSamplingDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete (1).png"))); // NOI18N
+        btnSamplingDelete.setBorderPainted(false);
+        btnSamplingDelete.setContentAreaFilled(false);
         btnSamplingDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSamplingDeleteActionPerformed(evt);
             }
         });
-        jpSampling.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 120, -1));
+        jpSampling.add(btnSamplingDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 200, 30, 40));
 
-        btnSamplingAdd.setText("Agregar");
+        btnSamplingAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add (1).png"))); // NOI18N
+        btnSamplingAdd.setBorderPainted(false);
+        btnSamplingAdd.setContentAreaFilled(false);
         btnSamplingAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSamplingAddActionPerformed(evt);
             }
         });
-        jpSampling.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 120, -1));
+        jpSampling.add(btnSamplingAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 40, 40, 40));
 
-        btnSamplingEdit.setText("Editar");
+        btnSamplingEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btnSamplingEdit.setBorderPainted(false);
+        btnSamplingEdit.setContentAreaFilled(false);
         btnSamplingEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSamplingEditActionPerformed(evt);
             }
         });
-        jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 120, -1));
+        jpSampling.add(btnSamplingEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 120, -1, 40));
 
-        TabRegister.addTab("Muestreo", jpSampling);
+        jLabel38.setText("Eliminar:");
+        jpSampling.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, -1, -1));
 
-        jpWater.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel39.setText("Agregar:");
+        jpSampling.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, -1, -1));
 
-        tblWater.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel40.setText("Editar:");
+        jpSampling.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, -1, 20));
+
+        tblSampling.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Direccion", "Latitud", "Longitud", "Descripcion", "Provincia", "Canton", "Distrito", "Entidad"
+                "ID", "Nombre", "Provincia", "Canton", "Distrito", "Entidad"
             }
         ));
-        tblWater.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblSampling.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblWaterMouseClicked(evt);
+                tblSamplingMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblWater);
+        jScrollPane6.setViewportView(tblSampling);
 
-        jpWater.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1080, 340));
+        jScrollPane7.setViewportView(jScrollPane6);
+
+        jpSampling.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 1070, 340));
+
+        TabRegister.addTab("Muestreo", jpSampling);
+
+        jpWater.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setText("Longitud");
         jpWater.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
@@ -629,29 +706,35 @@ public class Register extends javax.swing.JFrame {
         jpWater.add(txtWaterLatitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
         jpWater.add(txtWaterLongitude, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
-        btnWaterDelete.setText("Eliminar");
+        btnWaterDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete (1).png"))); // NOI18N
+        btnWaterDelete.setBorderPainted(false);
+        btnWaterDelete.setContentAreaFilled(false);
         btnWaterDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWaterDeleteActionPerformed(evt);
             }
         });
-        jpWater.add(btnWaterDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 120, -1));
+        jpWater.add(btnWaterDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 200, 30, 40));
 
-        btnWaterAdd.setText("Agregar");
+        btnWaterAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add (1).png"))); // NOI18N
+        btnWaterAdd.setBorderPainted(false);
+        btnWaterAdd.setContentAreaFilled(false);
         btnWaterAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWaterAddActionPerformed(evt);
             }
         });
-        jpWater.add(btnWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 120, -1));
+        jpWater.add(btnWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 40, 40, 50));
 
-        btnWaterEdit.setText("Editar");
+        btnWaterEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btnWaterEdit.setBorderPainted(false);
+        btnWaterEdit.setContentAreaFilled(false);
         btnWaterEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWaterEditActionPerformed(evt);
             }
         });
-        jpWater.add(btnWaterEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 120, -1));
+        jpWater.add(btnWaterEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 120, 40, 40));
 
         jLabel16.setText("Entidad:");
         jpWater.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
@@ -675,27 +758,45 @@ public class Register extends javax.swing.JFrame {
         cbxWaterDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:" }));
         jpWater.add(cbxWaterDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, -1));
 
+        jLabel35.setText("Eliminar:");
+        jpWater.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, -1, -1));
+
+        jLabel36.setText("Agregar:");
+        jpWater.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, -1, -1));
+
+        jLabel37.setText("Editar:");
+        jpWater.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, -1, -1));
+
+        tblWater.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Direccion", "Latitud", "Longitud", "Descripcion", "Provincia", "Canton", "Distrito", "Entidad"
+            }
+        ));
+        tblWater.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblWaterMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblWater);
+
+        jScrollPane8.setViewportView(jScrollPane3);
+
+        jpWater.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 1070, 340));
+
         TabRegister.addTab("Nacientes", jpWater);
 
         jpReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Grafica"));
-
-        javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
-        chartPanel.setLayout(chartPanelLayout);
-        chartPanelLayout.setHorizontalGroup(
-            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
-        );
-        chartPanelLayout.setVerticalGroup(
-            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
-        );
-
-        jpReport.add(chartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 710, 490));
-
         btnGraphic.setText("Graficar Reporte");
-        jpReport.add(btnGraphic, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+        btnGraphic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraphicActionPerformed(evt);
+            }
+        });
+        jpReport.add(btnGraphic, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 210, -1));
 
         btnWaterReport.setText("Reporte Naciente por Entidad");
         btnWaterReport.addActionListener(new java.awt.event.ActionListener() {
@@ -703,7 +804,15 @@ public class Register extends javax.swing.JFrame {
                 btnWaterReportActionPerformed(evt);
             }
         });
-        jpReport.add(btnWaterReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 150, 210, -1));
+        jpReport.add(btnWaterReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 210, -1));
+
+        btnDistrictReport.setText("Reporte por Distritos");
+        btnDistrictReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDistrictReportActionPerformed(evt);
+            }
+        });
+        jpReport.add(btnDistrictReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 210, -1));
 
         TabRegister.addTab("Reportes", jpReport);
 
@@ -867,6 +976,28 @@ public class Register extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnWaterReportActionPerformed
 
+    private void btnGraphicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraphicActionPerformed
+        FlowDAO flowdao = new FlowDAO();
+        List<FlowWithWaterSpring> flowsWithWaterSpring = flowdao.getFlowsWithWaterSprings(); // Reemplaza 'flowDao' por la instancia de tu FlowDAO
+
+        JFreeChart chart = FlowChart.createFlowChart(flowsWithWaterSpring);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(800, 600));
+
+        // Crea un diálogo o ventana emergente para mostrar el gráfico
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Gráfico de Capacidad de Flujo por Naciente");
+        dialog.add(chartPanel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnGraphicActionPerformed
+
+    private void btnDistrictReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistrictReportActionPerformed
+        DistrictReport dr = new DistrictReport();
+        dr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnDistrictReportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabRegister;
@@ -874,6 +1005,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btnAddDate;
     private javax.swing.JButton btnAddUser;
     private javax.swing.JButton btnDeleteUser;
+    private javax.swing.JButton btnDistrictReport;
     private javax.swing.JButton btnEditUser;
     private javax.swing.JButton btnEntityAdd;
     private javax.swing.JButton btnEntityDelete;
@@ -905,7 +1037,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxWaterDistrict;
     private javax.swing.JComboBox<String> cbxWaterEntity;
     private javax.swing.JComboBox<String> cbxWaterProvince;
-    private javax.swing.JPanel chartPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -934,7 +1065,22 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -942,10 +1088,15 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPanel jpEntity;
     private javax.swing.JPanel jpFlow;
     private javax.swing.JPanel jpReport;

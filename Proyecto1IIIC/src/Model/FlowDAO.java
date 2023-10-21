@@ -13,7 +13,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class FlowDAO {
-     // Method to create a new Flow record
+    // Method to create a new Flow record
+
     public void createFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO flows (capacity, method, observation, date, climate, done, water_spring_id, sampling_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +36,8 @@ public class FlowDAO {
             db.disconnect();
         }
     }
-      // Method to retrieve a list of Flow records
+    // Method to retrieve a list of Flow records
+
     public List<Flow> readFlows() {
         DBConnectionJava db = new DBConnectionJava();
         List<Flow> flows = new ArrayList<>();
@@ -63,6 +65,7 @@ public class FlowDAO {
         }
         return flows;
     }
+
     // Method to update an existing Flow record
     public void updateFlow(Flow flow) {
         DBConnectionJava db = new DBConnectionJava();
@@ -88,6 +91,7 @@ public class FlowDAO {
             db.disconnect();
         }
     }
+
     // Method to delete a Flow record by ID
     public void deleteFlow(int id) {
         DBConnectionJava db = new DBConnectionJava();
@@ -104,6 +108,36 @@ public class FlowDAO {
         } finally {
             db.disconnect();
         }
+    }
+
+    public List<FlowWithWaterSpring> getFlowsWithWaterSprings() {
+        DBConnectionJava db = new DBConnectionJava();
+        List<FlowWithWaterSpring> flowsWithWaterSprings = new ArrayList<>();
+
+        String sql = "SELECT f.*, ws.name AS water_spring_name "
+                + "FROM flows f "
+                + "INNER JOIN water_springs ws ON f.water_spring_id = ws.id";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int flowId = resultSet.getInt("id");
+                String capacity = resultSet.getString("capacity");
+                // Otros campos de Flow que necesites
+                String waterSpringName = resultSet.getString("water_spring_name");
+                // Otros campos de WaterSpring que necesites
+
+                FlowWithWaterSpring flowWithWaterSpring = new FlowWithWaterSpring(flowId, capacity, waterSpringName);
+                flowsWithWaterSprings.add(flowWithWaterSpring);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return flowsWithWaterSprings;
     }
 
 }

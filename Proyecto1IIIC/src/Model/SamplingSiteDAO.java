@@ -165,4 +165,37 @@ public class SamplingSiteDAO {
 
         return -1;
     }
+
+    public List<SamplingSite> getSamplingSitesByDistrict(String districtName) {
+        DBConnectionJava db = new DBConnectionJava();
+        List<SamplingSite> samplingSites = new ArrayList<>();
+
+        String sql = "SELECT * FROM samplings_sities WHERE district_id = "
+                + "(SELECT id FROM districts WHERE name = ?)";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, districtName);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int provinceId = resultSet.getInt("province_id");
+                int countyId = resultSet.getInt("county_id");
+                int districtId = resultSet.getInt("district_id");
+                int entityId = resultSet.getInt("entity_id");
+                
+
+                SamplingSite samplingSite = new SamplingSite(id, name, provinceId, countyId, districtId, entityId);
+                samplingSites.add(samplingSite);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return samplingSites;
+    }
+
 }
