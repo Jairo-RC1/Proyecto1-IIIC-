@@ -178,4 +178,62 @@ public class WaterSpringDAO {
         return -1;
     }
 
+    public List<WaterSpring> getWaterSpringsByEntity(String entityName) {
+        DBConnectionJava db = new DBConnectionJava();
+        List<WaterSpring> waterSprings = new ArrayList<>();
+
+        String sql = "SELECT ws.* FROM water_springs ws "
+                + "INNER JOIN entities e ON ws.entity_id = e.id "
+                + "WHERE e.name = ?";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, entityName);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String address = resultSet.getString("address");
+                String latitude = resultSet.getString("latitude");
+                String longitude = resultSet.getString("longitude");
+                String description = resultSet.getString("description");
+                int provinceId = resultSet.getInt("province_id");
+                int countyId = resultSet.getInt("county_id");
+                int districtId = resultSet.getInt("district_id");
+                int entityId = resultSet.getInt("entity_id");
+
+                WaterSpring waterSpring = new WaterSpring(id, name, address, latitude, longitude, description, provinceId, countyId, districtId, entityId);
+                waterSprings.add(waterSpring);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+
+        return waterSprings;
+    }
+
+    public String generateReport(List<WaterSpring> waterSprings) {
+        StringBuilder report = new StringBuilder();
+
+        report.append("Informe de Nacientes por Entidad\n\n");
+
+        for (WaterSpring waterSpring : waterSprings) {
+            report.append("Nombre de la Naciente: ").append(waterSpring.getName()).append("\n");
+            report.append("Dirección: ").append(waterSpring.getAddress()).append("\n");
+            report.append("Latitud: ").append(waterSpring.getLatitude()).append("\n");
+            report.append("Longitud: ").append(waterSpring.getLongitude()).append("\n");
+            report.append("Descripción: ").append(waterSpring.getDescription()).append("\n");
+            report.append("Provincia ID: ").append(waterSpring.getProvinceId()).append("\n");
+            report.append("Condado ID: ").append(waterSpring.getCountyId()).append("\n");
+            report.append("Distrito ID: ").append(waterSpring.getDistrictId()).append("\n");
+            report.append("Entidad ID: ").append(waterSpring.getEntityId()).append("\n");
+            report.append("\n");
+        }
+
+        return report.toString();
+    }
+    
+
 }

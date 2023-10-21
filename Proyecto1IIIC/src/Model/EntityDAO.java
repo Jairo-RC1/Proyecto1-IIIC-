@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 
 public class EntityDAO {
 
@@ -176,40 +180,42 @@ public class EntityDAO {
         return -1;
     }
 
-    public List<WaterSpring> getWaterSpringsByEntity(String entityName) {
-        DBConnectionJava db = new DBConnectionJava();
-        List<WaterSpring> waterSprings = new ArrayList<>();
+    public void generateReportToPDF(Entity entity) {
+        Document document = new Document();
+        WaterSpringDAO water = new WaterSpringDAO();
+        try {
+            // Nombre del archivo PDF de salida
+            String fileName = "report.pdf";
 
-        String sql = "SELECT ws.* FROM water_springs ws "
-                + "INNER JOIN entities e ON ws.entity_id = e.id "
-                + "WHERE e.name = ?";
+            // Crear un archivo PDF en la ubicación deseada
+            String filePath = "C:\\Users\\jairo\\Music\\Reportes/report.pdf";
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
-        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
-            ps.setString(1, entityName);
-            ResultSet resultSet = ps.executeQuery();
+            // Abrir el documento para comenzar a escribir
+            document.open();
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String address = resultSet.getString("address");
-                String latitude = resultSet.getString("latitude");
-                String longitude = resultSet.getString("longitude");
-                String description = resultSet.getString("description");
-                int provinceId = resultSet.getInt("province_id");
-                int countyId = resultSet.getInt("county_id");
-                int districtId = resultSet.getInt("district_id");
-                int entityId = resultSet.getInt("entity_id");
+            // Obtener la lista de manantiales de agua pertenecientes a la entidad
+            String entityName = entity.getName();
+            List<WaterSpring> waterSprings = water.getWaterSpringsByEntity(entityName);
 
-                WaterSpring waterSpring = new WaterSpring(id, name, address, latitude, longitude, description, provinceId, countyId, districtId, entityId);
-                waterSprings.add(waterSpring);
-            }
-        } catch (SQLException e) {
+            // Generar el contenido del informe en formato de cadena
+            String reportContent = water.generateReport(waterSprings);
+
+            // Crear un objeto Paragraph para agregar el contenido al documento
+            Paragraph paragraph = new Paragraph(reportContent);
+
+            // Agregar el contenido del informe al documento PDF
+            document.add(paragraph);
+
+        } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         } finally {
-            db.disconnect();
+            // Cerrar el documento en un bloque finally para asegurarte de que se cierre incluso en caso de excepción
+            if (document != null && document.isOpen()) {
+                document.close();
+            }
         }
-
-        return waterSprings;
     }
 
 }

@@ -264,6 +264,7 @@ public class Register extends javax.swing.JFrame {
         jpReport = new javax.swing.JPanel();
         chartPanel = new javax.swing.JPanel();
         btnGraphic = new javax.swing.JButton();
+        btnWaterReport = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
@@ -678,21 +679,31 @@ public class Register extends javax.swing.JFrame {
 
         jpReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Grafica"));
+
         javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
         chartPanel.setLayout(chartPanelLayout);
         chartPanelLayout.setHorizontalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
         chartPanelLayout.setVerticalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 466, Short.MAX_VALUE)
         );
 
         jpReport.add(chartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 710, 490));
 
         btnGraphic.setText("Graficar Reporte");
-        jpReport.add(btnGraphic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jpReport.add(btnGraphic, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+
+        btnWaterReport.setText("Reporte Naciente por Entidad");
+        btnWaterReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWaterReportActionPerformed(evt);
+            }
+        });
+        jpReport.add(btnWaterReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 150, 210, -1));
 
         TabRegister.addTab("Reportes", jpReport);
 
@@ -850,6 +861,12 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddDateActionPerformed
 
+    private void btnWaterReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterReportActionPerformed
+        WaterReport water = new WaterReport();
+        water.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnWaterReportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabRegister;
@@ -872,6 +889,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btnWaterAdd;
     private javax.swing.JButton btnWaterDelete;
     private javax.swing.JButton btnWaterEdit;
+    private javax.swing.JButton btnWaterReport;
     private javax.swing.JComboBox<String> cbxFlowClimate;
     private javax.swing.JComboBox<String> cbxFlowDone;
     private javax.swing.JComboBox<String> cbxFlowMethod;
