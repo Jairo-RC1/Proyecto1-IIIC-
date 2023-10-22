@@ -5,8 +5,6 @@
 package View;
 
 import Controller.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import Model.*;
 import java.awt.Dimension;
@@ -22,124 +20,30 @@ public class Register extends javax.swing.JFrame {
     CtrlSamplingSite ctss = new CtrlSamplingSite();
     CtrlUser ctu = new CtrlUser();
     CtrlWaterSpring ctw = new CtrlWaterSpring();
+    CtrlLogin ctl = new CtrlLogin();
 
     public Register(String roleName) {
         initComponents();
         this.roleName = roleName;
-        if (roleName.equals("Super Administrador")) {
-            
-            TabRegister.setEnabledAt(0, true);
-            TabRegister.setEnabledAt(1, true); 
-            TabRegister.setEnabledAt(2, true); 
-            TabRegister.setEnabledAt(3, true); 
-            TabRegister.setEnabledAt(4, true); 
-            TabRegister.setEnabledAt(5, true); 
-        } else if (roleName.equals("Administrador")) {
-            
-            TabRegister.setEnabledAt(0, true);
-            TabRegister.setEnabledAt(1, true); 
-            TabRegister.setEnabledAt(2, false); 
-            TabRegister.setEnabledAt(3, false); 
-            TabRegister.setEnabledAt(4, false); 
-            TabRegister.setEnabledAt(5, false); 
-        } else if (roleName.equals("Digitador")) {
-            
-            TabRegister.setEnabledAt(0, true); 
-            TabRegister.setEnabledAt(1, false); 
-            TabRegister.setEnabledAt(2, true); 
-            TabRegister.setEnabledAt(3, false); 
-            TabRegister.setEnabledAt(4, false); 
-            TabRegister.setEnabledAt(5, false); 
-            btnEditUser.setEnabled(false);
-            btnDeleteUser.setEnabled(false);
-            btnFlowEdit.setEnabled(false);
-            btnFlowDelete.setEnabled(false);
-        } else {
-
-        }
-
+        this.ctl.configureTabs(TabRegister, roleName, btnEditUser, btnDeleteUser, btnFlowEdit, btnFlowDelete);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.listUser();
+        this.listData();
         this.listCombobox();
-        this.listEntity();
-        this.listFlow();
-        this.listSampling();
-        this.listWater();
-
-        cbxSamplingProvince.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the name of the selected province
-                String selectedProvince = cbxSamplingProvince.getSelectedItem().toString();
-
-                // LCall the method to load the blocks
-                ctss.loadCountiesToSamplingCountyComboBox(cbxSamplingCounty, selectedProvince);
-            }
-        });
-        cbxSamplingCounty.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the name of the selected province
-                String selectedCounty = (String) cbxSamplingCounty.getSelectedItem();
-
-                // Call the method to load the blocks
-                ctss.loadDistrictsToSamplingDistrictComboBox(cbxSamplingDistrict, selectedCounty);
-            }
-        });
-        cbxWaterProvince.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the name of the selected province
-                String selectedProvince = cbxWaterProvince.getSelectedItem().toString();
-
-                // Call the method to load the blocks
-                ctss.loadCountiesToSamplingCountyComboBox(cbxWaterCounty, selectedProvince);
-            }
-        });
-        cbxWaterCounty.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the name of the selected province
-                String selectedCounty = (String) cbxWaterCounty.getSelectedItem();
-
-                // Call the method to load the blocks
-                ctss.loadDistrictsToSamplingDistrictComboBox(cbxWaterDistrict, selectedCounty);
-            }
-        });
-        btnAddCapacity.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Llama al método para generar el valor aleatorio
-                ctf.generateRandomCapacity(txtFlowCapacity);
-            }
-        });
-        btnAddDate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ctf.generateRandomDate(txtFlowDate);
-            }
-        });
+        cbxSamplingProvince.addActionListener(new ProvinceComboBoxListener(ctss, cbxSamplingCounty));
+        cbxSamplingCounty.addActionListener(new CountyComboBoxListener(ctss, cbxSamplingDistrict));
+        cbxWaterProvince.addActionListener(new ProvinceComboBoxListener(ctss, cbxWaterCounty));
+        cbxWaterCounty.addActionListener(new CountyComboBoxListener(ctss, cbxWaterDistrict));
+        btnAddCapacity.addActionListener(new CapacityButtonListener(ctf, txtFlowCapacity));
+        btnAddDate.addActionListener(new DateButtonListener(ctf, txtFlowDate));
 
     }
 
-    public void listUser() {
+    public void listData() {
         this.ctu.loadUserData(tblUser);
-    }
-
-    public void listEntity() {
-        this.cte.loadDataEntities(tblEntity);
-    }
-
-    public void listFlow() {
         this.ctf.loadFlowData(tblFlow);
-    }
-
-    public void listSampling() {
+        this.cte.loadDataEntities(tblEntity);
         this.ctss.loadDataSamplingSites(tblSampling);
-    }
-
-    public void listWater() {
         this.ctw.loadDataWaterSprings(tblWater);
     }
 
@@ -855,25 +759,25 @@ public class Register extends javax.swing.JFrame {
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
         this.ctu.addUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
         this.clear();
-        this.listUser();
+        this.listData();
     }//GEN-LAST:event_btnAddUserActionPerformed
 
     private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
         this.ctu.updateUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
         this.clear();
-        this.listUser();
+        this.listData();
     }//GEN-LAST:event_btnEditUserActionPerformed
 
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
         this.ctu.deleteUser();
         this.clear();
-        this.listUser();
+        this.listData();
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
     private void btnEntityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityAddActionPerformed
         this.cte.addEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.clear();
-        this.listEntity();
+        this.listData();
     }//GEN-LAST:event_btnEntityAddActionPerformed
 
     private void tblEntityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntityMouseClicked
@@ -883,13 +787,13 @@ public class Register extends javax.swing.JFrame {
     private void btnEntityEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityEditActionPerformed
         this.cte.updateEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.clear();
-        this.listEntity();
+        this.listData();
     }//GEN-LAST:event_btnEntityEditActionPerformed
 
     private void btnEntityDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityDeleteActionPerformed
         this.cte.deleteEntity();
         this.clear();
-        this.listEntity();
+        this.listData();
     }//GEN-LAST:event_btnEntityDeleteActionPerformed
 
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
@@ -899,19 +803,19 @@ public class Register extends javax.swing.JFrame {
     private void btnFlowAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowAddActionPerformed
         this.ctf.addFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
         this.clear();
-        this.listFlow();
+        this.listData();
     }//GEN-LAST:event_btnFlowAddActionPerformed
 
     private void btnFlowEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowEditActionPerformed
         this.ctf.updateFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
         this.clear();
-        this.listFlow();
+        this.listData();
     }//GEN-LAST:event_btnFlowEditActionPerformed
 
     private void btnFlowDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowDeleteActionPerformed
         this.ctf.deleteFlow();
         this.clear();
-        this.listFlow();
+        this.listData();
     }//GEN-LAST:event_btnFlowDeleteActionPerformed
 
     private void tblFlowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFlowMouseClicked
@@ -921,13 +825,13 @@ public class Register extends javax.swing.JFrame {
     private void btnSamplingAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingAddActionPerformed
         this.ctss.addSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
         this.clear();
-        this.listSampling();
+        this.listData();
     }//GEN-LAST:event_btnSamplingAddActionPerformed
 
     private void btnSamplingEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingEditActionPerformed
         this.ctss.updateSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
         this.clear();
-        this.listSampling();
+        this.listData();
     }//GEN-LAST:event_btnSamplingEditActionPerformed
 
     private void btnSamplingDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingDeleteActionPerformed
@@ -941,19 +845,19 @@ public class Register extends javax.swing.JFrame {
     private void btnWaterAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterAddActionPerformed
         this.ctw.addWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
         this.clear();
-        this.listWater();
+        this.listData();
     }//GEN-LAST:event_btnWaterAddActionPerformed
 
     private void btnWaterEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterEditActionPerformed
         this.ctw.updateWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
         this.clear();
-        this.listWater();
+        this.listData();
     }//GEN-LAST:event_btnWaterEditActionPerformed
 
     private void btnWaterDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterDeleteActionPerformed
         this.ctw.deleteWaterSpring();
         this.clear();
-        this.listWater();
+        this.listData();
     }//GEN-LAST:event_btnWaterDeleteActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -983,8 +887,7 @@ public class Register extends javax.swing.JFrame {
         JFreeChart chart = FlowChart.createFlowChart(flowsWithWaterSpring);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(1500, 750));
-
-        // Create a dialog or popup to display the graph
+       
         JDialog dialog = new JDialog();
         dialog.setTitle("Gráfico de Capacidad de Flujo por Naciente");
         dialog.add(chartPanel);
