@@ -226,7 +226,7 @@ public class WaterSpringDAO {
             report.append("Longitud: ").append(waterSpring.getLongitude()).append("\n");
             report.append("Descripción: ").append(waterSpring.getDescription()).append("\n");
             report.append("Provincia ID: ").append(waterSpring.getProvinceId()).append("\n");
-            report.append("Condado ID: ").append(waterSpring.getCountyId()).append("\n");
+            report.append("Cantón ID: ").append(waterSpring.getCountyId()).append("\n");
             report.append("Distrito ID: ").append(waterSpring.getDistrictId()).append("\n");
             report.append("Entidad ID: ").append(waterSpring.getEntityId()).append("\n");
             report.append("\n");
