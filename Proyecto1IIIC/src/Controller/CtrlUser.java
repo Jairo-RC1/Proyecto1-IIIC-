@@ -43,12 +43,32 @@ public class CtrlUser {
 
     // Add a new user
     public void addUser(JTextField txtName, JTextField txtLastName, JTextField txtEmail, JTextField txtPassword, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
+        String name = txtName.getText();
+        String lastName = txtLastName.getText();
+        String email = txtEmail.getText();
+        String password = txtPassword.getText();
+
+        Validations validator = new Validations();
+
+        // Validation of txtName and txtLastName
+        if (!(validator.validateABC(name) && validator.validateABC(lastName))) {
+            JOptionPane.showMessageDialog(null, "Nombre o apellido no válidos");
+            return; // Stops process if not valid
+        }
+
+        // Validation of txtEmail by using validateMail
+        if (!validator.validateMail(email)) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
+            return; // Stops process if not valid
+        }
+
+        // Validation of  txtPassword by using validateAllSpecialCharacters
+        if (!validator.validateAllSpecialCharacters(password)) {
+            JOptionPane.showMessageDialog(null, "Contraseña no válida");
+            return; // Stops process if not valid
+        }
+
         try {
-            // Get the values from the text fields
-            String name = txtName.getText();
-            String lastName = txtLastName.getText();
-            String email = txtEmail.getText();
-            String password = txtPassword.getText();
 
             // Get the entity and role names selected from ComboBoxes
             String entityName = (String) cbxEntity.getSelectedItem();
@@ -73,29 +93,54 @@ public class CtrlUser {
 
     // Update user data
     public void updateUser(JTextField name, JTextField lastName, JTextField email, JTextField password, JComboBox<String> cbxEntity, JComboBox<String> cbxRole) {
-        try {
-            User user = new User(this.id, name.getText(), lastName.getText(), email.getText(), password.getText());
+       String userName = name.getText();
+    String userLastName = lastName.getText();
+    String userEmail = email.getText();
+    String userPassword = password.getText();
 
-            // Instance of the CtrlEntity and CtrlRol classes
-            CtrlEntity ctrlEntity = new CtrlEntity();
-            CtrlRol ctrlRol = new CtrlRol();
+    Validations validator = new Validations();
 
-            // Get the selected values in the JComboBox for entityId and roleId
-            String entityName = (String) cbxEntity.getSelectedItem();
-            String roleName = (String) cbxRole.getSelectedItem();
-
-            // Convert entity and role names into their respective IDs
-            int entityId = ctrlEntity.getEntityIdByName(entityName);
-            int roleId = ctrlRol.getRoleIdByName(roleName);
-
-            user.setEntityId(entityId);
-            user.setRoleId(roleId);
-
-            dao.updateUser(user);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
-        }
+    // Validation for userName and userLastName
+    if (!(validator.validateABC(userName) && validator.validateABC(userLastName))) {
+        JOptionPane.showMessageDialog(null, "Nombre o Apellido no valido");
+        return; // Stop the process if they are not valid
     }
+
+    // Validation for userEmail using the validateMail method
+    if (!validator.validateMail(userEmail)) {
+        JOptionPane.showMessageDialog(null, "Email no valido");
+        return; // Stop the process if it is not valid
+    }
+
+    // Validation for userPassword using the validateAllSpecialCharacters method
+    if (!validator.validateAllSpecialCharacters(userPassword)) {
+        JOptionPane.showMessageDialog(null, "Contraseña no valida");
+        return; // Stop the process if it is not valid
+    }
+
+    try {
+        User user = new User(this.id, userName, userLastName, userEmail, userPassword);
+
+        // Instances of CtrlEntity and CtrlRol classes
+        CtrlEntity ctrlEntity = new CtrlEntity();
+        CtrlRol ctrlRol = new CtrlRol();
+
+        // Get the selected values in the JComboBox for entityId and roleId
+        String entityName = (String) cbxEntity.getSelectedItem();
+        String roleName = (String) cbxRole.getSelectedItem();
+
+        // Convert entity and role names into their respective IDs
+        int entityId = ctrlEntity.getEntityIdByName(entityName);
+        int roleId = ctrlRol.getRoleIdByName(roleName);
+
+        user.setEntityId(entityId);
+        user.setRoleId(roleId);
+
+        dao.updateUser(user);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error de formato en algún campo");
+    }
+}
 
     // Delete a user
     public void deleteUser() {
