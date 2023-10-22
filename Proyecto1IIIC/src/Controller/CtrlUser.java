@@ -111,10 +111,11 @@ public class CtrlUser {
                 name.setText(table.getValueAt(row, 1).toString());
                 lastName.setText(table.getValueAt(row, 2).toString());
                 email.setText(table.getValueAt(row, 3).toString());
+                password.setText(table.getValueAt(row, 4).toString());
 
                 // Get the values of the ComboBoxes (comboboxes)
-                String entityName = table.getValueAt(row, 4).toString();
-                String roleName = table.getValueAt(row, 5).toString();
+                String entityName = table.getValueAt(row, 5).toString();
+                String roleName = table.getValueAt(row, 6).toString();
 
                 // Set the selected values in the ComboBoxes
                 cbxEntity.setSelectedItem(entityName);

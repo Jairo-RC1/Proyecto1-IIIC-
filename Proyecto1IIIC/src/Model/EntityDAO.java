@@ -185,31 +185,31 @@ public class EntityDAO {
         WaterSpringDAO water = new WaterSpringDAO();
         try {
 
-            // Crear un archivo PDF en la ubicación deseada
+            // Create a PDF file in the desired location
             String filePath = "C:\\Users\\jairo\\Music\\Reportes/Informe de Nacientes por Entidad.pdf";
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
-            // Abrir el documento para comenzar a escribir
+            // Open the document to start writing
             document.open();
 
-            // Obtener la lista de manantiales de agua pertenecientes a la entidad
+            // Obtain the list of water springs belonging to the entity
             String entityName = entity.getName();
             List<WaterSpring> waterSprings = water.getWaterSpringsByEntity(entityName);
 
-            // Generar el contenido del informe en formato de cadena
+            // Generate the report content in string format
             String reportContent = water.generateReport(waterSprings);
 
-            // Crear un objeto Paragraph para agregar el contenido al documento
+            // Create a Paragraph object to add the content to the document
             Paragraph paragraph = new Paragraph(reportContent);
 
-            // Agregar el contenido del informe al documento PDF
+            // Add the report content to the PDF document
             document.add(paragraph);
 
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         } finally {
-            // Cerrar el documento en un bloque finally para asegurarte de que se cierre incluso en caso de excepción
+
             if (document != null && document.isOpen()) {
                 document.close();
             }

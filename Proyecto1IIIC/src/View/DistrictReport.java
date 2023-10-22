@@ -144,27 +144,27 @@ public class DistrictReport extends javax.swing.JFrame {
     private void btnDistrictReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistrictReportActionPerformed
         String selectedDistrict = cbxReportDistrict.getSelectedItem().toString();
 
-        // Llama al método para obtener los sitios de muestreo del distrito seleccionado
+        // Call the method to get the sampling sites of the selected district
         List<SamplingSite> samplingSites = samplingdao.getSamplingSitesByDistrict(selectedDistrict);
 
-        // Llama al método para obtener las nacientes del distrito seleccionado
+        // Call the method to obtain the springs of the selected district
         List<WaterSpring> waterSprings = waterdao.getWaterSpringsByDistrict(selectedDistrict);
 
-        // Genera un informe que combine los sitios de muestreo y las nacientes
+        // Generate a report that combines the sampling sites and headwaters
         String combinedReport = ctd.generateCombinedReport(selectedDistrict, samplingSites, waterSprings);
 
-        // Muestra el informe en un área de texto, por ejemplo:
+        // Display the report in a text area, for example:
         txtAreaReport.setText(combinedReport);
     }//GEN-LAST:event_btnDistrictReportActionPerformed
 
     private void btnReportPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportPDFActionPerformed
-        // Obtén la lista de sitios de muestreo y nacientes
+        // Get the list of sampling sites and springs
 
         String selectedDistrict = (String) cbxReportDistrict.getSelectedItem();
         List<SamplingSite> samplingSites = samplingdao.getSamplingSitesByDistrict(selectedDistrict);
         List<WaterSpring> waterSprings = waterdao.getWaterSpringsByDistrict(selectedDistrict);
 
-        // Llama al método generateSamplingSiteReportToPDF con la información correspondiente
+        // Call the generateSamplingSiteReportToPDF method with the corresponding information
         ctd.generateReportToPDF(samplingSites, waterSprings);
     }//GEN-LAST:event_btnReportPDFActionPerformed
 

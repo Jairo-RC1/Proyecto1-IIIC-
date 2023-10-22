@@ -27,29 +27,29 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         this.roleName = roleName;
         if (roleName.equals("Super Administrador")) {
-            // Habilita todas las pestañas
-            TabRegister.setEnabledAt(0, true); // Índice 0: User
-            TabRegister.setEnabledAt(1, true); // Índice 1: Entity
-            TabRegister.setEnabledAt(2, true); // Índice 2: Flow
-            TabRegister.setEnabledAt(3, true); // Índice 3: Sampling
-            TabRegister.setEnabledAt(4, true); // Índice 4: Water
-            TabRegister.setEnabledAt(5, true); // Índice 5: Report
+            
+            TabRegister.setEnabledAt(0, true);
+            TabRegister.setEnabledAt(1, true); 
+            TabRegister.setEnabledAt(2, true); 
+            TabRegister.setEnabledAt(3, true); 
+            TabRegister.setEnabledAt(4, true); 
+            TabRegister.setEnabledAt(5, true); 
         } else if (roleName.equals("Administrador")) {
-            // Habilita solo algunas pestañas
-            TabRegister.setEnabledAt(0, true); // Índice 0: User
-            TabRegister.setEnabledAt(1, true); // Índice 1: Entity
-            TabRegister.setEnabledAt(2, false); // Índice 2: Flow
-            TabRegister.setEnabledAt(3, false); // Índice 3: Sampling
-            TabRegister.setEnabledAt(4, false); // Índice 4: Water
-            TabRegister.setEnabledAt(5, false); // Índice 5: Report
+            
+            TabRegister.setEnabledAt(0, true);
+            TabRegister.setEnabledAt(1, true); 
+            TabRegister.setEnabledAt(2, false); 
+            TabRegister.setEnabledAt(3, false); 
+            TabRegister.setEnabledAt(4, false); 
+            TabRegister.setEnabledAt(5, false); 
         } else if (roleName.equals("Digitador")) {
-            // Habilita otras pestañas
-            TabRegister.setEnabledAt(0, true); // Índice 0: User
-            TabRegister.setEnabledAt(1, false); // Índice 1: Entity
-            TabRegister.setEnabledAt(2, true); // Índice 2: Flow
-            TabRegister.setEnabledAt(3, false); // Índice 3: Sampling
-            TabRegister.setEnabledAt(4, false); // Índice 4: Water
-            TabRegister.setEnabledAt(5, false); // Índice 5: Report
+            
+            TabRegister.setEnabledAt(0, true); 
+            TabRegister.setEnabledAt(1, false); 
+            TabRegister.setEnabledAt(2, true); 
+            TabRegister.setEnabledAt(3, false); 
+            TabRegister.setEnabledAt(4, false); 
+            TabRegister.setEnabledAt(5, false); 
             btnEditUser.setEnabled(false);
             btnDeleteUser.setEnabled(false);
             btnFlowEdit.setEnabled(false);
@@ -982,9 +982,9 @@ public class Register extends javax.swing.JFrame {
 
         JFreeChart chart = FlowChart.createFlowChart(flowsWithWaterSpring);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(800, 600));
+        chartPanel.setPreferredSize(new Dimension(1500, 750));
 
-        // Crea un diálogo o ventana emergente para mostrar el gráfico
+        // Create a dialog or popup to display the graph
         JDialog dialog = new JDialog();
         dialog.setTitle("Gráfico de Capacidad de Flujo por Naciente");
         dialog.add(chartPanel);

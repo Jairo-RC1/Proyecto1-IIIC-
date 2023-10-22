@@ -5,17 +5,11 @@
 package Controller;
 
 import View.*;
-import Model.DBConnectionJava;
 
 public class Main {
 
     public static void main(String[] args) {
-        //Register lo = new Register( );
-        //lo.setVisible(true);
         Login login = new Login();
         login.setVisible(true);
-        /*DBConnectionJava db = new DBConnectionJava();
-        db.getConnection();
-        db.disconnect();*/
     }
 }
