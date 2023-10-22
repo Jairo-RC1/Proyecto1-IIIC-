@@ -49,87 +49,108 @@ public class CtrlWaterSpring {
     }
 
     // Add a new water spring
-     public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
-    String springName = name.getText();
-    String springAddress = address.getText();
-    String springLatitude = latitude.getText();
-    String springLongitude = longitude.getText();
-    String springDescription = description.getText();
+    public void addWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JComboBox<String> provinceId, JComboBox<String> countyId, JComboBox<String> districtId, JComboBox<String> entityId) {
+        String springName = name.getText();
+        String springAddress = address.getText();
+        String springLatitude = latitude.getText();
+        String springLongitude = longitude.getText();
+        String springDescription = description.getText();
 
-    Validations validator = new Validations();
+        Validations validator = new Validations();
 
-    // Validation for name (should only contain text)
-    if (!validator.validateABC(springName)) {
-        JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
-        return;
+        // Validation for name (should only contain text)
+        if (!validator.validateABC(springName)) {
+            JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
+            return;
+        }
+
+        // Validation for address and description (should be alphanumeric)
+        if (!validator.validateAlfanumeric(springAddress) || !validator.validateAlfanumeric(springDescription)) {
+            JOptionPane.showMessageDialog(null, "Formato no valido. Solo se permiten numero y letras");
+            return;
+        }
+
+        // Validation for latitude and longitude (should be in decimal format)
+        if (!validator.validateDecimals(springLatitude) || !validator.validateDecimals(springLongitude)) {
+            JOptionPane.showMessageDialog(null, "Latitude o longitud no valida. Debe ser decimal");
+            return;
+        }
+
+        try {
+            // Validation for provinceId, countyId, districtId, and entityId (should be numbers)
+            String selectedProvince = (String) provinceId.getSelectedItem();
+            String selectedCounty = (String) countyId.getSelectedItem();
+            String selectedDistrict = (String) districtId.getSelectedItem();
+            String selectedEntity = (String) entityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
+
+
+            this.dao.createWaterSpring(new WaterSpring(springName, springAddress, springLatitude, springLongitude, springDescription, provinceName, countyName, districtName, entityName));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos ");
+        }
     }
-
-    // Validation for address and description (should be alphanumeric)
-    if (!validator.validateAlfanumeric(springAddress) || !validator.validateAlfanumeric(springDescription)) {
-        JOptionPane.showMessageDialog(null, "Formato no valido. Solo se permiten numero y letras");
-        return;
-    }
-
-    // Validation for latitude and longitude (should be in decimal format)
-    if (!validator.validateDecimals(springLatitude) || !validator.validateDecimals(springLongitude)) {
-        JOptionPane.showMessageDialog(null, "Latitude o longitud no valida. Debe ser decimal");
-        return;
-    }
-
-    try {
-        // Validation for provinceId, countyId, districtId, and entityId (should be numbers)
-        int province = Integer.parseInt(provinceId.getText());
-        int county = Integer.parseInt(countyId.getText());
-        int district = Integer.parseInt(districtId.getText());
-        int entity = Integer.parseInt(entityId.getText());
-
-        this.dao.createWaterSpring(new WaterSpring(springName, springAddress, springLatitude, springLongitude, springDescription, province, county, district, entity));
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos ");
-    }
-}
 
     // Update a water spring's data
-     public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JTextField provinceId, JTextField countyId, JTextField districtId, JTextField entityId) {
-    String springName = name.getText();
-    String springAddress = address.getText();
-    String springLatitude = latitude.getText();
-    String springLongitude = longitude.getText();
-    String springDescription = description.getText();
+    public void updateWaterSpring(JTextField name, JTextField address, JTextField latitude, JTextField longitude, JTextField description, JComboBox<String> provinceId, JComboBox<String> countyId, JComboBox<String> districtId, JComboBox<String> entityId) {
+        String springName = name.getText();
+        String springAddress = address.getText();
+        String springLatitude = latitude.getText();
+        String springLongitude = longitude.getText();
+        String springDescription = description.getText();
 
-    Validations validator = new Validations();
+        Validations validator = new Validations();
 
-    // Validation for name (should only contain text)
-    if (!validator.validateABC(springName)) {
-        JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
-        return;
+        // Validation for name (should only contain text)
+        if (!validator.validateABC(springName)) {
+            JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
+            return;
+        }
+
+        // Validation for address and description (should be alphanumeric)
+        if (!validator.validateAlfanumeric(springAddress) || !validator.validateAlfanumeric(springDescription)) {
+            JOptionPane.showMessageDialog(null, "Formato no valido. Solo se permiten numero y letras");
+            return;
+        }
+
+        // Validation for latitude and longitude (should be in decimal format)
+        if (!validator.validateDecimals(springLatitude) || !validator.validateDecimals(springLongitude)) {
+            JOptionPane.showMessageDialog(null, "Latitude o longitud no valida. Debe ser decimal");
+            return;
+        }
+
+        try {
+            // Validation for provinceId, countyId, districtId, and entityId (should be numbers)
+            String selectedProvince = (String) provinceId.getSelectedItem();
+            String selectedCounty = (String) countyId.getSelectedItem();
+            String selectedDistrict = (String) districtId.getSelectedItem();
+            String selectedEntity = (String) entityId.getSelectedItem();
+
+            ProvinceDAO provincedao = new ProvinceDAO();
+            CountyDAO countydao = new CountyDAO();
+            DistrictDAO districtdao = new DistrictDAO();
+            EntityDAO entitydao = new EntityDAO();
+
+            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
+            int countyName = countydao.getCountyIdByName(selectedCounty);
+            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
+            int entityName = entitydao.getEntityIdByName(selectedEntity);
+
+            // Continue with the logic to update the water spring
+            this.dao.updateWaterSpring(new WaterSpring(this.id, springName, springAddress, springLatitude, springLongitude, springDescription, provinceName, countyName, districtName, entityName));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos ");
+        }
     }
-
-    // Validation for address and description (should be alphanumeric)
-    if (!validator.validateAlfanumeric(springAddress) || !validator.validateAlfanumeric(springDescription)) {
-        JOptionPane.showMessageDialog(null, "Formato no valido. Solo se permiten numero y letras");
-        return;
-    }
-
-    // Validation for latitude and longitude (should be in decimal format)
-    if (!validator.validateDecimals(springLatitude) || !validator.validateDecimals(springLongitude)) {
-        JOptionPane.showMessageDialog(null, "Latitude o longitud no valida. Debe ser decimal");
-        return;
-    }
-
-    try {
-        // Validation for provinceId, countyId, districtId, and entityId (should be numbers)
-        int province = Integer.parseInt(provinceId.getText());
-        int county = Integer.parseInt(countyId.getText());
-        int district = Integer.parseInt(districtId.getText());
-        int entity = Integer.parseInt(entityId.getText());
-
-        // Continue with the logic to update the water spring
-        this.dao.updateWaterSpring(new WaterSpring(this.id, springName, springAddress, springLatitude, springLongitude, springDescription, province, county, district, entity));
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos ");
-    }
-}
 
     // Delete a water spring
     public void deleteWaterSpring() {
@@ -152,7 +173,7 @@ public class CtrlWaterSpring {
                 String county = (table.getValueAt(row, 7).toString());
                 String district = (table.getValueAt(row, 8).toString());
                 String entity = (table.getValueAt(row, 9).toString());
-                
+
                 cbxProvinceId.setSelectedItem(province);
                 cbxCountyId.setSelectedItem(county);
                 cbxDistrictId.setSelectedItem(district);
