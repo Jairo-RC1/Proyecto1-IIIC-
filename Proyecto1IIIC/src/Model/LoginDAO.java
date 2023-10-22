@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginDAO {
-
+    // Method to authenticate a user's login
     public String loginUser(String username, String password) {
         String role = "";
         String query = "SELECT r.name FROM users u "
                 + "INNER JOIN roles r ON u.role_id = r.id "
                 + "WHERE u.name = ? AND u.password = ?";
 
-        // Utiliza tu clase de conexión para establecer la conexión
+      // Use your database connection class to establish the connection 
         DBConnectionJava dbConnection = new DBConnectionJava();
         try (Connection connection = dbConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);

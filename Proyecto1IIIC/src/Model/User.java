@@ -17,7 +17,8 @@ public class User {
     private int roleId;
 
     private static int ContIdUser = 1;
-
+     // Constructor for creating a new user with complete information
+    
     public User(String name, String lastName, String email, String password, int entityId, int roleId) {
         this.name = name;
         this.lastName = lastName;
@@ -26,7 +27,7 @@ public class User {
         this.entityId = entityId;
         this.roleId = roleId;
     }
-    
+     // Constructor for creating a user with an existing ID
     public User(int id, String name, String lastName, String email, String password, int entityId, int roleId) {
         this.id = id;
         this.name = name;
@@ -36,7 +37,7 @@ public class User {
         this.entityId = entityId;
         this.roleId = roleId;
     }
-
+       // Constructor for creating a user without entity and role information
     public User(int id, String name, String lastName, String email, String password) {
         this.id = id;
         this.name = name;
@@ -118,7 +119,4 @@ public class User {
     public static void setContIdUser(int ContIdUser) {
         User.ContIdUser = ContIdUser;
     }
-
-    
-
 }

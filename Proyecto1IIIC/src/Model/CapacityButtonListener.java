@@ -11,12 +11,13 @@ import javax.swing.JTextField;
 public class CapacityButtonListener implements ActionListener {
     private CtrlFlow ctf;
     private JTextField capacityField;
-
+    
+    // Constructor for the CapacityButtonListener
     public CapacityButtonListener(CtrlFlow ctf, JTextField capacityField) {
         this.ctf = ctf;
         this.capacityField = capacityField;
     }
-
+    // Action performed when the button is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         // Call the method to generate a random capacity and set it in the text field

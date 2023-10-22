@@ -38,7 +38,7 @@ public class Register extends javax.swing.JFrame {
         btnAddDate.addActionListener(new DateButtonListener(ctf, txtFlowDate));
 
     }
-
+    // Load data into user interface tables
     public void listData() {
         this.ctu.loadUserData(tblUser);
         this.ctf.loadFlowData(tblFlow);
@@ -46,7 +46,7 @@ public class Register extends javax.swing.JFrame {
         this.ctss.loadDataSamplingSites(tblSampling);
         this.ctw.loadDataWaterSprings(tblWater);
     }
-
+    // Load options into user interface ComboBoxes
     public void listCombobox() {
         ctss.loadProvincesToSamplingProvinceComboBox(cbxSamplingProvince);
         ctw.loadProvincesToWaterProvinceComboBox(cbxWaterProvince);
@@ -57,7 +57,7 @@ public class Register extends javax.swing.JFrame {
         ctw.loadWaterSpringNamesToComboBox(cbxFlowWater);
         ctss.loadSamplingSiteNamesToComboBox(cbxFlowSampling);
     }
-
+    // Clear text input fields in the user interface
     public void clear() {
         this.cte.clearFields(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.ctf.clearFields(txtFlowCapacity, txtFlowObservation, txtFlowDate);
@@ -751,135 +751,157 @@ public class Register extends javax.swing.JFrame {
     private void cbxSamplingProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSamplingProvinceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxSamplingProvinceActionPerformed
-
+    // Event handler for when a row in the Water table is clicked
+    // Select the clicked row and populate related fields
     private void tblWaterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWaterMouseClicked
         this.ctw.selectWaterSpringRow(tblWater, txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
     }//GEN-LAST:event_tblWaterMouseClicked
-
+    // Event handler for adding a user
+    // Call the addUser method, clear fields, and refresh data
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
         this.ctu.addUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnAddUserActionPerformed
-
+    // Event handler for editing a user
+    // Call the updateUser method, clear fields, and refresh data
     private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
         this.ctu.updateUser(txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnEditUserActionPerformed
-
+       // Event handler for deleting a user
+    // Call the deleteUser method, clear fields, and refresh data
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
         this.ctu.deleteUser();
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnDeleteUserActionPerformed
-
+    // Event handler for adding an entity
+    // Call the addEntity method, clear fields, and refresh data
     private void btnEntityAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityAddActionPerformed
         this.cte.addEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnEntityAddActionPerformed
-
+    // Event handler for when a row in the Entity table is clicked
+    // Select the clicked row and populate related fields
     private void tblEntityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntityMouseClicked
         this.cte.selectEntityRow(tblEntity, txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
     }//GEN-LAST:event_tblEntityMouseClicked
-
+    // Event handler for editing an entity
+    // Call the updateEntity method, clear fields, and refresh data
     private void btnEntityEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityEditActionPerformed
         this.cte.updateEntity(txtLegalNumber, txtEntityName, txtEntityEmail, txtEntityPhone, txtEntityAddress, txtEntityDescription);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnEntityEditActionPerformed
-
+     // Event handler for deleting an entity
+    // Call the deleteEntity method, clear fields, and refresh data
     private void btnEntityDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntityDeleteActionPerformed
         this.cte.deleteEntity();
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnEntityDeleteActionPerformed
-
+    
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
         this.ctu.selectRow(tblUser, txtUserName, txtUserLastName, txtUserEmail, txtUserPassword, cbxUserEntity, cbxUserRol);
     }//GEN-LAST:event_tblUserMouseClicked
-
+     // Event handler for when a row in the User table is clicked
+    // Select the clicked row and populate related fields
     private void btnFlowAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowAddActionPerformed
         this.ctf.addFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnFlowAddActionPerformed
-
+    // Event handler for adding a flow
+    // Call the addFlow method, clear fields, and refresh data
     private void btnFlowEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowEditActionPerformed
         this.ctf.updateFlow(txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnFlowEditActionPerformed
-
+    // Event handler for deleting a flow
+    // Call the deleteFlow method, clear fields, and refresh data
     private void btnFlowDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlowDeleteActionPerformed
         this.ctf.deleteFlow();
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnFlowDeleteActionPerformed
-
+       // Event handler for when a row in the Flow table is clicked
+    // Select the clicked row and populate related fields
     private void tblFlowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFlowMouseClicked
         this.ctf.selectFlowRow(tblFlow, txtFlowCapacity, cbxFlowMethod, txtFlowObservation, txtFlowDate, cbxFlowClimate, cbxFlowDone, cbxFlowWater, cbxFlowSampling);
     }//GEN-LAST:event_tblFlowMouseClicked
-
+    // Event handler for adding a sampling site
+    // Call the addSamplingSite method, clear fields, and refresh data
     private void btnSamplingAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingAddActionPerformed
         this.ctss.addSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnSamplingAddActionPerformed
-
+     // Event handler for editing a sampling site
+    // Call the updateSamplingSite method, clear fields, and refresh data
     private void btnSamplingEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingEditActionPerformed
         this.ctss.updateSamplingSite(txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnSamplingEditActionPerformed
-
+    // Event handler for deleting a sampling site
+    // Call the deleteSamplingSite method
     private void btnSamplingDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamplingDeleteActionPerformed
         this.ctss.deleteSamplingSite();
     }//GEN-LAST:event_btnSamplingDeleteActionPerformed
-
+    // Event handler for when a row in the Sampling Site table is clicked
+    // Select the clicked row and populate related fields
     private void tblSamplingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSamplingMouseClicked
         this.ctss.selectSamplingSiteRow(tblSampling, txtSamplingName, cbxSamplingProvince, cbxSamplingCounty, cbxSamplingDistrict, cbxSamplingEntity);
     }//GEN-LAST:event_tblSamplingMouseClicked
-
+    // Event handler for adding a water spring
+    // Call the addWaterSpring method, clear fields, and refresh data
     private void btnWaterAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterAddActionPerformed
         this.ctw.addWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnWaterAddActionPerformed
-
+    // Event handler for editing a water spring
+    // Call the updateWaterSpring method, clear fields, and refresh data
     private void btnWaterEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterEditActionPerformed
         this.ctw.updateWaterSpring(txtWaterName, txtWaterAddress, txtWaterLatitude, txtWaterLongitude, txtWaterDescription, cbxWaterProvince, cbxWaterCounty, cbxWaterDistrict, cbxWaterEntity);
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnWaterEditActionPerformed
-
+     // Event handler for deleting a water spring
+    // Call the deleteWaterSpring method, clear fields, and refresh data
     private void btnWaterDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterDeleteActionPerformed
         this.ctw.deleteWaterSpring();
         this.clear();
         this.listData();
     }//GEN-LAST:event_btnWaterDeleteActionPerformed
-
+      // Event handler for exiting the current window
+    // Create a new Login window, make it visible, and close the current window
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         Login lo = new Login();
         lo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
-
+     // Event handler for adding capacity
     private void btnAddCapacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCapacityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddCapacityActionPerformed
-
+      // Event handler for adding a date
     private void btnAddDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddDateActionPerformed
-
+    // Event handler for generating a water report
+    // Create a new WaterReport window, make it visible, and close the current window
     private void btnWaterReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterReportActionPerformed
         WaterReport water = new WaterReport();
         water.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnWaterReportActionPerformed
-
+     // Event handler for generating a flow capacity chart
+    // Retrieve flow data and create a chart using JFreeChart
     private void btnGraphicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraphicActionPerformed
         FlowDAO flowdao = new FlowDAO();
         List<FlowWithWaterSpring> flowsWithWaterSpring = flowdao.getFlowsWithWaterSprings(); // Reemplaza 'flowDao' por la instancia de tu FlowDAO
@@ -894,7 +916,8 @@ public class Register extends javax.swing.JFrame {
         dialog.pack();
         dialog.setVisible(true);
     }//GEN-LAST:event_btnGraphicActionPerformed
-
+    // Event handler for generating a district report
+    // Create a new DistrictReport window, make it visible, and close the current window
     private void btnDistrictReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistrictReportActionPerformed
         DistrictReport dr = new DistrictReport();
         dr.setVisible(true);

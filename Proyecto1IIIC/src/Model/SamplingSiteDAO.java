@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class SamplingSiteDAO {
     // Method to create a sampling site in the database
-
+    
     public void createSamplingSite(SamplingSite samplingSite) {
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO samplings_sities (name, province_id, county_id, district_id, entity_id) VALUES (?, ?, ?, ?, ?)";
@@ -197,5 +197,4 @@ public class SamplingSiteDAO {
 
         return samplingSites;
     }
-
 }

@@ -18,7 +18,7 @@ public class Flow {
     private String done;
     private int waterSpringId;
     private int samplingId;
-
+    // Parameterized constructor for creating a Flow instance
     public Flow(String capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
         this.capacity = capacity;
         this.method = method;
@@ -29,7 +29,7 @@ public class Flow {
         this.waterSpringId = waterSpringId;
         this.samplingId = samplingId;
     }
-
+      // Parameterized constructor for creating a Flow instance with an ID
     public Flow(int id, String capacity, String method, String observation, Date date, String climate, String done, int waterSpringId, int samplingId) {
         this.id = id;
         this.capacity = capacity;
@@ -116,9 +116,4 @@ public class Flow {
     public void setSamplingId(int samplingId) {
         this.samplingId = samplingId;
     }
-
-    
-   
-    
-    
 }

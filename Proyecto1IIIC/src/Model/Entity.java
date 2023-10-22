@@ -100,7 +100,4 @@ public class Entity {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    
-
 }

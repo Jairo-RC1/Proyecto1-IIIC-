@@ -15,11 +15,12 @@ public class WaterReport extends javax.swing.JFrame {
     WaterSpringDAO waterdao = new WaterSpringDAO();
     CtrlEntity cte = new CtrlEntity();
     EntityDAO entitydao = new EntityDAO();
+    // Method to populate the entity names in a combo box
 
     public void listEntity() {
         cte.loadEntityNamesToComboBox(cbxWaterEntity);
     }
-
+    
     public WaterReport() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -97,26 +98,25 @@ public class WaterReport extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // Handle the action when the "Generate Report" button is clicked
     private void btnReportWaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWaterActionPerformed
-        // Obtén el nombre de la entidad seleccionada en el JComboBox
+       // Get the name of the selected entity from the combo box
         String selectedEntity = cbxWaterEntity.getSelectedItem().toString();
 
-        // Llama al método para obtener las nacientes de la entidad seleccionada
+          // Call the method to retrieve water springs associated with the selected entity
         List<WaterSpring> waterSprings = waterdao.getWaterSpringsByEntity(selectedEntity);
 
-        // Crea una representación del informe
+         // Generate a representation of the report
         String report = waterdao.generateReport(waterSprings);
 
-        // Puedes mostrar el informe en un área de texto o guardarlo como un archivo, por ejemplo:
+        // Display the report in a text area, or save it to a file, for example
         txtAreaWater.setText(report);
     }//GEN-LAST:event_btnReportWaterActionPerformed
-
+     // Handle the action when the "Exit" button is clicked
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         Register register = new Register("Super Administrador");
         register.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_btnExitActionPerformed
 
 

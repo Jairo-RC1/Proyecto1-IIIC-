@@ -8,7 +8,7 @@ public class Validations {
     public Validations() {
 
     }
-
+   
     public boolean validateABC(String valor) {
         //Validates abcs
         Pattern pat = Pattern.compile("[a-zA-Z]*");
@@ -17,14 +17,14 @@ public class Validations {
         //true or false if the values is not found in the validation
 
     }
-
+  
     public boolean validateNumbers(String valor) {
         //Validates regular numbers
         Pattern pat = Pattern.compile("[0-9]*");
         Matcher mat = pat.matcher(valor);
         return mat.matches();
     }
-
+    
     public boolean validateDecimals(String valor) {
         //Validates decimal numbers
         Pattern pat = Pattern.compile("[0-9.0-9]");

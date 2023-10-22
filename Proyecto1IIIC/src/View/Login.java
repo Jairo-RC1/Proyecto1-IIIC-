@@ -8,12 +8,13 @@ import Model.LoginDAO;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+      // Method to clear the input fields
     public void clear(){
         this.txtUserName.setText("");
         this.txtPassword.setText("");

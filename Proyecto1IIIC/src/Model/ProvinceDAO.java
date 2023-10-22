@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProvinceDAO {
-
+     // Method to retrieve a list of all provinces
     public List<Province> readProvinces() {
         DBConnectionJava db = new DBConnectionJava();
         List<Province> provinces = new ArrayList<>();
@@ -32,7 +32,8 @@ public class ProvinceDAO {
         }
         return provinces;
     }
-
+    
+    // Method to retrieve a province by name
     public Province getProvincesByName(String provinceName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM provinces WHERE name = ?";
@@ -55,7 +56,7 @@ public class ProvinceDAO {
 
         return null; // Return null if the province is not found
     }
-
+     // Method to retrieve the name of a province by its ID
     public String getProvinceNameById(int provinceId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM provinces WHERE id = ?";
@@ -77,7 +78,7 @@ public class ProvinceDAO {
             db.disconnect();
         }
     }
-    
+     // Method to retrieve the ID of a province by name
     public int getProvinceIdByName(String provinceName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM provinces WHERE name = ?";
@@ -98,6 +99,5 @@ public class ProvinceDAO {
 
         return -1; 
     }
-    
     
 }

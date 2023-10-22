@@ -22,31 +22,29 @@ public class County {
     }
     
     
-
+    // Getter method to retrieve the ID of the county
     public int getId() {
         return id;
     }
-
+    // Setter method to set the ID of the county
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    // Getter method to retrieve the name of the county
     public String getName() {
         return name;
     }
-
+    // Setter method to set the name of the county
     public void setName(String name) {
         this.name = name;
     }
-
+    // Getter method to retrieve the ID of the province to which the county belongs
     public int getProvinceId() {
         return provinceId;
     }
-
+      // Setter method to set the ID of the province to which the county belongs
     public void setProvinceId(int provinceId) {
         this.provinceId = provinceId;
     }
-
-    
-    
 }
