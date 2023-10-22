@@ -12,7 +12,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class FlowChart {
-
+     // Create a JFreeChart bar chart based on flow data
     public static JFreeChart createFlowChart(List<FlowWithWaterSpring> flows) {
         CategoryDataset dataset = createDataset(flows);
         JFreeChart chart = ChartFactory.createBarChart(
@@ -23,7 +23,7 @@ public class FlowChart {
 
         return chart;
     }
-
+    // Create a dataset for the bar chart
     private static CategoryDataset createDataset(List<FlowWithWaterSpring> flows) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 

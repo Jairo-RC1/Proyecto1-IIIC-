@@ -60,25 +60,26 @@ public class CtrlDistrict {
 
         return report.toString();
     }
-
+    // Generate a combined report as a string for a specific district
     public void generateReportToPDF(List<SamplingSite> samplingSites, List<WaterSpring> waterSprings) {
         Document document = new Document();
 
         try {
 
-            // Crear un archivo PDF en la ubicación deseada
+            // Create a PDF file at the desired location
             String filePath = "C:\\Users\\jairo\\Music\\Reportes/Informe de Sitios de Muestreo y Nacientes.pdf";
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
-            // Abrir el documento para comenzar a escribir
+           // Open the document to start writing
             document.open();
 
-            // Agregar título
+            
+            // Add title to the PDF
             Paragraph title = new Paragraph("Informe de Sitios de Muestreo y Nacientes");
             title.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(title);
 
-            // Agregar información de los Sitios de Muestreo
+          // Add information for Sampling Sites
             for (SamplingSite site : samplingSites) {
                 document.add(new Paragraph("Sitios de Muestreo:"));
                 document.add(new Paragraph("Nombre: " + site.getName()));
@@ -91,7 +92,7 @@ public class CtrlDistrict {
 
             }
 
-            // Agregar información de las Nacientes
+           // Add information for Water Springs
             for (WaterSpring spring : waterSprings) {
                 document.add(new Paragraph("Nacientes de Agua:"));
                 document.add(new Paragraph("Nombre: " + spring.getName()));
@@ -112,7 +113,7 @@ public class CtrlDistrict {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         } finally {
-            // Cerrar el documento en un bloque finally para asegurarte de que se cierre incluso en caso de excepción
+            // Close the document in a finally block to ensure it is closed even in case of an exception
             if (document != null && document.isOpen()) {
                 document.close();
             }
