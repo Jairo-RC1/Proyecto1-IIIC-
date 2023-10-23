@@ -29,7 +29,7 @@ public class FlowDAO {
             ps.setInt(7, flow.getWaterSpringId());
             ps.setInt(8, flow.getSamplingId());
             ps.execute();
-            JOptionPane.showMessageDialog(null, "Naciente creada correctamente");
+            JOptionPane.showMessageDialog(null, "Medicion creada correctamente");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo crear el flujo, error: " + e.getMessage());
         } finally {
