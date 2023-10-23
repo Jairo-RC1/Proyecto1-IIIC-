@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistrictDAO {
-    // Method to retrieve a list of districts for a given county name    
 
+    // Method to retrieve a list of districts for a given county name    
     public List<District> getDistrictsForCounty(String countyName) {
         DBConnectionJava db = new DBConnectionJava();
         List<District> districts = new ArrayList<>();
@@ -40,7 +40,8 @@ public class DistrictDAO {
 
         return districts;
     }
-
+    
+    //Method that get a district by name
     public District getDistrictByName(String districtName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT * FROM districts WHERE name = ?";
@@ -63,7 +64,8 @@ public class DistrictDAO {
 
         return null; // Return null if the district is not found
     }
-
+    
+    //Method that obtains a district by id
     public String getDistrictNameById(int districtId) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT name FROM districts WHERE id = ?";
@@ -85,7 +87,8 @@ public class DistrictDAO {
             db.disconnect();
         }
     }
-
+    
+    //Method that get a id district by name 
     public int getDistrictIdByName(String districtName) {
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM districts WHERE name = ?";

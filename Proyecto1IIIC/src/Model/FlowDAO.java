@@ -109,7 +109,7 @@ public class FlowDAO {
             db.disconnect();
         }
     }
-
+    //Method that get a flow with the water spring
     public List<FlowWithWaterSpring> getFlowsWithWaterSprings() {
         DBConnectionJava db = new DBConnectionJava();
         List<FlowWithWaterSpring> flowsWithWaterSprings = new ArrayList<>();

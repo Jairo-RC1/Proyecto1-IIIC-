@@ -8,7 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 public class CtrlLogin {
-
+    
+    //Configure the tabs for login
     public void configureTabs(JTabbedPane TabRegister, String roleName, JButton btnEditUser,
             JButton btnDeleteUser, JButton btnFlowEdit, JButton btnFlowDelete) {
         if (roleName.equals("Super Administrador")) {

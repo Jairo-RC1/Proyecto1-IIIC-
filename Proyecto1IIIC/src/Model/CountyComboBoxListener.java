@@ -23,7 +23,7 @@ public class CountyComboBoxListener implements ActionListener {
         Object selectedCountyObject = ((JComboBox) e.getSource()).getSelectedItem();
         if (selectedCountyObject != null) {
             String selectedCounty = selectedCountyObject.toString();
-            // Continuar con el procesamiento para cargar los distritos
+            // Continue processing to load the districts
             ctss.loadDistrictsToSamplingDistrictComboBox(districtComboBox, selectedCounty);
         }
     }

@@ -194,14 +194,14 @@ public class CtrlFlow {
     }
 
     public void generateRandomCapacity(JTextField txtFlowCapacity) {
-        // Rango de valores para la capacidad (entre 0.1 y 100)
+        // Range of values ​​for capacity (between 0.1 and 100)
         double minValue = 0.1;
         double maxValue = 100.0;
 
-        // Genera un número decimal aleatorio entre el valor mínimo y máximo
+        // Generate a random decimal number between the minimum and maximum value
         double randomCapacity = minValue + Math.random() * (maxValue - minValue);
 
-        // Formatea el número con dos decimales y lo establece en el campo txtFlowCapacity
+        // Formats the number to two decimal places and sets it in the txtFlowCapacity field
         txtFlowCapacity.setText(String.format(Locale.ENGLISH, "%.2f", randomCapacity));
     }
 
@@ -209,20 +209,20 @@ public class CtrlFlow {
         try {
             Random rand = new Random();
 
-            // Genera un número aleatorio para el día (1-31)
+            // Generate a random number for the day (1-31)
             int day = rand.nextInt(31) + 1;
 
-            // Genera un número aleatorio para el mes (1-12)
+            // Generate a random number for the month (1-12)
             int month = rand.nextInt(12) + 1;
 
-            // Establece el año como 2022
+            // Set the year as 2022
             int year = 2022;
 
-            // Combina los valores en una fecha
+            // Combine the values ​​into a date
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date randomDate = dateFormat.parse(String.format("%04d-%02d-%02d", year, month, day));
 
-            // Establece la fecha en el campo txtFlowDate
+            // Set the date in the txtFlowDate field
             txtFlowDate.setText(dateFormat.format(randomDate));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al generar la fecha aleatoria.");

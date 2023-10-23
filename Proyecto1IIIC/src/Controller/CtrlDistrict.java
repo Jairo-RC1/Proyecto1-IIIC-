@@ -30,10 +30,10 @@ public class CtrlDistrict {
     public String generateCombinedReport(String district, List<SamplingSite> samplingSites, List<WaterSpring> waterSprings) {
         StringBuilder report = new StringBuilder();
 
-        // Título del informe
+        // Report title
         report.append("Informe de Sitios de Muestreo y Nacientes en el Distrito de ").append(district).append("\n\n");
 
-        // Sección de Sitios de Muestreo
+        // Sampling Sites Section
         report.append("Sitios de Muestreo:\n");
         for (SamplingSite samplingSite : samplingSites) {
             report.append("Nombre del Sitio de Muestreo: ").append(samplingSite.getName()).append("\n");
@@ -44,7 +44,7 @@ public class CtrlDistrict {
             report.append("\n");
         }
 
-        // Sección de Nacientes
+        // Nascent Section
         report.append("Nacientes:\n");
         for (WaterSpring waterSpring : waterSprings) {
             report.append("Nombre de la Naciente: ").append(waterSpring.getName()).append("\n");
