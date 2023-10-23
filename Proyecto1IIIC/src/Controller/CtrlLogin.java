@@ -24,9 +24,9 @@ public class CtrlLogin {
             TabRegister.setEnabledAt(0, true);
             TabRegister.setEnabledAt(1, true);
             TabRegister.setEnabledAt(2, false);
-            TabRegister.setEnabledAt(3, false);
+            TabRegister.setEnabledAt(3, true);
             TabRegister.setEnabledAt(4, false);
-            TabRegister.setEnabledAt(5, false);
+            TabRegister.setEnabledAt(5, true);
         } else if (roleName.equals("Digitador")) {
 
             TabRegister.setEnabledAt(0, true);
@@ -34,7 +34,7 @@ public class CtrlLogin {
             TabRegister.setEnabledAt(2, true);
             TabRegister.setEnabledAt(3, false);
             TabRegister.setEnabledAt(4, false);
-            TabRegister.setEnabledAt(5, false);
+            TabRegister.setEnabledAt(5, true);
             btnEditUser.setEnabled(false);
             btnDeleteUser.setEnabled(false);
             btnFlowEdit.setEnabled(false);
