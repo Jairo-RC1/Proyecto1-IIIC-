@@ -48,51 +48,70 @@ public class CtrlSamplingSite {
     // Add a new Sampling Site
 
     public void addSamplingSite(JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
-        try {
-            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
-            String selectedCounty = (String) cbxCountyId.getSelectedItem();
-            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
-            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+    String siteName = name.getText();
+    Validations validator = new Validations();
 
-            ProvinceDAO provincedao = new ProvinceDAO();
-            CountyDAO countydao = new CountyDAO();
-            DistrictDAO districtdao = new DistrictDAO();
-            EntityDAO entitydao = new EntityDAO();
-
-            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
-            int countyName = countydao.getCountyIdByName(selectedCounty);
-            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
-            int entityName = entitydao.getEntityIdByName(selectedEntity);
-
-            this.dao.createSamplingSite(new SamplingSite(this.id, name.getText(), provinceName, countyName, districtName, entityName));
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
-        }
+    // Validación para name (solo caracteres de la A-Z, Ñ, y espacios)
+    if (!validator.validateABCWithSpaces(siteName)) {
+        JOptionPane.showMessageDialog(null, "Nombre no válido. Debe contener solo letras de la A-Z.");
+        return; // Detener el proceso si no es válido
     }
+
+    try {
+        String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+        String selectedCounty = (String) cbxCountyId.getSelectedItem();
+        String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+        String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+        ProvinceDAO provinceDao = new ProvinceDAO();
+        CountyDAO countyDao = new CountyDAO();
+        DistrictDAO districtDao = new DistrictDAO();
+        EntityDAO entityDao = new EntityDAO();
+
+        int provinceName = provinceDao.getProvinceIdByName(selectedProvince);
+        int countyName = countyDao.getCountyIdByName(selectedCounty);
+        int districtName = districtDao.getDistrictIdByName(selectedDistrict);
+        int entityName = entityDao.getEntityIdByName(selectedEntity);
+
+        this.dao.createSamplingSite(new SamplingSite(this.id, siteName, provinceName, countyName, districtName, entityName));
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
+    }
+}
+
     // Update an existing Sampling Site
 
-    public void updateSamplingSite(JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
-        try {
-            String selectedProvince = (String) cbxProvinceId.getSelectedItem();
-            String selectedCounty = (String) cbxCountyId.getSelectedItem();
-            String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
-            String selectedEntity = (String) cbxEntityId.getSelectedItem();
+ public void updateSamplingSite(JTextField name, JComboBox<String> cbxProvinceId, JComboBox<String> cbxCountyId, JComboBox<String> cbxDistrictId, JComboBox<String> cbxEntityId) {
+    String siteName = name.getText();
+    Validations validator = new Validations();
 
-            ProvinceDAO provincedao = new ProvinceDAO();
-            CountyDAO countydao = new CountyDAO();
-            DistrictDAO districtdao = new DistrictDAO();
-            EntityDAO entitydao = new EntityDAO();
-            int provinceName = provincedao.getProvinceIdByName(selectedProvince);
-            int countyName = countydao.getCountyIdByName(selectedCounty);
-            int districtName = districtdao.getDistrictIdByName(selectedDistrict);
-            int entityName = entitydao.getEntityIdByName(selectedEntity);
-
-            this.dao.updateSamplingSite(new SamplingSite(this.id, name.getText(), provinceName, countyName, districtName, entityName));
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
-        }
+    // Validates ABC
+    if (!validator.validateABCWithSpaces(siteName)) {
+        JOptionPane.showMessageDialog(null, "Nombre no válido. Debe contener solo letras de la A-Z.");
+        return; // Stops if not valid
     }
+
+    try {
+        String selectedProvince = (String) cbxProvinceId.getSelectedItem();
+        String selectedCounty = (String) cbxCountyId.getSelectedItem();
+        String selectedDistrict = (String) cbxDistrictId.getSelectedItem();
+        String selectedEntity = (String) cbxEntityId.getSelectedItem();
+
+        ProvinceDAO provinceDao = new ProvinceDAO();
+        CountyDAO countyDao = new CountyDAO();
+        DistrictDAO districtDao = new DistrictDAO();
+        EntityDAO entityDao = new EntityDAO();
+
+        int provinceName = provinceDao.getProvinceIdByName(selectedProvince);
+        int countyName = countyDao.getCountyIdByName(selectedCounty);
+        int districtName = districtDao.getDistrictIdByName(selectedDistrict);
+        int entityName = entityDao.getEntityIdByName(selectedEntity);
+
+        this.dao.updateSamplingSite(new SamplingSite(this.id, siteName, provinceName, countyName, districtName, entityName));
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(null, "Error de formato en alguno de los campos.");
+    }
+}
 
     // Delete a Sampling Site
     public void deleteSamplingSite() {

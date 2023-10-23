@@ -59,7 +59,7 @@ public class CtrlWaterSpring {
         Validations validator = new Validations();
 
         // Validation for name (should only contain text)
-        if (!validator.validateABC(springName)) {
+        if (!validator.validateABCWithSpaces(springName)) {
             JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
             return;
         }
@@ -111,7 +111,7 @@ public class CtrlWaterSpring {
         Validations validator = new Validations();
 
         // Validation for name (should only contain text)
-        if (!validator.validateABC(springName)) {
+        if (!validator.validateABCWithSpaces(springName)) {
             JOptionPane.showMessageDialog(null, "Nombre no valido. Solo se permite texto");
             return;
         }

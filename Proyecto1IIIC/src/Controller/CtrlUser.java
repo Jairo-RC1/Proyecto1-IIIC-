@@ -51,7 +51,7 @@ public class CtrlUser {
         Validations validator = new Validations();
 
         // Validation of txtName and txtLastName
-        if (!(validator.validateABC(name) && validator.validateABC(lastName))) {
+        if (!(validator.validateABCWithSpaces(name) && validator.validateABCWithSpaces(lastName))) {
             JOptionPane.showMessageDialog(null, "Nombre o apellido no válidos");
             return; // Stops process if not valid
         }
@@ -101,7 +101,7 @@ public class CtrlUser {
     Validations validator = new Validations();
 
     // Validation for userName and userLastName
-    if (!(validator.validateABC(userName) && validator.validateABC(userLastName))) {
+    if (!(validator.validateABCWithSpaces(userName) && validator.validateABCWithSpaces(userLastName))) {
         JOptionPane.showMessageDialog(null, "Nombre o Apellido no valido");
         return; // Stop the process if they are not valid
     }

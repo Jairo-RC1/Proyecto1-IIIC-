@@ -35,10 +35,53 @@ public class CtrlEntity {
     // Add a new entity
 
     public void addEntity(JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
-        try {
-            long legalIdValue = Long.parseLong(legalId.getText());
+        Validations validator = new Validations();
 
-            this.dao.createEntity(new Entity(legalIdValue, name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
+        // Validates legalId 
+        String legalIdText = legalId.getText();
+        if (!validator.validateLegalID(legalIdText)) {
+            JOptionPane.showMessageDialog(null, "ID legal no válido. Debe seguir el formato correcto.");
+            return;
+        }
+
+        // Validates name and address 
+        String nameText = name.getText();
+        if (!validator.validateABCWithSpaces(nameText)) {
+            JOptionPane.showMessageDialog(null, "Nombre o dirección no válidos. Deben contener solo letras de la A-Z y la Ñ.");
+            return;
+        }
+        // Validates address and spaces
+        String addressText = address.getText();
+        if (!validator.validateAlfanumeric(addressText)) {
+            JOptionPane.showMessageDialog(null, "Dirección no válida. Debe contener solo letras de la A-Z, números y espacios.");
+            return;
+        }
+
+        // Validates email only email format
+        String emailText = email.getText();
+        if (!validator.validateMail(emailText)) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico no válido. Debe tener un formato válido.");
+            return;
+        }
+
+        // Validates phoneNumber only numbers
+        String phoneNumberText = phoneNumber.getText();
+        if (!validator.validatePhone(phoneNumberText)) {
+            JOptionPane.showMessageDialog(null, "Número de teléfono no válido. Debe contener solo números.");
+            return;
+        }
+
+        // Validates description all characters
+        String descriptionText = description.getText();
+        if (!validator.validateAllSpecialCharacters(descriptionText)) {
+            JOptionPane.showMessageDialog(null, "Descripción no válida. Puede contener cualquier carácter especial.");
+            return;
+        }
+
+        try {
+            long legalIdValue = Long.parseLong(legalIdText);
+
+            this.dao.createEntity(new Entity(legalIdValue, nameText, emailText, Integer.parseInt(phoneNumberText), addressText, descriptionText));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }
@@ -46,10 +89,53 @@ public class CtrlEntity {
 
     // Update an existing entity
     public void updateEntity(JTextField legalId, JTextField name, JTextField email, JTextField phoneNumber, JTextField address, JTextField description) {
-        try {
-            long legalIdValue = Long.parseLong(legalId.getText());
+        Validations validator = new Validations();
 
-            this.dao.updateEntity(new Entity(this.id, legalIdValue, name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()), address.getText(), description.getText()));
+        // Validates legalId 
+        String legalIdText = legalId.getText();
+        if (!validator.validateLegalID(legalIdText)) {
+            JOptionPane.showMessageDialog(null, "ID legal no válido. Debe seguir el formato correcto.");
+            return;
+        }
+
+        // Validates name
+        String nameText = name.getText();
+        if (!validator.validateABCWithSpaces(nameText)) {
+            JOptionPane.showMessageDialog(null, "Nombre o dirección no válidos. Deben contener solo letras de la A-Z y la Ñ.");
+            return;
+        }
+        // Validates address and spaces
+        String addressText = address.getText();
+        if (!validator.validateAlfanumeric(addressText)) {
+            JOptionPane.showMessageDialog(null, "Dirección no válida. Debe contener solo letras de la A-Z, números y espacios.");
+            return;
+        }
+
+        // Validates email 
+        String emailText = email.getText();
+        if (!validator.validateMail(emailText)) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico no válido. Debe tener un formato válido.");
+            return;
+        }
+
+        // Validates phoneNumber
+        String phoneNumberText = phoneNumber.getText();
+        if (!validator.validatePhone(phoneNumberText)) {
+            JOptionPane.showMessageDialog(null, "Número de teléfono no válido. Debe contener solo números.");
+            return;
+        }
+
+        // Validates description
+        String descriptionText = description.getText();
+        if (!validator.validateAllSpecialCharacters(descriptionText)) {
+            JOptionPane.showMessageDialog(null, "Descripción no válida. Puede contener cualquier carácter especial.");
+            return;
+        }
+
+        try {
+            long legalIdValue = Long.parseLong(legalIdText);
+
+            this.dao.updateEntity(new Entity(this.id, legalIdValue, nameText, emailText, Integer.parseInt(phoneNumberText), addressText, descriptionText));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }

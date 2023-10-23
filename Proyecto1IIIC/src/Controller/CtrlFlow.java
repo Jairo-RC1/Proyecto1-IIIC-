@@ -45,11 +45,32 @@ public class CtrlFlow {
 
     // Add a new flow
     public void addFlow(JTextField capacity, JComboBox<String> cbxMethod, JTextField observation, JTextField date, JComboBox<String> cbxClimate, JComboBox<String> cbxDone, JComboBox<String> cbxFlowWater, JComboBox<String> cbxFlowSampling) {
+        Validations validator = new Validations();
+
+        // Validation for capacity only alphanumeric
+        String capacityText = capacity.getText();
+        if (!validator.validateAlfanumeric(capacityText)) {
+            JOptionPane.showMessageDialog(null, "Formato capacidad no válida. Debe contener solo caracteres alfanuméricos.");
+            return;
+        }
+
+        // Validation for observation
+        String observationText = observation.getText();
+        if (!validator.validateABCWithSpaces(observationText)) {
+            JOptionPane.showMessageDialog(null, "Observación no válida. Debe contener solo texto.");
+            return;
+        }
+
+        // Validates date to be "yyyy-MM-dd"
+        String dateText = date.getText();
+        if (!validator.validateDate(dateText)) {
+            JOptionPane.showMessageDialog(null, "Fecha no válida. Debe tener el formato aaaa-MM-dd.");
+            return;
+        }
+
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date flowDate = dateFormat.parse(date.getText());
-
-            
+            Date flowDate = dateFormat.parse(dateText);
 
             String selectedMethod = (String) cbxMethod.getSelectedItem();
             String selectedClimate = (String) cbxClimate.getSelectedItem();
@@ -62,7 +83,7 @@ public class CtrlFlow {
             int waterName = waterdao.getWaterSpringIdByName(selectedWater);
             int samplingName = samplingdao.getSamplingSiteIdByName(selectedSampling);
 
-            this.dao.createFlow(new Flow(capacity.getText(), selectedMethod, observation.getText(), flowDate, selectedClimate, selectedDone, waterName, samplingName));
+            this.dao.createFlow(new Flow(capacityText, selectedMethod, observationText, flowDate, selectedClimate, selectedDone, waterName, samplingName));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en capacidad.");
         } catch (ParseException ex) {
@@ -72,9 +93,32 @@ public class CtrlFlow {
 
     // Update an existing flow
     public void updateFlow(JTextField capacity, JComboBox<String> cbxMethod, JTextField observation, JTextField date, JComboBox<String> cbxClimate, JComboBox<String> cbxDone, JComboBox<String> cbxFlowWater, JComboBox<String> cbxFlowSampling) {
+        Validations validator = new Validations();
+
+        //  Validation for capacity only alphanumeric
+        String capacityText = capacity.getText();
+        if (!validator.validateAlfanumeric(capacityText)) {
+            JOptionPane.showMessageDialog(null, "Capacidad no válida. Debe contener solo caracteres alfanuméricos.");
+            return;
+        }
+
+        // Validation for observation
+        String observationText = observation.getText();
+        if (!validator.validateABCWithSpaces(observationText)) {
+            JOptionPane.showMessageDialog(null, "Observación no válida. Debe contener solo texto y espacios.");
+            return;
+        }
+
+        // Validates date to be "yyyy-MM-dd"
+        String dateText = date.getText();
+        if (!validator.validateDate(dateText)) {
+            JOptionPane.showMessageDialog(null, "Fecha no válida. Debe tener el formato yyyy-MM-dd.");
+            return;
+        }
+
         try {
             // Parse the capacity
-            double flowCapacity = Double.parseDouble(capacity.getText());
+            double flowCapacity = Double.parseDouble(capacityText);
 
             // Get the selected values in the JComboBox for climate, done, flowWater, and flowSampling
             String selectedMethod = (String) cbxMethod.getSelectedItem();
@@ -93,9 +137,9 @@ public class CtrlFlow {
 
             // Parse the date (assuming it's in the format "yyyy-MM-dd")
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date flowDate = dateFormat.parse(date.getText());
+            Date flowDate = dateFormat.parse(dateText);
 
-            Flow flow = new Flow(this.id, capacity.getText(), selectedMethod, observation.getText(),
+            Flow flow = new Flow(this.id, capacityText, selectedMethod, observationText,
                     flowDate, climate, done, flowWaterId, flowSamplingId);
 
             dao.updateFlow(flow);
