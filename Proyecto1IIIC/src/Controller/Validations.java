@@ -26,7 +26,7 @@ public class Validations {
 
     public boolean validateDecimals(String valor) {
         //Validates decimal numbers
-        Pattern pat = Pattern.compile("[0-9.0-9]");
+        Pattern pat = Pattern.compile("[0-9.]+");
         Matcher mat = pat.matcher(valor);
         return mat.matches();
     }
@@ -41,7 +41,7 @@ public class Validations {
 
     public boolean validateLegalID(String valor) {
         //Validates the format to be according legal compliances
-        Pattern pat = Pattern.compile("\\d-\\d{3}-\\d{6}");
+        Pattern pat = Pattern.compile("\\d{10}");
         Matcher mat = pat.matcher(valor);
         return mat.matches();
 
@@ -73,10 +73,11 @@ public class Validations {
         // Validates any character, aside from linejump
         return valor.matches(".*");
     }
+
     public boolean validateDate(String valor) {
-    // Valida el formato de fecha "yyyy-MM-dd"
-    Pattern pat = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
-    Matcher mat = pat.matcher(valor);
-    return mat.matches();
-}
+        // Valida el formato de fecha "yyyy-MM-dd"
+        Pattern pat = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+        Matcher mat = pat.matcher(valor);
+        return mat.matches();
+    }
 }

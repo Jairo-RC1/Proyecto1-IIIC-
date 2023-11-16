@@ -898,7 +898,7 @@ public class Register extends javax.swing.JFrame {
     private void btnWaterReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterReportActionPerformed
         WaterReport water = new WaterReport();
         water.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnWaterReportActionPerformed
      // Event handler for generating a flow capacity chart
     // Retrieve flow data and create a chart using JFreeChart
@@ -921,7 +921,7 @@ public class Register extends javax.swing.JFrame {
     private void btnDistrictReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistrictReportActionPerformed
         DistrictReport dr = new DistrictReport();
         dr.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnDistrictReportActionPerformed
 
 

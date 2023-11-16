@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+
 public class SamplingSiteDAO {
     // Method to create a sampling site in the database
     

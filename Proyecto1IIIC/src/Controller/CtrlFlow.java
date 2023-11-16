@@ -47,13 +47,6 @@ public class CtrlFlow {
     public void addFlow(JTextField capacity, JComboBox<String> cbxMethod, JTextField observation, JTextField date, JComboBox<String> cbxClimate, JComboBox<String> cbxDone, JComboBox<String> cbxFlowWater, JComboBox<String> cbxFlowSampling) {
         Validations validator = new Validations();
 
-        // Validation for capacity only alphanumeric
-        String capacityText = capacity.getText();
-        if (!validator.validateAlfanumeric(capacityText)) {
-            JOptionPane.showMessageDialog(null, "Formato capacidad no válida. Debe contener solo caracteres alfanuméricos.");
-            return;
-        }
-
         // Validation for observation
         String observationText = observation.getText();
         if (!validator.validateABCWithSpaces(observationText)) {
@@ -83,7 +76,7 @@ public class CtrlFlow {
             int waterName = waterdao.getWaterSpringIdByName(selectedWater);
             int samplingName = samplingdao.getSamplingSiteIdByName(selectedSampling);
 
-            this.dao.createFlow(new Flow(capacityText, selectedMethod, observationText, flowDate, selectedClimate, selectedDone, waterName, samplingName));
+            this.dao.createFlow(new Flow(capacity.getText(), selectedMethod, observationText, flowDate, selectedClimate, selectedDone, waterName, samplingName));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en capacidad.");
         } catch (ParseException ex) {
@@ -94,13 +87,6 @@ public class CtrlFlow {
     // Update an existing flow
     public void updateFlow(JTextField capacity, JComboBox<String> cbxMethod, JTextField observation, JTextField date, JComboBox<String> cbxClimate, JComboBox<String> cbxDone, JComboBox<String> cbxFlowWater, JComboBox<String> cbxFlowSampling) {
         Validations validator = new Validations();
-
-        //  Validation for capacity only alphanumeric
-        String capacityText = capacity.getText();
-        if (!validator.validateAlfanumeric(capacityText)) {
-            JOptionPane.showMessageDialog(null, "Capacidad no válida. Debe contener solo caracteres alfanuméricos.");
-            return;
-        }
 
         // Validation for observation
         String observationText = observation.getText();
@@ -118,9 +104,9 @@ public class CtrlFlow {
 
         try {
             // Parse the capacity
-            double flowCapacity = Double.parseDouble(capacityText);
+            String capacityText = capacity.getText();
 
-            // Get the selected values in the JComboBox for climate, done, flowWater, and flowSampling
+            // Get the selected values in the JComboBox for method, climate, done, flowWater, and flowSampling
             String selectedMethod = (String) cbxMethod.getSelectedItem();
             String climate = (String) cbxClimate.getSelectedItem();
             String done = (String) cbxDone.getSelectedItem();
